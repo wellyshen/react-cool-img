@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import url from 'rollup-plugin-url';
 import replace from '@rollup/plugin-replace';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
@@ -27,7 +28,6 @@ const esm = {
 
 const extensions = ['.js', '.ts', '.tsx', '.json'];
 const common = [
-  babel({ exclude: 'node_modules/**', extensions }),
   resolve({ extensions }),
   commonjs({
     namedExports: {
@@ -39,8 +39,10 @@ const common = [
         'Fragment'
       ]
     }
-  })
+  }),
+  babel({ exclude: 'node_modules/**', extensions })
 ];
+if (!isDist) common.push(url({ limit: 10 * 1024 }));
 const plugins = isDev
   ? [
       ...common,
