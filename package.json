@@ -1,0 +1,187 @@
+{
+  "name": "react-cool-img",
+  "version": "1.0.0",
+  "description": "A cool react img component.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "ui",
+    "img"
+  ],
+  "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wellyshen/react-cool-img"
+  },
+  "homepage": "https://github.com/wellyshen/react-cool-img",
+  "bugs": {
+    "url": "https://github.com/wellyshen/react-cool-img/issues"
+  },
+  "engines": {
+    "node": ">=10",
+    "npm": ">=6"
+  },
+  "scripts": {
+    "dev": "yarn clean:dev && rollup -c -w --environment BUILD:dev",
+    "build:dist": "yarn clean:dist && rollup -c --environment BUILD:dist",
+    "build:example": "yarn clean:dev && rollup -c --environment BUILD:example",
+    "build": "yarn build:dist && yarn build:example",
+    "test": "jest --coverage",
+    "test:watch": "yarn test --watch",
+    "lint": "eslint --fix . --ext .js,.ts,.tsx",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check --watch",
+    "clean:dev": "rm -rf example/assets",
+    "clean:dist": "rm -rf dist",
+    "clean": "yarn clean:dev && yarn clean:dist"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn test"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint --fix",
+    "*.{json,md}": "prettier --write"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "useBuiltIns": "usage",
+          "corejs": 3
+        }
+      ],
+      "@babel/typescript",
+      "@babel/react",
+      "@emotion/babel-preset-css-prop"
+    ],
+    "plugins": [
+      "emotion"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "airbnb",
+      "airbnb/hooks",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended",
+      "prettier/@typescript-eslint",
+      "prettier/react"
+    ],
+    "plugins": [
+      "@typescript-eslint",
+      "react",
+      "prettier",
+      "emotion"
+    ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [
+            ".js",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "rules": {
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".js",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true
+        }
+      ]
+    }
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest/setup.ts"
+    ],
+    "snapshotSerializers": [
+      "jest-emotion"
+    ]
+  },
+  "eslintIgnore": [
+    "example/assets",
+    "dist"
+  ],
+  "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "emotion-normalize": "^10.1.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@babel/preset-typescript": "^7.7.2",
+    "@emotion/babel-preset-css-prop": "^10.0.23",
+    "@rollup/plugin-replace": "^2.2.1",
+    "@types/enzyme": "^3.10.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.22",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "babel-plugin-emotion": "^10.0.23",
+    "core-js": "^3.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-emotion": "^10.0.14",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.9",
+    "jest": "^24.9.0",
+    "jest-emotion": "^10.0.17",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.19.0",
+    "react-test-renderer": "^16.11.0",
+    "rollup": "^1.26.3",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-livereload": "^1.0.4",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-size-snapshot": "^0.10.0",
+    "rollup-plugin-terser": "^5.1.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "peerDependencies": {
+    "react": "16.11.x",
+    "react-dom": "16.11.x"
+  }
+}
