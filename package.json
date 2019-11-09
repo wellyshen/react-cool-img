@@ -133,7 +133,7 @@
   ],
   "dependencies": {
     "@emotion/core": "^10.0.22",
-    "emotion-normalize": "^10.1.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
@@ -175,6 +175,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-livereload": "^1.0.4",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
