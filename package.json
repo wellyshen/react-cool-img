@@ -29,7 +29,7 @@
     "build:example": "yarn clean:dev && rollup -c --environment BUILD:example",
     "build:dist": "yarn clean:dist && rollup -c --environment BUILD:dist",
     "build": "yarn build:dist && yarn build:example",
-    "test": "jest --coverage",
+    "test": "jest --coverage --passWithNoTests",
     "test:watch": "yarn test --watch",
     "lint": "eslint --fix . --ext .js,.ts,.tsx",
     "type-check": "tsc --noEmit",
