@@ -2,4 +2,6 @@
 *.log
 
 node_modules
+coverage
+dist
 .size-snapshot.json

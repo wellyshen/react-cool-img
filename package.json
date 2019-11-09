@@ -35,8 +35,9 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
     "clean:dev": "rm -rf example/assets",
+    "clean:test": "rm -rf coverage",
     "clean:dist": "rm -rf dist",
-    "clean": "yarn clean:dev && yarn clean:dist"
+    "clean": "yarn clean:dev && yarn clean:test && yarn clean:dist"
   },
   "husky": {
     "hooks": {
