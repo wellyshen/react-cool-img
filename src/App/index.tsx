@@ -1,20 +1,16 @@
 import React from 'react';
-import { css } from '@emotion/core';
 
 import Img from '../Img';
 import loadingImg from './images/loading.gif';
+import styles from './styles';
 
-export default () => {
-  const styles = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  `;
-
-  return (
-    <div css={styles}>
-      <Img src={loadingImg} />
-    </div>
-  );
-};
+export default () => (
+  <div css={styles}>
+    <Img
+      src="https://picsum.photos/252"
+      placeholder={loadingImg}
+      // width="252"
+      // height="252"
+    />
+  </div>
+);
