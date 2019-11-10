@@ -78,19 +78,18 @@
     ],
     "plugins": [
       "@typescript-eslint",
-      "react",
       "prettier",
       "emotion"
     ],
     "settings": {
+      "import/parsers": {
+        "@typescript-eslint/parser": [
+          ".ts",
+          ".tsx"
+        ]
+      },
       "import/resolver": {
-        "node": {
-          "extensions": [
-            ".js",
-            ".ts",
-            ".tsx"
-          ]
-        }
+        "typescript": {}
       }
     },
     "env": {
@@ -100,6 +99,8 @@
       "jest": true
     },
     "rules": {
+      "no-console": "off",
+      "react/jsx-props-no-spreading": "off",
       "react/jsx-filename-extension": [
         "error",
         {
@@ -110,12 +111,14 @@
           ]
         }
       ],
+      "import/no-extraneous-dependencies": "off",
       "prettier/prettier": [
         "error",
         {
           "singleQuote": true
         }
-      ]
+      ],
+      "@typescript-eslint/no-explicit-any": "off"
     }
   },
   "jest": {
@@ -158,6 +161,7 @@
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.5.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-emotion": "^10.0.14",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -170,7 +174,7 @@
     "lint-staged": "^9.4.2",
     "prettier": "^1.19.1",
     "react-test-renderer": "^16.11.0",
-    "rollup": "^1.26.3",
+    "rollup": "^1.26.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-livereload": "^1.0.4",
