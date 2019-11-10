@@ -1,3 +1,5 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
@@ -33,13 +35,8 @@ const plugins = [
   resolve({ extensions }),
   commonjs({
     namedExports: {
-      react: [
-        'createContext',
-        'forwardRef',
-        'createElement',
-        'Component',
-        'Fragment'
-      ]
+      react: Object.keys(React),
+      'react-dom': Object.keys(ReactDOM)
     }
   }),
   babel({ exclude: 'node_modules/**', extensions }),
