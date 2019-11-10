@@ -23,21 +23,19 @@ const Img: SFC<Props> = ({
   height,
   alt,
   className,
-  onLoad,
-  ...rest
+  onLoad
 }: Props) => {
   const [imgSz, setImgSz] = useState({ w: null, h: null });
   const [showPlaceholder, setShowPlaceholder] = useState(!!placeholder);
 
   useEffect(() => {
-    if (placeholder)
-      placeholderSz.onLoad(placeholder, (w: string, h: string) => {
-        console.log(`LOG ==> w: ${w} h: ${h}`);
-        setImgSz({ w, h });
-      });
+    placeholderSz.onLoad(placeholder, (w: string, h: string) => {
+      console.log(`LOG ==> w: ${w} h: ${h}`);
+      setImgSz({ w, h });
+    });
 
     return (): void => {
-      if (placeholder) placeholderSz.reset();
+      placeholderSz.reset();
     };
   }, [placeholder]);
 
@@ -61,7 +59,6 @@ const Img: SFC<Props> = ({
           height={height || imgSz.h}
           alt={alt}
           onLoad={handleLoaded}
-          {...rest}
         />
       )}
     </ClassNames>

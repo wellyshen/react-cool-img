@@ -6,14 +6,18 @@ export default class {
   }
 
   onLoad(src: string | null, cb: Function): void {
-    if (!src || src === this.prevSrc) return;
+    if (src === this.prevSrc) return;
 
-    const img = new Image();
+    if (!src) {
+      cb(null, null);
+    } else {
+      const img = new Image();
 
-    img.src = src;
-    img.onload = (): void => {
-      cb(img.width, img.height);
-    };
+      img.src = src;
+      img.onload = (): void => {
+        cb(img.width, img.height);
+      };
+    }
 
     this.prevSrc = src;
   }
