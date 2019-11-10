@@ -8,7 +8,8 @@
     "react",
     "react-component",
     "ui",
-    "img"
+    "img",
+    "typescript"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
   "license": "MIT",
