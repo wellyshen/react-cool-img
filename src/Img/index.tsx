@@ -26,7 +26,7 @@ const Img: SFC<Props> = ({
   onLoad
 }: Props) => {
   const [imgSz, setImgSz] = useState({ w: null, h: null });
-  const [showPlaceholder, setShowPlaceholder] = useState(!!placeholder);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     placeholderSz.onLoad(placeholder, (w: string, h: string) => {
@@ -41,7 +41,7 @@ const Img: SFC<Props> = ({
 
   const handleLoaded = (): void => {
     setImgSz({ w: null, h: null });
-    setShowPlaceholder(false);
+    setLoaded(true);
 
     onLoad();
   };
@@ -50,10 +50,7 @@ const Img: SFC<Props> = ({
     <ClassNames>
       {({ cx, css }): ReactNode => (
         <img
-          className={cx(
-            { [styles(placeholder, css)]: showPlaceholder },
-            className
-          )}
+          className={cx({ [styles(placeholder, css)]: !loaded }, className)}
           src={src}
           width={width || imgSz.w}
           height={height || imgSz.h}
