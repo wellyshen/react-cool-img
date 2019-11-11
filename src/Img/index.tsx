@@ -58,7 +58,7 @@ const Img: SFC<Props> = ({
   const handleError = (e: SyntheticEvent): void => {
     onError(e);
 
-    // ...
+    // Handle fallback image...
   };
 
   return (
