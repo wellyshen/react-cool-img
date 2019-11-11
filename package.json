@@ -26,19 +26,20 @@
     "npm": ">=6"
   },
   "scripts": {
-    "dev": "yarn clean:dev && rollup -c -w --environment BUILD:dev",
-    "build:example": "yarn clean:dev && rollup -c --environment BUILD:example",
-    "build:dist": "yarn clean:dist && rollup -c --environment BUILD:dist",
+    "dev": "yarn clean:dev && rollup -c rollup/config.js -w --environment BUILD:dev",
+    "build:example": "yarn clean:example && yarn clean:dev && rollup -c rollup/config.js --environment BUILD:example",
+    "build:dist": "yarn clean:dist && rollup -c rollup/config.js --environment BUILD:dist",
     "build": "yarn build:dist && yarn build:example",
     "test": "jest --coverage --passWithNoTests",
     "test:watch": "yarn test --watch",
-    "lint": "eslint --fix . --ext .js,.ts,.tsx",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
-    "clean:dev": "rm -rf example/assets",
-    "clean:test": "rm -rf coverage",
+    "lint": "eslint --fix . --ext .js,.ts,.tsx",
+    "clean:dev": "rm -rf src/.dev",
+    "clean:example": "rm -rf example",
     "clean:dist": "rm -rf dist",
-    "clean": "yarn clean:dev && yarn clean:test && yarn clean:dist"
+    "clean:test": "rm -rf coverage",
+    "clean": "yarn clean:dev && yarn clean:example && yarn clean:dist && yarn clean:test"
   },
   "husky": {
     "hooks": {
@@ -175,7 +176,9 @@
     "react-test-renderer": "^16.11.0",
     "rollup": "^1.26.4",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-bundle-html": "^0.2.2",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.1.0",
     "rollup-plugin-livereload": "^1.0.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",

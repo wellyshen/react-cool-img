@@ -2,5 +2,6 @@
 *.log
 
 node_modules
+src/.dev
 coverage
 .size-snapshot.json
