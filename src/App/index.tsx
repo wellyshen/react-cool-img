@@ -7,7 +7,7 @@ import styles from './styles';
 const App: SFC<{}> = () => (
   <div css={styles}>
     <Img
-      src="https://picsum.photos/252"
+      src="https://picsum.photos/504"
       placeholder={loadingImg}
       // width="252"
       // height="252"

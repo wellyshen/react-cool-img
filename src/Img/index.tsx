@@ -29,7 +29,7 @@ const Img: SFC<Props> = ({
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    placeholderSz.onLoad(placeholder, (w: string, h: string) => {
+    placeholderSz.onLoad(placeholder, width, height, (w: string, h: string) => {
       console.log(`LOG ==> w: ${w} h: ${h}`);
       setImgSz({ w, h });
     });
@@ -37,7 +37,7 @@ const Img: SFC<Props> = ({
     return (): void => {
       placeholderSz.reset();
     };
-  }, [placeholder]);
+  }, [placeholder, width, height]);
 
   const handleLoaded = (): void => {
     setImgSz({ w: null, h: null });
