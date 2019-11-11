@@ -20,8 +20,8 @@ interface Props {
   height?: string;
   alt?: string;
   className?: string;
-  onLoad?: Function;
-  onError?: Function;
+  onLoad?: (event: SyntheticEvent) => void;
+  onError?: (event: SyntheticEvent) => void;
 }
 
 const Img: SFC<Props> = ({
