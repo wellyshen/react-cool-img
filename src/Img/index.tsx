@@ -1,4 +1,11 @@
-import React, { SFC, ReactNode, useState, useEffect, memo } from 'react';
+import React, {
+  SFC,
+  SyntheticEvent,
+  ReactNode,
+  useState,
+  useEffect,
+  memo
+} from 'react';
 import { ClassNames } from '@emotion/core';
 
 import ImgSize from '../utils/ImgSize';
@@ -14,6 +21,7 @@ interface Props {
   alt?: string;
   className?: string;
   onLoad?: Function;
+  onError?: Function;
 }
 
 const Img: SFC<Props> = ({
@@ -23,7 +31,8 @@ const Img: SFC<Props> = ({
   height,
   alt,
   className,
-  onLoad
+  onLoad,
+  onError
 }: Props) => {
   const [imgSz, setImgSz] = useState({ w: null, h: null });
   const [loaded, setLoaded] = useState(false);
@@ -39,11 +48,17 @@ const Img: SFC<Props> = ({
     };
   }, [placeholder, width, height]);
 
-  const handleLoaded = (): void => {
+  const handleLoaded = (e: SyntheticEvent): void => {
+    onLoad(e);
+
     setImgSz({ w: null, h: null });
     setLoaded(true);
+  };
 
-    onLoad();
+  const handleError = (e: SyntheticEvent): void => {
+    onError(e);
+
+    // ...
   };
 
   return (
@@ -56,6 +71,7 @@ const Img: SFC<Props> = ({
           height={height || imgSz.h}
           alt={alt}
           onLoad={handleLoaded}
+          onError={handleError}
         />
       )}
     </ClassNames>
@@ -69,7 +85,8 @@ Img.defaultProps = {
   height: null,
   alt: null,
   className: '',
-  onLoad: (): void => {}
+  onLoad: (): void => {},
+  onError: (): void => {}
 };
 
 export default memo(Img);

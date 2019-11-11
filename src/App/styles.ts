@@ -5,4 +5,5 @@ export default css`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: black;
 `;

@@ -174,7 +174,7 @@
     "lint-staged": "^9.4.2",
     "prettier": "^1.19.1",
     "react-test-renderer": "^16.11.0",
-    "rollup": "^1.26.4",
+    "rollup": "^1.26.5",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-bundle-html": "^0.2.2",
     "rollup-plugin-commonjs": "^10.1.0",
