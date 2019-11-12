@@ -34,7 +34,8 @@
     "test:watch": "yarn test --watch",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
-    "lint": "eslint --fix . --ext .js,.ts,.tsx",
+    "lint:code": "eslint --fix . --ext .js,.ts,.tsx",
+    "lint:style": "stylelint --fix \"./**/*.ts\" \"./**/*.tsx\"",
     "clean:dev": "rm -rf src/.dev",
     "clean:example": "rm -rf example",
     "clean:dist": "rm -rf dist",
@@ -49,6 +50,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --fix",
+    "*.{ts,tsx}": "stylelint --fix",
     "*.{json,md}": "prettier --write"
   },
   "babel": {
@@ -121,6 +123,23 @@
       "@typescript-eslint/no-explicit-any": "off"
     }
   },
+  "eslintIgnore": [
+    "example/assets",
+    "dist"
+  ],
+  "prettier": {
+    "singleQuote": true
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "rules": {
+      "string-quotes": "single",
+      "declaration-empty-line-before": null
+    }
+  },
   "jest": {
     "preset": "ts-jest",
     "setupFilesAfterEnv": [
@@ -130,10 +149,6 @@
       "jest-emotion"
     ]
   },
-  "eslintIgnore": [
-    "example/assets",
-    "dist"
-  ],
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "normalize.css": "^8.0.1",
@@ -186,6 +201,9 @@
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-url": "^3.0.0",
+    "stylelint": "^11.1.1",
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-standard": "^19.0.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"
   },
