@@ -5,7 +5,12 @@ export default class {
     this.prevSrc = null;
   }
 
-  onLoad(src: string | null, w: string, h: string, cb: Function): void {
+  onLoad(
+    src: string | null,
+    w: string,
+    h: string,
+    cb: (w: string | null, h: string | null) => void
+  ): void {
     if (src === this.prevSrc) return;
 
     if (!src) {
@@ -17,8 +22,10 @@ export default class {
       img.onload = (): void => {
         const wRatio = !w && h ? parseInt(h, 10) / img.height : 1;
         const hRatio = w && !h ? parseInt(w, 10) / img.width : 1;
+        const width = (w || img.width * wRatio).toString();
+        const height = (h || img.height * hRatio).toString();
 
-        cb(w || img.width * wRatio, h || img.height * hRatio);
+        cb(width, height);
       };
     }
 

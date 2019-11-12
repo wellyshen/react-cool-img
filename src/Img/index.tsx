@@ -38,8 +38,9 @@ const Img: SFC<Props> = ({
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    placeholderSz.onLoad(placeholder, width, height, (w: string, h: string) => {
+    placeholderSz.onLoad(placeholder, width, height, (w, h) => {
       console.log(`LOG ==> w: ${w} h: ${h}`);
+
       setImgSz({ w, h });
     });
 
