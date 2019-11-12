@@ -8,7 +8,8 @@ const App: SFC<{}> = () => (
   <div css={styles}>
     <Img
       src="https://picsum.photos/252"
-      placeholder={loadingImg}
+      placeholderSrc={loadingImg}
+      // placeholderAsError={false}
       // width="252"
       // height="252"
       alt="Image"

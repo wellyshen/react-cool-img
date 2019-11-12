@@ -15,7 +15,8 @@ const placeholderImg = new MyImage();
 
 interface Props {
   src?: string;
-  placeholder?: string;
+  placeholderSrc?: string;
+  placeholderAsError?: boolean;
   width?: string;
   height?: string;
   alt?: string;
@@ -26,7 +27,8 @@ interface Props {
 
 const Img: SFC<Props> = ({
   src,
-  placeholder,
+  placeholderSrc,
+  placeholderAsError,
   width,
   height,
   alt,
@@ -34,42 +36,49 @@ const Img: SFC<Props> = ({
   onLoad,
   onError
 }: Props) => {
-  const [imgSz, setImgSz] = useState({ w: null, h: null });
-  const [loaded, setLoaded] = useState(false);
+  const [source, setSource] = useState(src);
+  const [imgSize, setImgSize] = useState({ width: null, height: null });
+  const [showPlaceholder, setShowPlaceholder] = useState(!!placeholderSrc);
 
   useEffect(() => {
-    placeholderImg.onLoad(placeholder, width, height, (w, h) => {
-      console.log(`LOG ==> w: ${w} h: ${h}`);
-
-      setImgSz({ w, h });
+    placeholderImg.onLoad(placeholderSrc, width, height, (w, h) => {
+      setImgSize({ width: w, height: h });
     });
 
     return (): void => {
       placeholderImg.reset();
     };
-  }, [placeholder, width, height]);
+  }, [placeholderSrc, width, height]);
 
-  const handleLoaded = (e: SyntheticEvent): void => {
-    onLoad(e);
-
-    setImgSz({ w: null, h: null });
-    setLoaded(true);
+  const removeBgImg = (): void => {
+    setImgSize({ width: null, height: null });
+    setShowPlaceholder(false);
   };
 
-  const handleError = (e: SyntheticEvent): void => {
-    onError(e);
+  const handleLoaded = (event: SyntheticEvent): void => {
+    onLoad(event);
 
-    // Handle fallback image...
+    removeBgImg();
+  };
+
+  const handleError = (event: SyntheticEvent): void => {
+    onError(event);
+
+    removeBgImg();
+    if (placeholderAsError) setSource(placeholderSrc);
   };
 
   return (
     <ClassNames>
       {({ cx, css }): ReactNode => (
         <img
-          className={cx({ [styles(placeholder, css)]: !loaded }, className)}
-          src={src}
-          width={width || imgSz.w}
-          height={height || imgSz.h}
+          className={cx(
+            { [styles(placeholderSrc, css)]: showPlaceholder },
+            className
+          )}
+          src={source}
+          width={width || imgSize.width}
+          height={height || imgSize.height}
           alt={alt}
           onLoad={handleLoaded}
           onError={handleError}
@@ -81,7 +90,8 @@ const Img: SFC<Props> = ({
 
 Img.defaultProps = {
   src: null,
-  placeholder: null,
+  placeholderSrc: null,
+  placeholderAsError: true,
   width: null,
   height: null,
   alt: null,
