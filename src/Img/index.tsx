@@ -8,10 +8,10 @@ import React, {
 } from 'react';
 import { ClassNames } from '@emotion/core';
 
-import ImgSize from '../utils/ImgSize';
+import MyImage from '../utils/MyImage';
 import styles from './styles';
 
-const placeholderSz = new ImgSize();
+const placeholderImg = new MyImage();
 
 interface Props {
   src?: string;
@@ -38,14 +38,14 @@ const Img: SFC<Props> = ({
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    placeholderSz.onLoad(placeholder, width, height, (w, h) => {
+    placeholderImg.onLoad(placeholder, width, height, (w, h) => {
       console.log(`LOG ==> w: ${w} h: ${h}`);
 
       setImgSz({ w, h });
     });
 
     return (): void => {
-      placeholderSz.reset();
+      placeholderImg.reset();
     };
   }, [placeholder, width, height]);
 
