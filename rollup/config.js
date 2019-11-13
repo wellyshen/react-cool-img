@@ -57,8 +57,7 @@ const plugins = [
   isDev && livereload(),
   // Must be placed before terser
   !isDev && sizeSnapshot(),
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  !isDev && terser({ sourcemap: true, compress: { drop_console: true } }),
+  !isDev && terser({ sourcemap: true }),
   isExample &&
     copy({
       targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],

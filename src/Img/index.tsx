@@ -42,8 +42,13 @@ const Img: SFC<Props> = ({
 
   useEffect(() => {
     if (placeholderSrc)
-      loadImgSize(placeholderSrc, width, height, (w, h) => {
-        setImgSize({ width: w, height: h });
+      loadImgSize(placeholderSrc, width, height, (error, data) => {
+        if (error) {
+          console.error(`🤭 react-cool-img: ${error}`);
+          return;
+        }
+
+        setImgSize({ width: data.width, height: data.height });
       });
   }, [placeholderSrc, width, height]);
 

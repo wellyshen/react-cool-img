@@ -3,8 +3,8 @@ import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
 import Img from '../Img';
-import placeholderSrc from './images/loading.gif';
-import errorSrc from './images/error.svg';
+import loadingImg from './images/loading.gif';
+import errorImg from './images/error.svg';
 import { root, app } from './styles';
 
 const App: SFC<{}> = () => (
@@ -18,9 +18,9 @@ const App: SFC<{}> = () => (
     <div css={app}>
       <Img
         src="https://picsum.photos/252"
-        placeholderSrc={placeholderSrc}
+        placeholderSrc={loadingImg}
         // placeholderAsError={false}
-        errorSrc={errorSrc}
+        errorSrc={errorImg}
         // width="200"
         // height="200"
         alt="Image"

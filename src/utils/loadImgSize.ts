@@ -2,7 +2,7 @@ export default (
   src: string,
   w: string,
   h: string,
-  cb: (w: string, h: string) => void
+  cb: (error: any, data?: { width: string; height: string }) => void
 ): void => {
   const img = new Image();
 
@@ -13,6 +13,9 @@ export default (
     const width = (w || img.width * wRatio).toString();
     const height = (h || img.height * hRatio).toString();
 
-    cb(width, height);
+    cb(null, { width, height });
+  };
+  img.onerror = (error): void => {
+    cb(error);
   };
 };
