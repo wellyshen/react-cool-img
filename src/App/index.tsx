@@ -1,20 +1,32 @@
 import React, { SFC } from 'react';
+import { Global, css } from '@emotion/core';
+import normalize from 'normalize.css';
 
 import Img from '../Img';
-import loadingImg from './images/loading.gif';
-import styles from './styles';
+import placeholderSrc from './images/loading.gif';
+import errorSrc from './images/error.svg';
+import { root, app } from './styles';
 
 const App: SFC<{}> = () => (
-  <div css={styles}>
-    <Img
-      src="https://picsum.photos/252"
-      placeholderSrc={loadingImg}
-      // placeholderAsError={false}
-      // width="252"
-      // height="252"
-      alt="Image"
+  <>
+    <Global
+      styles={css`
+        ${normalize}
+        ${root}
+      `}
     />
-  </div>
+    <div css={app}>
+      <Img
+        src="https://picsum.photos/252"
+        placeholderSrc={placeholderSrc}
+        // placeholderAsError={false}
+        errorSrc={errorSrc}
+        // width="200"
+        // height="200"
+        alt="Image"
+      />
+    </div>
+  </>
 );
 
 export default App;

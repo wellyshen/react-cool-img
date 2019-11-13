@@ -8,15 +8,14 @@ import React, {
 } from 'react';
 import { ClassNames } from '@emotion/core';
 
-import MyImage from '../utils/MyImage';
+import loadImgSize from '../utils/loadImgSize';
 import styles from './styles';
-
-const placeholderImg = new MyImage();
 
 interface Props {
   src?: string;
   placeholderSrc?: string;
   placeholderAsError?: boolean;
+  errorSrc?: string;
   width?: string;
   height?: string;
   alt?: string;
@@ -29,6 +28,7 @@ const Img: SFC<Props> = ({
   src,
   placeholderSrc,
   placeholderAsError,
+  errorSrc,
   width,
   height,
   alt,
@@ -41,31 +41,27 @@ const Img: SFC<Props> = ({
   const [showPlaceholder, setShowPlaceholder] = useState(!!placeholderSrc);
 
   useEffect(() => {
-    placeholderImg.onLoad(placeholderSrc, width, height, (w, h) => {
-      setImgSize({ width: w, height: h });
-    });
-
-    return (): void => {
-      placeholderImg.reset();
-    };
+    if (placeholderSrc)
+      loadImgSize(placeholderSrc, width, height, (w, h) => {
+        setImgSize({ width: w, height: h });
+      });
   }, [placeholderSrc, width, height]);
-
-  const removeBgImg = (): void => {
-    setImgSize({ width: null, height: null });
-    setShowPlaceholder(false);
-  };
 
   const handleLoaded = (event: SyntheticEvent): void => {
     onLoad(event);
-
-    removeBgImg();
+    setShowPlaceholder(false);
   };
 
   const handleError = (event: SyntheticEvent): void => {
     onError(event);
 
-    removeBgImg();
-    if (placeholderAsError) setSource(placeholderSrc);
+    if (errorSrc) {
+      setSource(errorSrc);
+    } else if (placeholderAsError && placeholderSrc) {
+      setSource(placeholderSrc);
+    } else {
+      setShowPlaceholder(false);
+    }
   };
 
   return (
@@ -77,8 +73,8 @@ const Img: SFC<Props> = ({
             className
           )}
           src={source}
-          width={width || imgSize.width}
-          height={height || imgSize.height}
+          width={width || showPlaceholder ? imgSize.width : null}
+          height={height || showPlaceholder ? imgSize.height : null}
           alt={alt}
           onLoad={handleLoaded}
           onError={handleError}
@@ -92,6 +88,7 @@ Img.defaultProps = {
   src: null,
   placeholderSrc: null,
   placeholderAsError: true,
+  errorSrc: null,
   width: null,
   height: null,
   alt: null,

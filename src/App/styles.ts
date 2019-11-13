@@ -1,9 +1,14 @@
 import { css } from '@emotion/core';
 
-export default css`
+export const root = css`
+  body {
+    background: black;
+  }
+`;
+
+export const app = css`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: black;
 `;
