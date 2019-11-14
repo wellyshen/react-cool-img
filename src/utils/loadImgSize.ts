@@ -4,14 +4,15 @@ export default (
   h: number,
   cb: (error: any, data?: { width: number; height: number }) => void
 ): void => {
-  const img = new Image(w, h);
+  const img = new Image();
 
   img.src = src;
   img.onload = (): void => {
-    const wRatio = !w && h ? h / img.height : 1;
-    const hRatio = w && !h ? w / img.width : 1;
+    const { naturalWidth, naturalHeight } = img;
+    const wRatio = !w && h ? h / naturalHeight : 1;
+    const hRatio = w && !h ? w / naturalWidth : 1;
 
-    cb(null, { width: img.width * wRatio, height: img.height * hRatio });
+    cb(null, { width: naturalWidth * wRatio, height: naturalHeight * hRatio });
   };
   img.onerror = (error): void => {
     cb(error);
