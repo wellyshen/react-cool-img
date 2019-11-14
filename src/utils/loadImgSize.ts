@@ -2,7 +2,7 @@ export default (
   src: string,
   w: number,
   h: number,
-  cb: (error: string, data?: { width: number; height: number }) => void
+  cb: (error: string | null, data?: { width: number; height: number }) => void
 ): void => {
   const img = new Image();
 
