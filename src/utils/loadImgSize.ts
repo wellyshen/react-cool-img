@@ -2,7 +2,7 @@ export default (
   src: string,
   w: number,
   h: number,
-  cb: (error: any, data?: { width: number; height: number }) => void
+  cb: (error: string, data?: { width: number; height: number }) => void
 ): void => {
   const img = new Image();
 
@@ -14,7 +14,7 @@ export default (
 
     cb(null, { width: naturalWidth * wRatio, height: naturalHeight * hRatio });
   };
-  img.onerror = (error): void => {
-    cb(error);
+  img.onerror = (): void => {
+    cb(`Failed to load ${src}`);
   };
 };

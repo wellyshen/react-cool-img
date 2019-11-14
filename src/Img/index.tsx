@@ -48,7 +48,7 @@ const Img: SFC<Props> = ({
         parseInt(height, 10),
         (error, data) => {
           if (error) {
-            console.error(`🤭 react-cool-img: ${error}`);
+            console.error(`😱react-cool-img: ${error}`);
             return;
           }
 
