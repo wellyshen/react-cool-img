@@ -42,14 +42,19 @@ const Img: SFC<Props> = ({
 
   useEffect(() => {
     if (placeholderSrc)
-      loadImgSize(placeholderSrc, width, height, (error, data) => {
-        if (error) {
-          console.error(`🤭 react-cool-img: ${error}`);
-          return;
-        }
+      loadImgSize(
+        placeholderSrc,
+        parseInt(width, 10),
+        parseInt(height, 10),
+        (error, data) => {
+          if (error) {
+            console.error(`🤭 react-cool-img: ${error}`);
+            return;
+          }
 
-        setImgSize({ width: data.width, height: data.height });
-      });
+          setImgSize({ width: data.width, height: data.height });
+        }
+      );
   }, [placeholderSrc, width, height]);
 
   const handleLoaded = (event: SyntheticEvent): void => {

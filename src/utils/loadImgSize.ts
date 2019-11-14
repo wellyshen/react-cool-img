@@ -1,19 +1,17 @@
 export default (
   src: string,
-  w: string,
-  h: string,
-  cb: (error: any, data?: { width: string; height: string }) => void
+  w: number,
+  h: number,
+  cb: (error: any, data?: { width: number; height: number }) => void
 ): void => {
-  const img = new Image();
+  const img = new Image(w, h);
 
   img.src = src;
   img.onload = (): void => {
-    const wRatio = !w && h ? parseInt(h, 10) / img.height : 1;
-    const hRatio = w && !h ? parseInt(w, 10) / img.width : 1;
-    const width = (w || img.width * wRatio).toString();
-    const height = (h || img.height * hRatio).toString();
+    const wRatio = !w && h ? h / img.height : 1;
+    const hRatio = w && !h ? w / img.width : 1;
 
-    cb(null, { width, height });
+    cb(null, { width: img.width * wRatio, height: img.height * hRatio });
   };
   img.onerror = (error): void => {
     cb(error);
