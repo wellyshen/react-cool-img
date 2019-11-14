@@ -44,4 +44,33 @@ describe('loadImgSize', () => {
       done();
     });
   });
+
+  it('if width and height props are set, use them as image size', done => {
+    const width = 250;
+    const height = 250;
+
+    loadImgSize(SUCCESS_SRC, width, height, (error, data) => {
+      expect(data.width).toBe(width);
+      expect(data.height).toBe(height);
+      done();
+    });
+  });
+
+  it('if one of width or height prop is set, auto scale image', done => {
+    const width = 200;
+
+    loadImgSize(SUCCESS_SRC, width, null, (error, data) => {
+      expect(data.width).toBe(width);
+      expect(data.height).toBe(width);
+      done();
+    });
+
+    const height = 300;
+
+    loadImgSize(SUCCESS_SRC, null, height, (error, data) => {
+      expect(data.width).toBe(height);
+      expect(data.height).toBe(height);
+      done();
+    });
+  });
 });

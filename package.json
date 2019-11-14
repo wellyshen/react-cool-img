@@ -160,6 +160,10 @@
     },
     "snapshotSerializers": [
       "jest-emotion"
+    ],
+    "collectCoverageFrom": [
+      "src/utils/*.ts",
+      "src/Img/*.tsx"
     ]
   },
   "dependencies": {

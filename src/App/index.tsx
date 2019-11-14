@@ -21,7 +21,7 @@ const App: SFC<{}> = () => (
         placeholderSrc={loadingImg}
         // placeholderAsError={false}
         errorSrc={errorImg}
-        // width="200"
+        // width="100"
         // height="200"
         alt="Image"
       />
