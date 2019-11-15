@@ -12,3 +12,9 @@ export const app = css`
   align-items: center;
   height: 100vh;
 `;
+
+export const container = css`
+  width: 300px;
+  height: 300px;
+  background: gray;
+`;
