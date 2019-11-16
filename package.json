@@ -38,8 +38,8 @@
     "lint:style": "stylelint --fix \"./**/*.css\" \"./**/*.ts\" \"./**/*.tsx\"",
     "lint": "npm-run-all lint:*",
     "clean:dev": "rm -rf src/.dev",
-    "clean:example": "rm -rf example",
-    "clean:dist": "rm -rf dist",
+    "clean:example": "rm -rf example .size-snapshot.json",
+    "clean:dist": "rm -rf dist .size-snapshot.json",
     "clean:test": "rm -rf coverage",
     "clean": "npm-run-all clean:*",
     "coveralls": "yarn clean:test && yarn cat ./coverage/lcov.info | coveralls"
