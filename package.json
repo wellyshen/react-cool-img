@@ -173,8 +173,8 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "normalize.css": "^8.0.1",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -207,10 +207,10 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "^9.4.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "react-test-renderer": "^16.11.0",
+    "react-test-renderer": "^16.12.0",
     "rollup": "^1.27.0",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-bundle-html": "^0.2.2",
@@ -223,14 +223,14 @@
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-url": "^3.0.0",
-    "stylelint": "^11.1.1",
+    "stylelint": "^12.0.0",
     "stylelint-config-prettier": "^6.0.0",
     "stylelint-config-standard": "^19.0.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.7.2"
   },
   "peerDependencies": {
-    "react": "16.11.x",
-    "react-dom": "16.11.x"
+    "react": "16.12.x",
+    "react-dom": "16.12.x"
   }
 }
