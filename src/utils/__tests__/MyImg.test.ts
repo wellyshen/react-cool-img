@@ -1,11 +1,38 @@
 import MyImg from '../MyImg';
 
 describe('MyImg', () => {
-  const myImg = new MyImg();
   const SUCCESS_SRC = 'SUCCESS_SRC';
   const FAILURE_SRC = 'FAILURE_SRC';
-  const ERROR_EVT = { msg: 'mock event' };
-  const LOAD_EVT = { msg: 'mock event' };
+  const ERROR_EVT = { mock: '' };
+  const LOAD_EVT = { mock: '' };
+
+  const myImg = new MyImg();
+  const myImgDelegation = {
+    load: ({
+      src,
+      crossOrigin,
+      decode,
+      onError,
+      onLoad
+    }: {
+      src?: string;
+      crossOrigin?: string;
+      decode?: boolean;
+      onError?: (event: Event) => void;
+      onLoad?: (event: Event) => void;
+    }): void => {
+      myImg.load(
+        src || SUCCESS_SRC,
+        crossOrigin,
+        decode || false,
+        onError,
+        onLoad
+      );
+    },
+    unload: (): void => {
+      myImg.unload();
+    }
+  };
 
   beforeAll(() => {
     let source: undefined;
@@ -50,7 +77,7 @@ describe('MyImg', () => {
     };
     const onLoad = jest.fn();
 
-    myImg.load(FAILURE_SRC, null, true, onError, onLoad);
+    myImgDelegation.load({ src: FAILURE_SRC, onError, onLoad });
 
     expect(onLoad).not.toBeCalled();
   });
@@ -62,31 +89,19 @@ describe('MyImg', () => {
       done();
     };
 
-    myImg.load(SUCCESS_SRC, null, true, onError, onLoad);
+    myImgDelegation.load({ src: SUCCESS_SRC, onError, onLoad });
 
     expect(onError).not.toBeCalled();
   });
 
   it("set Image's crossOrigin attribute correctly", () => {
-    myImg.load(
-      SUCCESS_SRC,
-      null,
-      true,
-      () => {},
-      () => {}
-    );
+    myImgDelegation.load({});
 
     expect(myImg.img.crossOrigin).toBeUndefined();
 
     const crossOrigin = '';
 
-    myImg.load(
-      SUCCESS_SRC,
-      crossOrigin,
-      true,
-      () => {},
-      () => {}
-    );
+    myImgDelegation.load({ crossOrigin });
 
     setTimeout(() => {
       expect(myImg.img.crossOrigin).toBe(crossOrigin);
@@ -97,23 +112,11 @@ describe('MyImg', () => {
     // @ts-ignore
     const decode = jest.spyOn(global.Image.prototype, 'decode');
 
-    myImg.load(
-      SUCCESS_SRC,
-      null,
-      false,
-      () => {},
-      () => {}
-    );
+    myImgDelegation.load({});
 
     expect(decode).not.toBeCalled();
 
-    myImg.load(
-      SUCCESS_SRC,
-      null,
-      true,
-      () => {},
-      () => {}
-    );
+    myImgDelegation.load({ decode: true });
 
     expect(decode).toBeCalled();
   });
@@ -121,20 +124,14 @@ describe('MyImg', () => {
   it('image unload, clear "onerror", "onload", "src" properties and Image instance', () => {
     const src = 'mock src';
 
-    myImg.load(
-      src,
-      null,
-      true,
-      () => {},
-      () => {}
-    );
+    myImgDelegation.load({ src });
 
     expect(myImg.img.onerror).toBeInstanceOf(Function);
     expect(myImg.img.onload).toBeInstanceOf(Function);
     expect(myImg.img.src).toBe(src);
     expect(myImg.img).toBeInstanceOf(HTMLImageElement);
 
-    myImg.unload();
+    myImgDelegation.unload();
 
     expect(myImg.img).toBeNull();
   });
