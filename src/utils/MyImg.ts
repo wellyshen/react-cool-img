@@ -15,6 +15,7 @@ export default class MyImg {
     this.img = new Image();
     this.img.src = src;
 
+    /* istanbul ignore next */
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
     if (decode)
       this.img.decode().catch(() => {
@@ -31,6 +32,7 @@ export default class MyImg {
   }
 
   unload(): void {
+    /* istanbul ignore next */
     if (!this.img) return;
 
     this.img.onerror = null;
