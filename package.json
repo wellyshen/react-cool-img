@@ -42,7 +42,7 @@
     "clean:dist": "rm -rf dist .size-snapshot.json",
     "clean:test": "rm -rf coverage",
     "clean": "npm-run-all clean:*",
-    "coveralls": "yarn clean:test && cat ./coverage/lcov.info | coveralls"
+    "coveralls": "yarn test && cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
     "hooks": {
