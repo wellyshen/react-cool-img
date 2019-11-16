@@ -20,7 +20,7 @@ export default class MyImg {
     if (decode)
       this.img.decode().catch(() => {
         /* istanbul ignore next */
-        console.error(`😱react-cool-img: Error decoding image at ${src}`);
+        console.error(`🤡react-cool-img: Error decoding image at ${src}`);
       });
 
     this.img.onerror = (event: Event): void => {

@@ -35,13 +35,14 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
     "lint:code": "eslint --fix . --ext .js,.ts,.tsx",
-    "lint:style": "stylelint --fix \"./**/*.ts\" \"./**/*.tsx\"",
+    "lint:style": "stylelint --fix \"./**/*.css\" \"./**/*.ts\" \"./**/*.tsx\"",
     "lint": "npm-run-all lint:*",
     "clean:dev": "rm -rf src/.dev",
     "clean:example": "rm -rf example",
     "clean:dist": "rm -rf dist",
     "clean:test": "rm -rf coverage",
-    "clean": "npm-run-all clean:*"
+    "clean": "npm-run-all clean:*",
+    "coveralls": "yarn clean:test && yarn cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
     "hooks": {
@@ -51,7 +52,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --fix",
-    "*.{ts,tsx}": "stylelint --fix",
+    "*.{css,ts,tsx}": "stylelint --fix",
     "*.{json,md}": "prettier --write"
   },
   "babel": {
@@ -150,7 +151,11 @@
     "rules": {
       "string-quotes": "single",
       "declaration-empty-line-before": null
-    }
+    },
+    "ignoreFiles": [
+      "example/**/*.css",
+      "coverage/**/*.css"
+    ]
   },
   "jest": {
     "preset": "ts-jest",
@@ -187,6 +192,7 @@
     "@typescript-eslint/parser": "^2.7.0",
     "babel-plugin-emotion": "^10.0.23",
     "core-js": "^3.4.1",
+    "coveralls": "^3.0.7",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.1.0",

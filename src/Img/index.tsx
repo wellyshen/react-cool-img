@@ -61,7 +61,7 @@ const Img: SFC<Props> = ({
     // @ts-ignore
     const targetSrc = event.target.src;
 
-    console.error(`😱react-cool-img: Error loading image at ${targetSrc}`);
+    console.error(`🤡react-cool-img: Error loading image at ${targetSrc}`);
 
     if (targetSrc === src) {
       if (errorSrc) {
