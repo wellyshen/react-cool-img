@@ -1,108 +1,108 @@
+/* eslint-disable jsx-a11y/alt-text, react-hooks/exhaustive-deps */
+
 import React, {
+  DetailedHTMLProps,
+  ImgHTMLAttributes,
   SFC,
   SyntheticEvent,
-  ReactNode,
   useState,
   useEffect,
   memo
 } from 'react';
-import { ClassNames } from '@emotion/core';
 
-import loadImgSize from '../utils/loadImgSize';
-import styles from './styles';
+import MyImg from '../utils/MyImg';
 
-interface Props {
-  src?: string;
-  placeholderSrc?: string;
-  placeholderAsError?: boolean;
+const myImg = new MyImg();
+
+interface Props
+  extends DetailedHTMLProps<
+    ImgHTMLAttributes<HTMLImageElement>,
+    HTMLImageElement
+  > {
+  src: string;
+  defaultSrc?: string;
   errorSrc?: string;
-  width?: string;
-  height?: string;
-  alt?: string;
-  className?: string;
-  onLoad?: (event: SyntheticEvent) => void;
-  onError?: (event: SyntheticEvent) => void;
+  defaultAsError?: boolean;
+  crossOrigin?: '' | 'anonymous' | 'use-credentials';
+  decode?: boolean;
+  srcSet?: string;
+  sizes?: string;
+  onLoad?: (event: SyntheticEvent | Event) => void;
+  onError?: (event: SyntheticEvent | Event) => void;
 }
 
 const Img: SFC<Props> = ({
   src,
-  placeholderSrc,
-  placeholderAsError,
+  defaultSrc,
   errorSrc,
-  width,
-  height,
-  alt,
-  className,
+  defaultAsError,
+  crossOrigin,
+  decode,
+  srcSet,
+  sizes,
   onLoad,
-  onError
+  onError,
+  ...rest
 }: Props) => {
-  const [source, setSource] = useState(src);
-  const [imgSize, setImgSize] = useState({ width: null, height: null });
-  const [showPlaceholder, setShowPlaceholder] = useState(!!placeholderSrc);
+  const [source, setSource] = useState(defaultSrc || src || errorSrc);
+  const isSrc = source === src;
 
-  useEffect(() => {
-    if (placeholderSrc)
-      loadImgSize(
-        placeholderSrc,
-        parseInt(width, 10),
-        parseInt(height, 10),
-        (error, data) => {
-          if (error) {
-            console.error(`😱react-cool-img: ${error}`);
-            return;
-          }
+  const handleLoad = (event: SyntheticEvent | Event): void => {
+    // @ts-ignore
+    const targetSrc = event.target.src;
 
-          setImgSize({ width: data.width, height: data.height });
-        }
-      );
-  }, [placeholderSrc, width, height]);
-
-  const handleLoaded = (event: SyntheticEvent): void => {
-    onLoad(event);
-    setShowPlaceholder(false);
-  };
-
-  const handleError = (event: SyntheticEvent): void => {
-    onError(event);
-
-    if (errorSrc) {
-      setSource(errorSrc);
-    } else if (placeholderAsError && placeholderSrc) {
-      setSource(placeholderSrc);
-    } else {
-      setShowPlaceholder(false);
+    if (targetSrc === src) {
+      setSource(targetSrc);
+      onLoad(event);
     }
   };
 
+  const handleError = (event: SyntheticEvent | Event): void => {
+    // @ts-ignore
+    const targetSrc = event.target.src;
+
+    console.error(`😱react-cool-img: Error loading image at ${targetSrc}`);
+
+    if (targetSrc === src) {
+      if (errorSrc) {
+        setSource(errorSrc);
+      } else if (defaultSrc) {
+        setSource((defaultAsError && defaultSrc) || null);
+      }
+
+      onError(event);
+    }
+  };
+
+  useEffect(() => {
+    myImg.load(src, crossOrigin, decode, handleError, handleLoad);
+
+    return (): void => {
+      myImg.unload();
+    };
+  }, [src, crossOrigin, decode]);
+
   return (
-    <ClassNames>
-      {({ cx, css }): ReactNode => (
-        <img
-          className={cx(
-            { [styles(placeholderSrc, css)]: showPlaceholder },
-            className
-          )}
-          src={source}
-          width={width || showPlaceholder ? imgSize.width : null}
-          height={height || showPlaceholder ? imgSize.height : null}
-          alt={alt}
-          onLoad={handleLoaded}
-          onError={handleError}
-        />
-      )}
-    </ClassNames>
+    <img
+      src={source}
+      crossOrigin={crossOrigin}
+      srcSet={isSrc ? srcSet : null}
+      sizes={isSrc ? sizes : null}
+      onLoad={isSrc ? null : handleLoad}
+      onError={isSrc ? null : handleError}
+      {...rest}
+    />
   );
 };
 
 Img.defaultProps = {
-  src: null,
-  placeholderSrc: null,
-  placeholderAsError: true,
+  defaultSrc: null,
   errorSrc: null,
-  width: null,
-  height: null,
-  alt: null,
-  className: '',
+  defaultAsError: true,
+  crossOrigin: null,
+  decode: true,
+  srcSet: null,
+  sizes: null,
   onLoad: (): void => {},
   onError: (): void => {}
 };

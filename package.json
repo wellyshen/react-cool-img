@@ -29,18 +29,19 @@
     "dev": "yarn clean:dev && rollup -c rollup/config.js -w --environment BUILD:dev",
     "build:example": "yarn clean:example && yarn clean:dev && rollup -c rollup/config.js --environment BUILD:example",
     "build:dist": "yarn clean:dist && rollup -c rollup/config.js --environment BUILD:dist",
-    "build": "yarn build:dist && yarn build:example",
+    "build": "npm-run-all build:*",
     "test": "jest --coverage",
     "test:watch": "yarn test --watch",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
     "lint:code": "eslint --fix . --ext .js,.ts,.tsx",
     "lint:style": "stylelint --fix \"./**/*.ts\" \"./**/*.tsx\"",
+    "lint": "npm-run-all lint:*",
     "clean:dev": "rm -rf src/.dev",
     "clean:example": "rm -rf example",
     "clean:dist": "rm -rf dist",
     "clean:test": "rm -rf coverage",
-    "clean": "yarn clean:dev && yarn clean:example && yarn clean:dist && yarn clean:test"
+    "clean": "npm-run-all clean:*"
   },
   "husky": {
     "hooks": {
@@ -112,6 +113,7 @@
           ]
         }
       ],
+      "react/jsx-props-no-spreading": "off",
       "react/jsx-filename-extension": [
         "error",
         {
@@ -129,12 +131,12 @@
           "singleQuote": true
         }
       ],
-      "@typescript-eslint/ban-ts-ignore": "off",
-      "@typescript-eslint/no-explicit-any": "off"
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-ignore": "off"
     }
   },
   "eslintIgnore": [
-    "example/assets",
+    "example",
     "dist"
   ],
   "prettier": {
@@ -156,11 +158,8 @@
       "<rootDir>/jest/setup.ts"
     ],
     "moduleNameMapper": {
-      "\\.(svg|png|jpg|gif)$": "<rootDir>/__mocks__/file.ts"
+      "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts"
     },
-    "snapshotSerializers": [
-      "jest-emotion"
-    ],
     "collectCoverageFrom": [
       "src/utils/*.ts",
       "src/Img/*.tsx"
@@ -202,8 +201,8 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "husky": "^3.0.9",
     "jest": "^24.9.0",
-    "jest-emotion": "^10.0.17",
     "lint-staged": "^9.4.2",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
     "react-test-renderer": "^16.11.0",
     "rollup": "^1.27.0",

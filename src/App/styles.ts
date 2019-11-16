@@ -14,7 +14,7 @@ export const app = css`
 `;
 
 export const container = css`
-  width: 300px;
-  height: 300px;
   background: gray;
+  width: 500px;
+  height: 500px;
 `;
