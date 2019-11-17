@@ -6,6 +6,7 @@ import Img from '../Img';
 import loadingImg from '../static/loading.gif';
 import emptyImg from '../static/empty.svg';
 import { root, app, container } from './styles';
+import './styles.css';
 
 const App: SFC<{}> = () => {
   const [showImg, setShowImg] = useState(true);
@@ -26,13 +27,14 @@ const App: SFC<{}> = () => {
         <div css={container}>
           {showImg && (
             <Img
-              src="https://picsum.photos/500"
+              // className="image"
+              src="https://picsum.photos/252"
               // defaultSrc={loadingImg}
               errorSrc={emptyImg}
               // decode={false}
               // defaultAsError={false}
-              width="250"
-              // height="500"
+              width="252"
+              height="252"
               // onLoad={e => {
               //   console.log('LOG ===> Load: ', e);
               // }}
