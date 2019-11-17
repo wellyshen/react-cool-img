@@ -26,12 +26,12 @@ const App: SFC<{}> = () => {
         <div css={container}>
           {showImg && (
             <Img
-              src="https://picsum.photos/252"
-              defaultSrc={loadingImg}
+              src="https://picsum.photos/500"
+              // defaultSrc={loadingImg}
               errorSrc={emptyImg}
               // decode={false}
               // defaultAsError={false}
-              // width="500"
+              width="250"
               // height="500"
               // onLoad={e => {
               //   console.log('LOG ===> Load: ', e);
