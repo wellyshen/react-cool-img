@@ -89,7 +89,7 @@ describe('MyImg', () => {
       done();
     };
 
-    myImgDelegation.load({ src: SUCCESS_SRC, onError, onLoad });
+    myImgDelegation.load({ onError, onLoad });
 
     expect(onError).not.toBeCalled();
   });
