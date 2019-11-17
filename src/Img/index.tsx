@@ -10,9 +10,9 @@ import React, {
   memo
 } from 'react';
 
-import MyImg from '../utils/MyImg';
+import Imager from '../utils/Imager';
 
-const myImg = new MyImg();
+const imager = new Imager();
 
 interface Props
   extends DetailedHTMLProps<
@@ -75,10 +75,10 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    myImg.load(src, crossOrigin, decode, handleError, handleLoad);
+    imager.load(src, crossOrigin, decode, handleError, handleLoad);
 
     return (): void => {
-      myImg.unload();
+      imager.unload();
     };
   }, [src, crossOrigin, decode]);
 

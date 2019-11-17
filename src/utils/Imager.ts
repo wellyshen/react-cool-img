@@ -1,4 +1,4 @@
-export default class MyImg {
+export default class Imager {
   img: HTMLImageElement | null;
 
   constructor() {

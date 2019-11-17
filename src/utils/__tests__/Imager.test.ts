@@ -1,13 +1,13 @@
-import MyImg from '../MyImg';
+import Imager from '../Imager';
 
-describe('MyImg', () => {
+describe('Imager', () => {
   const SUCCESS_SRC = 'SUCCESS_SRC';
   const FAILURE_SRC = 'FAILURE_SRC';
   const ERROR_EVT = { mock: '' };
   const LOAD_EVT = { mock: '' };
 
-  const myImg = new MyImg();
-  const myImgDelegation = {
+  const imager = new Imager();
+  const image = {
     load: ({
       src,
       crossOrigin,
@@ -21,7 +21,7 @@ describe('MyImg', () => {
       onError?: (event: Event) => void;
       onLoad?: (event: Event) => void;
     }): void => {
-      myImg.load(
+      imager.load(
         src || SUCCESS_SRC,
         crossOrigin,
         decode || false,
@@ -30,7 +30,7 @@ describe('MyImg', () => {
       );
     },
     unload: (): void => {
-      myImg.unload();
+      imager.unload();
     }
   };
 
@@ -77,7 +77,7 @@ describe('MyImg', () => {
     };
     const onLoad = jest.fn();
 
-    myImgDelegation.load({ src: FAILURE_SRC, onError, onLoad });
+    image.load({ src: FAILURE_SRC, onError, onLoad });
 
     expect(onLoad).not.toBeCalled();
   });
@@ -89,22 +89,22 @@ describe('MyImg', () => {
       done();
     };
 
-    myImgDelegation.load({ onError, onLoad });
+    image.load({ onError, onLoad });
 
     expect(onError).not.toBeCalled();
   });
 
   it("set Image's crossOrigin attribute correctly", () => {
-    myImgDelegation.load({});
+    image.load({});
 
-    expect(myImg.img.crossOrigin).toBeUndefined();
+    expect(imager.img.crossOrigin).toBeUndefined();
 
     const crossOrigin = '';
 
-    myImgDelegation.load({ crossOrigin });
+    image.load({ crossOrigin });
 
     setTimeout(() => {
-      expect(myImg.img.crossOrigin).toBe(crossOrigin);
+      expect(imager.img.crossOrigin).toBe(crossOrigin);
     });
   });
 
@@ -112,11 +112,11 @@ describe('MyImg', () => {
     // @ts-ignore
     const decode = jest.spyOn(global.Image.prototype, 'decode');
 
-    myImgDelegation.load({});
+    image.load({});
 
     expect(decode).not.toBeCalled();
 
-    myImgDelegation.load({ decode: true });
+    image.load({ decode: true });
 
     expect(decode).toBeCalled();
   });
@@ -124,15 +124,15 @@ describe('MyImg', () => {
   it('image unload, clear "onerror", "onload", "src" properties and Image instance', () => {
     const src = 'mock src';
 
-    myImgDelegation.load({ src });
+    image.load({ src });
 
-    expect(myImg.img.onerror).toBeInstanceOf(Function);
-    expect(myImg.img.onload).toBeInstanceOf(Function);
-    expect(myImg.img.src).toBe(src);
-    expect(myImg.img).toBeInstanceOf(HTMLImageElement);
+    expect(imager.img.onerror).toBeInstanceOf(Function);
+    expect(imager.img.onload).toBeInstanceOf(Function);
+    expect(imager.img.src).toBe(src);
+    expect(imager.img).toBeInstanceOf(HTMLImageElement);
 
-    myImgDelegation.unload();
+    image.unload();
 
-    expect(myImg.img).toBeNull();
+    expect(imager.img).toBeNull();
   });
 });
