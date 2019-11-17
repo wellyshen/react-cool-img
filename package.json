@@ -9,6 +9,7 @@
     "react-component",
     "ui",
     "img",
+    "performance",
     "typescript"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
