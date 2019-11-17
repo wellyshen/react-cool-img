@@ -14,7 +14,10 @@ export const app = css`
 `;
 
 export const container = css`
-  background: gray;
-  width: 500px;
-  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+  width: 400px;
+  height: 400px;
 `;
