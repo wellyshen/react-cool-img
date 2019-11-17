@@ -29,7 +29,7 @@
   "scripts": {
     "dev": "yarn clean:dev && rollup -c rollup/config.js -w --environment BUILD:dev",
     "build:example": "yarn clean:example && yarn clean:dev && rollup -c rollup/config.js --environment BUILD:example",
-    "build:dist": "yarn clean:dist && rollup -c rollup/config.js --environment BUILD:dist",
+    "build:dist": "yarn clean:dist && BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:dist",
     "build": "npm-run-all build:*",
     "test": "jest --coverage",
     "test:watch": "yarn test --watch",
@@ -66,12 +66,18 @@
         }
       ],
       "@babel/typescript",
-      "@babel/react",
-      "@emotion/babel-preset-css-prop"
+      "@babel/react"
     ],
-    "plugins": [
-      "emotion"
-    ]
+    "env": {
+      "development": {
+        "presets": [
+          "@emotion/babel-preset-css-prop"
+        ],
+        "plugins": [
+          "emotion"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
