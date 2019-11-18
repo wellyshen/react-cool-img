@@ -29,18 +29,19 @@ const App: SFC<{}> = () => {
             <Img
               // className="image"
               src="https://picsum.photos/252"
-              // defaultSrc={loadingImg}
+              defaultSrc={loadingImg}
               errorSrc={emptyImg}
               // decode={false}
               // defaultAsError={false}
-              width="252"
-              height="252"
+              // width="252"
+              // height="252"
               // onLoad={e => {
               //   console.log('LOG ===> Load: ', e);
               // }}
               // onError={e => {
               //   console.log('LOG ===> Error: ', e);
               // }}
+              // retry={{ count: 3, delay: 2 }}
               alt="Image"
             />
           )}

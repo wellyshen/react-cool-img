@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 
 import Imager from '../utils/Imager';
+import errorManager from '../utils/errorManager';
 
 const imager = new Imager();
 
@@ -25,6 +26,7 @@ interface Props
   defaultAsError?: boolean;
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
+  retry?: { count: number; delay: number; acc?: string };
   srcSet?: string;
   sizes?: string;
   onLoad?: (event: SyntheticEvent | Event) => void;
@@ -38,6 +40,7 @@ const Img: SFC<Props> = ({
   defaultAsError,
   crossOrigin,
   decode,
+  retry,
   srcSet,
   sizes,
   onLoad,
@@ -61,7 +64,7 @@ const Img: SFC<Props> = ({
     // @ts-ignore
     const targetSrc = event.target.src;
 
-    console.error(`🤡react-cool-img: Error loading image at ${targetSrc}`);
+    errorManager('load-error', { src: targetSrc });
 
     if (targetSrc === src) {
       if (errorSrc) {
@@ -75,12 +78,12 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    imager.load(src, crossOrigin, decode, handleError, handleLoad);
+    imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
 
     return (): void => {
       imager.unload();
     };
-  }, [src, crossOrigin, decode]);
+  }, [src, crossOrigin, decode, retry]);
 
   return (
     <img
@@ -101,6 +104,7 @@ Img.defaultProps = {
   defaultAsError: true,
   crossOrigin: null,
   decode: true,
+  retry: null,
   srcSet: null,
   sizes: null,
   onLoad: (): void => {},
