@@ -24,7 +24,6 @@ export default class Imager {
     this.img = new Image();
     this.img.src = src;
 
-    /* istanbul ignore next */
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
     if (decode)
       this.img.decode().catch(() => {
@@ -61,15 +60,14 @@ export default class Imager {
   }
 
   unload(): void {
-    /* istanbul ignore next */
-    if (!this.img) return;
-
-    this.img.onerror = null;
-    this.img.onload = null;
-    this.clearSrc();
-    this.img = null;
+    if (this.img) {
+      this.img.onerror = null;
+      this.img.onload = null;
+      this.clearSrc();
+      this.img = null;
+    }
     this.retries = 1;
-    if (this.timeOut) this.timeOut = null;
+    this.timeOut = null;
   }
 
   clearSrc(): void {

@@ -74,7 +74,7 @@ describe('Imager', () => {
     });
   });
 
-  it('image loaded failure, trigger onError callback', done => {
+  it('should trigger onError when failed to load image', done => {
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
       done();
@@ -86,7 +86,7 @@ describe('Imager', () => {
     expect(onLoad).not.toBeCalled();
   });
 
-  it('image loaded success, trigger onLoad callback', done => {
+  it('should trigger onLoad when success to load image', done => {
     const onError = jest.fn();
     const onLoad = (event: Event): void => {
       expect(event).toMatchObject(LOAD_EVT);
@@ -98,12 +98,12 @@ describe('Imager', () => {
     expect(onError).not.toBeCalled();
   });
 
-  it("set Image's crossOrigin attribute correctly", () => {
+  it('should set crossOrigin correctly', () => {
     image.load({});
 
     expect(imager.img.crossOrigin).toBeUndefined();
 
-    const crossOrigin = '';
+    const crossOrigin = 'anonymous';
 
     image.load({ crossOrigin });
 
@@ -112,7 +112,7 @@ describe('Imager', () => {
     });
   });
 
-  it("call Image's decode method correctly", () => {
+  it('should call decode method', () => {
     // @ts-ignore
     const decode = jest.spyOn(global.Image.prototype, 'decode');
 
@@ -125,19 +125,12 @@ describe('Imager', () => {
     expect(decode).toBeCalled();
   });
 
-  it('image unload, clear "onerror", "onload", "src" properties and Image instance', () => {
-    const src = 'mock src';
-
-    image.load({ src });
-
-    expect(imager.img.onerror).toBeInstanceOf(Function);
-    expect(imager.img.onload).toBeInstanceOf(Function);
-    expect(imager.img.src).toBe(src);
-    expect(imager.img).toBeInstanceOf(HTMLImageElement);
-
+  it('should clear img.src and reset variables', () => {
+    image.load({ src: SUCCESS_SRC });
     image.unload();
 
     expect(imager.clearSrc).toBeCalled();
-    expect(imager.img).toBeNull();
+    expect(imager.timeOut).toBeNull();
+    expect(imager.retries).toBe(1);
   });
 });
