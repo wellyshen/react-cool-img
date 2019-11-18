@@ -45,8 +45,8 @@ export default class Imager {
       }
 
       let time = retry.delay ** this.retries;
-      if (retry.acc === 'add') time = retry.delay * this.retries;
       if (retry.acc === 'const') time = retry.delay;
+      if (retry.acc === 'add') time = retry.delay * this.retries;
 
       this.timeOut = setTimeout(() => {
         this.clearSrc();

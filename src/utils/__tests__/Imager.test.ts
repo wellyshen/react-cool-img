@@ -6,18 +6,21 @@ describe('Imager', () => {
   const ERROR_EVT = { mock: '' };
   const LOAD_EVT = { mock: '' };
 
+  Imager.prototype.clearSrc = jest.fn();
   const imager = new Imager();
   const image = {
     load: ({
       src,
       crossOrigin,
       decode,
+      retry,
       onError,
       onLoad
     }: {
       src?: string;
       crossOrigin?: string;
       decode?: boolean;
+      retry?: { count: number; delay: number; acc?: string };
       onError?: (event: Event) => void;
       onLoad?: (event: Event) => void;
     }): void => {
@@ -25,6 +28,7 @@ describe('Imager', () => {
         src || SUCCESS_SRC,
         crossOrigin,
         decode || false,
+        retry || null,
         onError,
         onLoad
       );
@@ -133,6 +137,7 @@ describe('Imager', () => {
 
     image.unload();
 
+    expect(imager.clearSrc).toBeCalled();
     expect(imager.img).toBeNull();
   });
 });
