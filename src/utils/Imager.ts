@@ -48,7 +48,7 @@ export default class Imager {
       if (retry.acc === 'add') time = retry.delay * this.retries;
 
       this.timeOut = setTimeout(() => {
-        this.clearSrc();
+        this.clearImgSrc();
         this.img.src = src;
       }, time * 1000);
 
@@ -63,14 +63,14 @@ export default class Imager {
     if (this.img) {
       this.img.onerror = null;
       this.img.onload = null;
-      this.clearSrc();
+      this.clearImgSrc();
       this.img = null;
     }
     this.retries = 1;
     this.timeOut = null;
   }
 
-  clearSrc(): void {
+  clearImgSrc(): void {
     this.img.src = '';
     try {
       delete this.img.src;

@@ -6,7 +6,7 @@ describe('Imager', () => {
   const ERROR_EVT = { mock: '' };
   const LOAD_EVT = { mock: '' };
 
-  Imager.prototype.clearSrc = jest.fn();
+  Imager.prototype.clearImgSrc = jest.fn();
   const imager = new Imager();
   const image = {
     load: ({
@@ -39,7 +39,6 @@ describe('Imager', () => {
   };
 
   beforeAll(() => {
-    let source: undefined;
     let crossOrigin: undefined;
 
     // Mock Image events
@@ -47,16 +46,11 @@ describe('Imager', () => {
     Object.defineProperties(global.Image.prototype, {
       src: {
         set(src): void {
-          source = src;
-
           if (src === FAILURE_SRC) {
             setTimeout(() => this.onerror(ERROR_EVT));
           } else if (src === SUCCESS_SRC) {
             setTimeout(() => this.onload(LOAD_EVT));
           }
-        },
-        get(): string {
-          return source;
         }
       },
       crossOrigin: {
@@ -129,7 +123,7 @@ describe('Imager', () => {
     image.load({ src: SUCCESS_SRC });
     image.unload();
 
-    expect(imager.clearSrc).toBeCalled();
+    expect(imager.clearImgSrc).toBeCalled();
     expect(imager.timeOut).toBeNull();
     expect(imager.retries).toBe(1);
   });
