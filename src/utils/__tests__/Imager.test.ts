@@ -29,8 +29,8 @@ describe('Imager', () => {
         crossOrigin,
         decode || false,
         retry || null,
-        onError,
-        onLoad
+        onError || ((): void => {}),
+        onLoad || ((): void => {})
       );
     },
     unload: (): void => {
