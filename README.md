@@ -1,4 +1,4 @@
-# React Cool Img 😎🌌
+# React Cool Img
 
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-img/master.svg?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-img)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-img?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-img?branch=master)
