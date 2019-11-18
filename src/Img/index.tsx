@@ -66,8 +66,8 @@ const Img: SFC<Props> = ({
     if (targetSrc === src) {
       if (errorSrc) {
         setSource(errorSrc);
-      } else if (defaultSrc) {
-        setSource((defaultAsError && defaultSrc) || null);
+      } else if (defaultSrc && defaultAsError) {
+        setSource(defaultSrc);
       }
 
       onError(event);
