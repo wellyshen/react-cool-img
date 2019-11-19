@@ -27,6 +27,7 @@ export default class Imager {
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
     if (decode)
       this.img.decode().catch(() => {
+        /* istanbul ignore next */
         errorManager('decode', { src });
       });
 
@@ -44,7 +45,9 @@ export default class Imager {
       }
 
       let time = retry.delay ** this.retries;
+      /* istanbul ignore if */
       if (retry.acc === 'const') time = retry.delay;
+      /* istanbul ignore if */
       if (retry.acc === 'add') time = retry.delay * this.retries;
 
       this.timeOut = setTimeout(() => {
@@ -60,6 +63,7 @@ export default class Imager {
   }
 
   unload(): void {
+    /* istanbul ignore next */
     if (this.img) {
       this.img.onerror = null;
       this.img.onload = null;
@@ -70,6 +74,7 @@ export default class Imager {
     this.timeOut = null;
   }
 
+  /* istanbul ignore next */
   clearImgSrc(): void {
     this.img.src = '';
     try {
