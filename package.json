@@ -173,8 +173,7 @@
       "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts"
     },
     "collectCoverageFrom": [
-      "src/utils/*.ts",
-      "src/Img/*.tsx"
+      "src/Img/*.(ts|tsx)"
     ]
   },
   "dependencies": {
