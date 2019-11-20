@@ -10,8 +10,8 @@ import React, {
   memo
 } from 'react';
 
-import Imager from '../utils/Imager';
-import errorManager from '../utils/errorManager';
+import Imager from './Imager';
+import errorManager from './errorManager';
 
 const imager = new Imager();
 
