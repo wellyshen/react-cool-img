@@ -9,8 +9,8 @@ export default class Imager {
 
   constructor() {
     this.img = null;
-    this.retries = 1;
     this.timeOut = null;
+    this.retries = 1;
   }
 
   load(
@@ -66,8 +66,11 @@ export default class Imager {
       this.clearImgSrc();
       this.img = null;
     }
+    if (this.timeOut) {
+      clearTimeout(this.timeOut);
+      this.timeOut = null;
+    }
     this.retries = 1;
-    this.timeOut = null;
   }
 
   clearImgSrc(): void {
