@@ -1,6 +1,7 @@
 import Imager from '../Imager';
 
 describe('Imager', () => {
+  Imager.prototype.clearImgSrc = jest.fn();
   jest.useFakeTimers();
 
   const SUCCESS_SRC = 'SUCCESS_SRC';
@@ -8,8 +9,20 @@ describe('Imager', () => {
   const ERROR_EVT = { mock: '' };
   const LOAD_EVT = { mock: '' };
 
-  Imager.prototype.clearImgSrc = jest.fn();
-  const createImage = (ins: Imager): { load: Function; unload: Function } => ({
+  interface Return {
+    load: Function;
+    unload: Function;
+  }
+  interface Params {
+    src?: string;
+    crossOrigin?: string;
+    decode?: boolean;
+    retry?: { count: number; delay: number; acc?: string };
+    onError?: (event: Event) => void;
+    onLoad?: (event: Event) => void;
+  }
+
+  const createImage = (ins: Imager): Return => ({
     load: ({
       src,
       crossOrigin,
@@ -17,14 +30,7 @@ describe('Imager', () => {
       retry,
       onError,
       onLoad
-    }: {
-      src?: string;
-      crossOrigin?: string;
-      decode?: boolean;
-      retry?: { count: number; delay: number; acc?: string };
-      onError?: (event: Event) => void;
-      onLoad?: (event: Event) => void;
-    }): void => {
+    }: Params): void => {
       ins.load(
         src || SUCCESS_SRC,
         crossOrigin,

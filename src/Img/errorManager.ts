@@ -1,9 +1,11 @@
 export const prefix = '🤡react-cool-img:';
 
-export default (
-  type: string,
-  { src, retry }: { src?: string; retry?: { count?: number; delay?: number } }
-): void => {
+interface Params {
+  src?: string;
+  retry?: { count?: number; delay?: number };
+}
+
+export default (type: string, { src, retry }: Params): void => {
   switch (type) {
     case 'decode':
       console.error(`${prefix} error decoding image at ${src}`);
