@@ -5,7 +5,7 @@ import errorManager from './errorManager';
 export interface Retry {
   count: number;
   delay: number;
-  acc?: string;
+  acc?: string | boolean;
 }
 
 export default class Imager {
@@ -50,8 +50,8 @@ export default class Imager {
       }
 
       let time = retry.delay ** this.retries;
-      if (retry.acc === 'const') time = retry.delay;
       if (retry.acc === 'add') time = retry.delay * this.retries;
+      if (retry.acc === false) time = retry.delay;
 
       this.timeOut = setTimeout(() => {
         this.clearImgSrc();
