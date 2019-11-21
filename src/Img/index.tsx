@@ -52,7 +52,7 @@ const Img: SFC<Props> = ({
   onError,
   ...rest
 }: Props) => {
-  const [setRef, inView] = useInView(observerConfig);
+  const [setRef, inView] = useInView(lazy, observerConfig);
   const [source, setSource] = useState(defaultSrc || src || errorSrc);
   const isSrc = source === src;
 
@@ -84,15 +84,8 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    // Fix typescript error: https://github.com/microsoft/TypeScript/issues/5296
-    const load = imager.load as any;
-    const params = [src, crossOrigin, decode, retry, handleError, handleLoad];
-
-    if (!lazy) {
-      load(...params);
-    } else if (inView) {
-      load(...params);
-    }
+    if (inView)
+      imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
 
     return (): void => {
       imager.unload();

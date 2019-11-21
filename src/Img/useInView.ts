@@ -9,12 +9,11 @@ export interface Config {
 }
 type Return = [(node?: Element | null) => void, boolean];
 
-export default ({
-  root = null,
-  rootMargin = '0px',
-  threshold = 0
-}: Config = {}): Return => {
-  if (typeof window === 'undefined' || !window.IntersectionObserver) {
+export default (
+  lazy: boolean,
+  { root = null, rootMargin = '0px', threshold = 0 }: Config = {}
+): Return => {
+  if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
     errorManager('observer');
     return [(): void => {}, true];
   }
