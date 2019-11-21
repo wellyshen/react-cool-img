@@ -14,18 +14,19 @@ export default (
   { root = null, rootMargin = '0px', threshold = 0 }: Config = {}
 ): Return => {
   if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
-    errorManager('observer');
+    if (!window.IntersectionObserver) errorManager('observer');
     return [(): void => {}, true];
-  }
-
-  if (typeof threshold !== 'number') {
-    errorManager('threshold');
-    threshold = 0;
   }
 
   const [startLoad, setStartLoad] = useState(false);
   const [node, setNode] = useState(null);
   const observerRef = useRef(null);
+  let numThreshold = threshold;
+
+  if (typeof threshold !== 'number') {
+    errorManager('threshold');
+    numThreshold = 0;
+  }
 
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
@@ -34,7 +35,7 @@ export default (
       ([entry]) => {
         setStartLoad(entry.isIntersecting);
       },
-      { root, rootMargin, threshold }
+      { root, rootMargin, threshold: numThreshold }
     );
 
     const { current: observer } = observerRef;
@@ -44,7 +45,7 @@ export default (
     return (): void => {
       observer.disconnect();
     };
-  }, [node, root, rootMargin, threshold]);
+  }, [node, root, rootMargin, numThreshold]);
 
   return [setNode, startLoad];
 };
