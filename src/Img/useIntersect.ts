@@ -18,7 +18,7 @@ export default (
     return [(): void => {}, true];
   }
 
-  const [startLoad, setInView] = useState(false);
+  const [startLoad, setStartLoad] = useState(false);
   const [node, setNode] = useState(null);
   const observerRef = useRef(null);
 
@@ -27,7 +27,7 @@ export default (
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
-        setInView(entry.isIntersecting);
+        setStartLoad(entry.isIntersecting);
       },
       { root, rootMargin, threshold }
     );
