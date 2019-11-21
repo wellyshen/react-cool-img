@@ -24,7 +24,6 @@ interface Props
   src: string;
   defaultSrc?: string;
   errorSrc?: string;
-  defaultAsError?: boolean;
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
   lazy?: boolean;
@@ -40,7 +39,6 @@ const Img: SFC<Props> = ({
   src,
   defaultSrc,
   errorSrc,
-  defaultAsError,
   crossOrigin,
   decode,
   lazy,
@@ -75,7 +73,7 @@ const Img: SFC<Props> = ({
     if (targetSrc === src) {
       if (errorSrc) {
         setSource(errorSrc);
-      } else if (defaultSrc && defaultAsError) {
+      } else if (defaultSrc) {
         setSource(defaultSrc);
       }
 
@@ -109,7 +107,6 @@ const Img: SFC<Props> = ({
 Img.defaultProps = {
   defaultSrc: null,
   errorSrc: null,
-  defaultAsError: true,
   crossOrigin: null,
   decode: true,
   lazy: true,

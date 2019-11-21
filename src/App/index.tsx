@@ -32,7 +32,6 @@ const App: SFC<{}> = () => {
               defaultSrc={loadingImg}
               errorSrc={emptyImg}
               // decode={false}
-              // defaultAsError={false}
               // width="252"
               // height="252"
               // onLoad={e => {
@@ -54,7 +53,6 @@ const App: SFC<{}> = () => {
             defaultSrc={loadingImg}
             errorSrc={emptyImg}
             // decode={false}
-            // defaultAsError={false}
             // width="252"
             // height="252"
             // onLoad={e => {
