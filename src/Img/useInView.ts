@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import errorManager from './errorManager';
 
-export interface Options {
+export interface Config {
   root?: Element;
   rootMargin?: string;
   threshold?: number;
@@ -13,7 +13,7 @@ export default ({
   root = null,
   rootMargin = '0px',
   threshold = 0
-}: Options = {}): Return => {
+}: Config = {}): Return => {
   if (typeof window === 'undefined' || !window.IntersectionObserver) {
     errorManager('observer');
     return [(): void => {}, true];

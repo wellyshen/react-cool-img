@@ -10,7 +10,7 @@ import React, {
   memo
 } from 'react';
 
-import useInView, { Options } from './useInView';
+import useInView, { Config } from './useInView';
 import Imager, { Retry } from './Imager';
 import errorManager from './errorManager';
 
@@ -28,7 +28,7 @@ interface Props
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
   lazy?: boolean;
-  observerOptions?: Options;
+  observerConfig?: Config;
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
@@ -44,7 +44,7 @@ const Img: SFC<Props> = ({
   crossOrigin,
   decode,
   lazy,
-  observerOptions,
+  observerConfig,
   retry,
   srcSet,
   sizes,
@@ -52,7 +52,7 @@ const Img: SFC<Props> = ({
   onError,
   ...rest
 }: Props) => {
-  const [setRef, inView] = useInView(observerOptions);
+  const [setRef, inView] = useInView(observerConfig);
   const [source, setSource] = useState(defaultSrc || src || errorSrc);
   const isSrc = source === src;
 
@@ -120,7 +120,7 @@ Img.defaultProps = {
   crossOrigin: null,
   decode: true,
   lazy: true,
-  observerOptions: {},
+  observerConfig: {},
   retry: null,
   srcSet: null,
   sizes: null,
