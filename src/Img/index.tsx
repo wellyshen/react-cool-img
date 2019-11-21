@@ -10,7 +10,7 @@ import React, {
   memo
 } from 'react';
 
-import useInView, { Config } from './useInView';
+import useIntersect, { Config } from './useIntersect';
 import Imager, { Retry } from './Imager';
 import errorManager from './errorManager';
 
@@ -52,7 +52,7 @@ const Img: SFC<Props> = ({
   onError,
   ...rest
 }: Props) => {
-  const [setRef, inView] = useInView(lazy, observerConfig);
+  const [setRef, startLoad] = useIntersect(lazy, observerConfig);
   const [source, setSource] = useState(defaultSrc || src || errorSrc);
   const isSrc = source === src;
 
@@ -84,13 +84,13 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    if (inView)
+    if (startLoad)
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
 
     return (): void => {
       imager.unload();
     };
-  }, [inView, src, crossOrigin, decode, retry]);
+  }, [startLoad, src, crossOrigin, decode, retry]);
 
   return (
     <img

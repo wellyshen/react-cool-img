@@ -18,7 +18,7 @@ export default (
     return [(): void => {}, true];
   }
 
-  const [inView, setInView] = useState(false);
+  const [startLoad, setInView] = useState(false);
   const [node, setNode] = useState(null);
   const observerRef = useRef(null);
 
@@ -41,5 +41,5 @@ export default (
     };
   }, [node, root, rootMargin, threshold]);
 
-  return [setNode, inView];
+  return [setNode, startLoad];
 };
