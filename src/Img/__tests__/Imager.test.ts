@@ -24,21 +24,14 @@ describe('Imager', () => {
 
   const createImage = (ins: Imager): Return => ({
     load: ({
-      src,
+      src = SUCCESS_SRC,
       crossOrigin,
-      decode,
-      retry,
-      onError,
-      onLoad
+      decode = false,
+      retry = null,
+      onError = (): void => {},
+      onLoad = (): void => {}
     }: Params): void => {
-      ins.load(
-        src || SUCCESS_SRC,
-        crossOrigin,
-        decode || false,
-        retry || null,
-        onError || ((): void => {}),
-        onLoad || ((): void => {})
-      );
+      ins.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
     unload: (): void => {
       ins.unload();
