@@ -6,11 +6,15 @@
   "module": "dist/index.esm.js",
   "keywords": [
     "react",
-    "react-component",
+    "component",
     "ui",
     "img",
     "performance",
-    "typescript"
+    "typescript",
+    "lazy-loading",
+    "placeholder",
+    "auto-retry",
+    "intersection-observer"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
   "license": "MIT",
