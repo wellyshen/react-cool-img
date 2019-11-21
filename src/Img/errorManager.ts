@@ -5,6 +5,7 @@ export const msgs = {
     ${prefix} IntersectionObserver API doesn't support this browser, please install polyfill to enable lazy loading.
     intersection-observer: https://www.npmjs.com/package/intersection-observer
   `,
+  threshold: 'The threshold of observerConfig must be a number.',
   decode: (src: string): string => `${prefix} error decoding image at ${src}.`,
   onerror: (src: string): string => `${prefix} error loading image at ${src}.`,
   retry: `${prefix} you must setup "count" and "delay" to enable auto retry.`
@@ -18,6 +19,9 @@ interface Props {
 export default (type: string, props?: Props): void => {
   switch (type) {
     case 'observer':
+      console.error(msgs[type]);
+      break;
+    case 'threshold':
       console.error(msgs[type]);
       break;
     case 'decode':

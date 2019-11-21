@@ -12,6 +12,12 @@ describe('errorManager', () => {
     expect(global.console.error).toBeCalledWith(msgs.observer);
   });
 
+  it('should throw threshold error correctly', () => {
+    errorManager('threshold');
+
+    expect(global.console.error).toBeCalledWith(msgs.threshold);
+  });
+
   it('should throw decode error correctly', () => {
     errorManager('decode', { src });
 

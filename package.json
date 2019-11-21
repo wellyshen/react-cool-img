@@ -112,6 +112,7 @@
       "jest": true
     },
     "rules": {
+      "no-param-reassign": "off",
       "no-console": [
         "warn",
         {

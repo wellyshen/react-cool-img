@@ -18,6 +18,11 @@ export default (
     return [(): void => {}, true];
   }
 
+  if (typeof threshold !== 'number') {
+    errorManager('threshold');
+    threshold = 0;
+  }
+
   const [startLoad, setStartLoad] = useState(false);
   const [node, setNode] = useState(null);
   const observerRef = useRef(null);
