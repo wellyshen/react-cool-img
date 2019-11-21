@@ -10,7 +10,8 @@ import React, {
   memo
 } from 'react';
 
-import Imager from './Imager';
+import useInView, { Options } from './useInView';
+import Imager, { Retry } from './Imager';
 import errorManager from './errorManager';
 
 const imager = new Imager();
@@ -26,7 +27,9 @@ interface Props
   defaultAsError?: boolean;
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
-  retry?: { count: number; delay: number; acc?: string };
+  lazy?: boolean;
+  observerOptions?: Options;
+  retry?: Retry;
   srcSet?: string;
   sizes?: string;
   onLoad?: (event: SyntheticEvent | Event) => void;
@@ -40,6 +43,8 @@ const Img: SFC<Props> = ({
   defaultAsError,
   crossOrigin,
   decode,
+  lazy,
+  observerOptions,
   retry,
   srcSet,
   sizes,
@@ -47,6 +52,7 @@ const Img: SFC<Props> = ({
   onError,
   ...rest
 }: Props) => {
+  const [setRef, inView] = useInView(observerOptions);
   const [source, setSource] = useState(defaultSrc || src || errorSrc);
   const isSrc = source === src;
 
@@ -78,12 +84,20 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
+    // Fix typescript error: https://github.com/microsoft/TypeScript/issues/5296
+    const load = imager.load as any;
+    const params = [src, crossOrigin, decode, retry, handleError, handleLoad];
+
+    if (!lazy) {
+      load(...params);
+    } else if (inView) {
+      load(...params);
+    }
 
     return (): void => {
       imager.unload();
     };
-  }, [src, crossOrigin, decode, retry]);
+  }, [inView, src, crossOrigin, decode, retry]);
 
   return (
     <img
@@ -93,6 +107,7 @@ const Img: SFC<Props> = ({
       sizes={isSrc ? sizes : null}
       onLoad={isSrc ? null : handleLoad}
       onError={isSrc ? null : handleError}
+      ref={setRef}
       {...rest}
     />
   );
@@ -104,6 +119,8 @@ Img.defaultProps = {
   defaultAsError: true,
   crossOrigin: null,
   decode: true,
+  lazy: true,
+  observerOptions: {},
   retry: null,
   srcSet: null,
   sizes: null,

@@ -6,6 +6,12 @@ describe('errorManager', () => {
 
   const src = 'https://github.com/wellyshen/react-cool-starter';
 
+  it('should throw observer error correctly', () => {
+    errorManager('observer');
+
+    expect(global.console.error).toBeCalledWith(msgs.observer);
+  });
+
   it('should throw decode error correctly', () => {
     errorManager('decode', { src });
 

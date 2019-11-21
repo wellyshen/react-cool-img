@@ -28,7 +28,7 @@ const App: SFC<{}> = () => {
           {showImg && (
             <Img
               // className="image"
-              src="https://picsum.photos/252"
+              src="https://picsum.photos/252?random=1"
               defaultSrc={loadingImg}
               errorSrc={emptyImg}
               // decode={false}
@@ -42,9 +42,31 @@ const App: SFC<{}> = () => {
               //   console.log('LOG ===> Error: ', e);
               // }}
               // retry={{ count: 3, delay: 2 }}
+              // lazy={false}
               alt="Image"
             />
           )}
+        </div>
+        <div css={container}>
+          <Img
+            // className="image"
+            src="https://picsum.photos/252?random=2"
+            defaultSrc={loadingImg}
+            errorSrc={emptyImg}
+            // decode={false}
+            // defaultAsError={false}
+            // width="252"
+            // height="252"
+            // onLoad={e => {
+            //   console.log('LOG ===> Load: ', e);
+            // }}
+            // onError={e => {
+            //   console.log('LOG ===> Error: ', e);
+            // }}
+            // retry={{ count: 3, delay: 2 }}
+            // lazy={false}
+            alt="Image"
+          />
         </div>
       </div>
     </>

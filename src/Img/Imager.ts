@@ -2,6 +2,12 @@
 
 import errorManager from './errorManager';
 
+export interface Retry {
+  count: number;
+  delay: number;
+  acc?: string;
+}
+
 export default class Imager {
   img: HTMLImageElement | null;
   retries: number;
@@ -17,7 +23,7 @@ export default class Imager {
     src: string,
     crossOrigin: string | null,
     decode: boolean,
-    retry: { count: number; delay: number; acc?: string } | null,
+    retry: Retry | null,
     onError: (event: Event) => void,
     onLoad: (event: Event) => void
   ): void {

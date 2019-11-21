@@ -8,9 +8,11 @@ export const root = css`
 
 export const app = css`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  padding: 50px 0;
+  height: 1500px;
 `;
 
 export const container = css`

@@ -1,4 +1,4 @@
-import Imager from '../Imager';
+import Imager, { Retry } from '../Imager';
 
 describe('Imager', () => {
   Imager.prototype.clearImgSrc = jest.fn();
@@ -17,12 +17,12 @@ describe('Imager', () => {
     src?: string;
     crossOrigin?: string;
     decode?: boolean;
-    retry?: { count: number; delay: number; acc?: string };
+    retry?: Retry;
     onError?: (event: Event) => void;
     onLoad?: (event: Event) => void;
   }
 
-  const createImage = (ins: Imager): Return => ({
+  const createImage = (instance: Imager): Return => ({
     load: ({
       src = SUCCESS_SRC,
       crossOrigin,
@@ -31,10 +31,10 @@ describe('Imager', () => {
       onError = (): void => {},
       onLoad = (): void => {}
     }: Params): void => {
-      ins.load(src, crossOrigin, decode, retry, onError, onLoad);
+      instance.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
     unload: (): void => {
-      ins.unload();
+      instance.unload();
     }
   });
 
