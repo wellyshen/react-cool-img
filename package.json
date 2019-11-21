@@ -241,7 +241,7 @@
     "typescript": "^3.7.2"
   },
   "peerDependencies": {
-    "react": "16.12.x",
-    "react-dom": "16.12.x"
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
   }
 }
