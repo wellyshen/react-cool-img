@@ -1,4 +1,4 @@
-import errorManager, { prefix } from '../errorManager';
+import errorManager, { msgs } from '../errorManager';
 
 describe('errorManager', () => {
   // @ts-ignore
@@ -9,17 +9,13 @@ describe('errorManager', () => {
   it('should throw decode error correctly', () => {
     errorManager('decode', { src });
 
-    expect(global.console.error).toBeCalledWith(
-      `${prefix} error decoding image at ${src}`
-    );
+    expect(global.console.error).toBeCalledWith(msgs.decode(src));
   });
 
   it('should throw onerror error correctly', () => {
     errorManager('onerror', { src });
 
-    expect(global.console.error).toBeCalledWith(
-      `${prefix} error decoding image at ${src}`
-    );
+    expect(global.console.error).toBeCalledWith(msgs.onerror(src));
   });
 
   it('should throw retry error correctly', () => {
@@ -36,12 +32,10 @@ describe('errorManager', () => {
 
     errorManager('retry', { retry: { count: 3 } });
 
-    const msg = `${prefix} to use retry, you must setup "count" and "delay"`;
-
-    expect(global.console.error).toBeCalledWith(msg);
+    expect(global.console.error).toBeCalledWith(msgs.retry);
 
     errorManager('retry', { retry: { delay: 2 } });
 
-    expect(global.console.error).toBeCalledWith(msg);
+    expect(global.console.error).toBeCalledWith(msgs.retry);
   });
 });
