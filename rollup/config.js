@@ -23,13 +23,12 @@ const isDist = BUILD === 'dist';
 const cjs = {
   file: isDist ? pkg.main : 'src/.dev/bundle.js',
   format: 'cjs',
-  sourcemap: !isExample
+  sourcemap: isDev
 };
 
 const esm = {
   file: pkg.module,
-  format: 'esm',
-  sourcemap: true
+  format: 'esm'
 };
 
 const extensions = ['.js', '.ts', '.tsx', '.json'];
@@ -57,7 +56,7 @@ const plugins = [
   isDev && livereload(),
   // Must be placed before terser
   !isDev && sizeSnapshot(),
-  !isDev && terser({ sourcemap: true }),
+  !isDev && terser(),
   isExample &&
     copy({
       targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],
