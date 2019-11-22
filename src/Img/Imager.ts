@@ -5,7 +5,7 @@ import errorManager from './errorManager';
 export interface Retry {
   count: number;
   delay: number;
-  acc?: string | boolean;
+  acc?: 'x' | '+' | boolean;
 }
 
 export default class Imager {
@@ -50,7 +50,7 @@ export default class Imager {
       }
 
       let time = retry.delay ** this.retries;
-      if (retry.acc === 'add') time = retry.delay * this.retries;
+      if (retry.acc === '+') time = retry.delay * this.retries;
       if (retry.acc === false) time = retry.delay;
 
       this.timeOut = setTimeout(() => {
