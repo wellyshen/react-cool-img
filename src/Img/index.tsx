@@ -10,7 +10,7 @@ import React, {
   memo
 } from 'react';
 
-import useIntersect, { Config } from './useIntersect';
+import useObserver, { Config } from './useObserver';
 import Imager, { Retry } from './Imager';
 import errorManager from './errorManager';
 
@@ -50,7 +50,7 @@ const Img: SFC<Props> = ({
   onError,
   ...rest
 }: Props) => {
-  const [setRef, startLoad] = useIntersect(lazy, observerConfig);
+  const [setRef, startLoad] = useObserver(lazy, observerConfig);
   const [source, setSource] = useState(placeholder || src || error);
   const isSrc = source === src;
 

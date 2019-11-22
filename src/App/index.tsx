@@ -29,7 +29,9 @@ const App: SFC<{}> = () => {
             <Img
               // className="image"
               placeholder={loadingImg}
-              src="https://picsum.photos/252?random=1"
+              src={`https://fakeimg.pl/252/?text=${Math.floor(
+                Math.random() * 100
+              ) + 1}`}
               error={emptyImg}
               // decode={false}
               // width="252"
@@ -40,8 +42,9 @@ const App: SFC<{}> = () => {
               // onError={e => {
               //   console.log('LOG ===> Error: ', e);
               // }}
-              retry={{ count: 3, delay: 2 }}
+              // retry={{ count: 3, delay: 2 }}
               // lazy={false}
+              // observerConfig={{ debounce: 1000 }}
               alt="Image"
             />
           )}
@@ -50,7 +53,9 @@ const App: SFC<{}> = () => {
           <Img
             // className="image"
             placeholder={loadingImg}
-            src="https://picsum.photos/252?random=2"
+            src={`https://fakeimg.pl/252/?text=${Math.floor(
+              Math.random() * 100
+            ) + 1}`}
             error={emptyImg}
             // decode={false}
             // width="252"
@@ -63,6 +68,7 @@ const App: SFC<{}> = () => {
             // }}
             // retry={{ count: 3, delay: 2 }}
             // lazy={false}
+            // observerConfig={{ debounce: 1000 }}
             alt="Image"
           />
         </div>

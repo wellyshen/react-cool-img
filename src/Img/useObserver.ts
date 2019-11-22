@@ -6,12 +6,18 @@ export interface Config {
   root?: Element;
   rootMargin?: string;
   threshold?: number;
+  debounce?: number;
 }
 type Return = [(node?: Element | null) => void, boolean];
 
 export default (
   lazy: boolean,
-  { root = null, rootMargin = '0px', threshold = 0 }: Config = {}
+  {
+    root = null,
+    rootMargin = '50px',
+    threshold = 0.01,
+    debounce = 300
+  }: Config = {}
 ): Return => {
   if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
     if (!window.IntersectionObserver) errorManager('observer');
@@ -21,6 +27,7 @@ export default (
   const [startLoad, setStartLoad] = useState(false);
   const [node, setNode] = useState(null);
   const observerRef = useRef(null);
+  const timeoutRef = useRef(null);
   let numThreshold = threshold;
 
   if (typeof threshold !== 'number') {
@@ -28,12 +35,26 @@ export default (
     numThreshold = 0;
   }
 
+  const resetTimeout = (): void => {
+    if (!timeoutRef.current) return;
+
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = null;
+  };
+
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
-        setStartLoad(entry.isIntersecting);
+        if (entry.isIntersecting && !startLoad) {
+          timeoutRef.current = setTimeout(() => {
+            setStartLoad(true);
+            resetTimeout();
+          }, debounce);
+        } else if (timeoutRef.current) {
+          resetTimeout();
+        }
       },
       { root, rootMargin, threshold: numThreshold }
     );
@@ -44,8 +65,9 @@ export default (
 
     return (): void => {
       observer.disconnect();
+      resetTimeout();
     };
-  }, [node, root, rootMargin, numThreshold]);
+  }, [node, startLoad, root, rootMargin, numThreshold, debounce]);
 
   return [setNode, startLoad];
 };

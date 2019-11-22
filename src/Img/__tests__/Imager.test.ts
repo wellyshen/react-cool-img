@@ -156,7 +156,7 @@ describe('Imager', () => {
     expect(imager.img.onload).not.toBeNull();
     expect(imager.img.src).toBe(FAILURE_SRC);
     expect(imager.img).not.toBeNull();
-    expect(imager.timeOut).not.toBeNull();
+    expect(imager.timeout).not.toBeNull();
     expect(imager.retries).not.toBe(1);
 
     image.unload();
@@ -164,7 +164,7 @@ describe('Imager', () => {
     expect(imager.clearImgSrc).toBeCalled();
     expect(imager.img).toBeNull();
     expect(clearTimeout).toBeCalled();
-    expect(imager.timeOut).toBeNull();
+    expect(imager.timeout).toBeNull();
     expect(imager.retries).toBe(1);
   });
 });

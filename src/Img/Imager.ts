@@ -11,11 +11,11 @@ export interface Retry {
 export default class Imager {
   img: HTMLImageElement | null;
   retries: number;
-  timeOut: any;
+  timeout: any;
 
   constructor() {
     this.img = null;
-    this.timeOut = null;
+    this.timeout = null;
     this.retries = 1;
   }
 
@@ -53,7 +53,7 @@ export default class Imager {
       if (retry.acc === '+') time = retry.delay * this.retries;
       if (retry.acc === false) time = retry.delay;
 
-      this.timeOut = setTimeout(() => {
+      this.timeout = setTimeout(() => {
         this.clearImgSrc();
         this.img.src = src;
       }, time * 1000);
@@ -72,9 +72,9 @@ export default class Imager {
       this.clearImgSrc();
       this.img = null;
     }
-    if (this.timeOut) {
-      clearTimeout(this.timeOut);
-      this.timeOut = null;
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+      this.timeout = null;
     }
     this.retries = 1;
   }
