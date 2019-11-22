@@ -5,7 +5,7 @@ import errorManager from './errorManager';
 export interface Retry {
   count: number;
   delay: number;
-  acc?: 'x' | '+' | boolean;
+  acc?: '+' | '*' | boolean;
 }
 
 export default class Imager {

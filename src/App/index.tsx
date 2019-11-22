@@ -29,7 +29,7 @@ const App: SFC<{}> = () => {
             <Img
               // className="image"
               placeholder={loadingImg}
-              src="https://123picsum.photos/252?random=1"
+              src="https://picsum.photos/252?random=1"
               error={emptyImg}
               // decode={false}
               // width="252"
