@@ -22,8 +22,8 @@ interface Props
     HTMLImageElement
   > {
   src: string;
-  placeholderSrc?: string;
-  errorSrc?: string;
+  placeholder?: string;
+  error?: string;
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
   lazy?: boolean;
@@ -37,8 +37,8 @@ interface Props
 
 const Img: SFC<Props> = ({
   src,
-  placeholderSrc,
-  errorSrc,
+  placeholder,
+  error,
   crossOrigin,
   decode,
   lazy,
@@ -51,7 +51,7 @@ const Img: SFC<Props> = ({
   ...rest
 }: Props) => {
   const [setRef, startLoad] = useIntersect(lazy, observerConfig);
-  const [source, setSource] = useState(placeholderSrc || src || errorSrc);
+  const [source, setSource] = useState(placeholder || src || error);
   const isSrc = source === src;
 
   const handleLoad = (event: SyntheticEvent | Event): void => {
@@ -71,10 +71,10 @@ const Img: SFC<Props> = ({
     errorManager('load-error', { src: targetSrc });
 
     if (targetSrc === src) {
-      if (errorSrc) {
-        setSource(errorSrc);
-      } else if (placeholderSrc) {
-        setSource(placeholderSrc);
+      if (error) {
+        setSource(error);
+      } else if (placeholder) {
+        setSource(placeholder);
       }
 
       onError(event);
@@ -105,8 +105,8 @@ const Img: SFC<Props> = ({
 };
 
 Img.defaultProps = {
-  placeholderSrc: null,
-  errorSrc: null,
+  placeholder: null,
+  error: null,
   crossOrigin: null,
   decode: true,
   lazy: true,

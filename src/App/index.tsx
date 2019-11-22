@@ -29,8 +29,8 @@ const App: SFC<{}> = () => {
             <Img
               // className="image"
               src="https://picsum.photos/252?random=1"
-              placeholderSrc={loadingImg}
-              errorSrc={emptyImg}
+              placeholder={loadingImg}
+              error={emptyImg}
               // decode={false}
               // width="252"
               // height="252"
@@ -50,8 +50,8 @@ const App: SFC<{}> = () => {
           <Img
             // className="image"
             src="https://picsum.photos/252?random=2"
-            placeholderSrc={loadingImg}
-            errorSrc={emptyImg}
+            placeholder={loadingImg}
+            error={emptyImg}
             // decode={false}
             // width="252"
             // height="252"
