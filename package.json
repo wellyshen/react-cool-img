@@ -178,12 +178,6 @@
       "src/Img/*.(ts|tsx)"
     ]
   },
-  "dependencies": {
-    "@emotion/core": "^10.0.22",
-    "normalize.css": "^8.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
@@ -192,6 +186,7 @@
     "@babel/preset-react": "^7.7.0",
     "@babel/preset-typescript": "^7.7.2",
     "@emotion/babel-preset-css-prop": "^10.0.23",
+    "@emotion/core": "^10.0.22",
     "@rollup/plugin-replace": "^2.2.1",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
@@ -218,8 +213,11 @@
     "husky": "^3.1.0",
     "jest": "^24.9.0",
     "lint-staged": "^9.4.3",
+    "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
     "rollup": "^1.27.3",
     "rollup-plugin-babel": "^4.3.3",
