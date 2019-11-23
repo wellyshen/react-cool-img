@@ -18,10 +18,10 @@ import pkg from '../package.json';
 const { BUILD } = process.env;
 const isDev = BUILD === 'dev';
 const isExample = BUILD === 'example';
-const isDist = BUILD === 'dist';
+const isLib = BUILD === 'lib';
 
 const cjs = {
-  file: isDist ? pkg.main : 'src/.dev/bundle.js',
+  file: isLib ? pkg.main : 'src/.dev/bundle.js',
   format: 'cjs',
   sourcemap: isDev
 };
@@ -44,9 +44,9 @@ const plugins = [
   replace({
     'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
   }),
-  !isDist && url({ limit: 10 * 1024 }),
-  !isDist && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
-  !isDist &&
+  !isLib && url({ limit: 10 * 1024 }),
+  !isLib && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
+  !isLib &&
     html({
       template: 'rollup/template.html',
       dest: 'src/.dev',
@@ -65,8 +65,8 @@ const plugins = [
 ];
 
 export default {
-  input: isDist ? 'src/Img' : 'src',
-  output: isDist ? [cjs, esm] : [cjs],
+  input: isLib ? 'src/Img' : 'src',
+  output: isLib ? [cjs, esm] : [cjs],
   plugins,
-  external: isDist ? Object.keys(pkg.peerDependencies) : []
+  external: isLib ? Object.keys(pkg.peerDependencies) : []
 };

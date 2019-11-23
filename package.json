@@ -1,9 +1,12 @@
 {
   "name": "react-cool-img",
-  "version": "0.5.0",
+  "version": "0.0.1",
   "description": "A cool react <Img /> component.",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "files": [
+    "lib/**/*"
+  ],
   "keywords": [
     "react",
     "component",
@@ -33,7 +36,7 @@
   "scripts": {
     "dev": "yarn clean:dev && rollup -c rollup/config.js -w --environment BUILD:dev",
     "build:example": "yarn clean:example && yarn clean:dev && rollup -c rollup/config.js --environment BUILD:example",
-    "build:dist": "yarn clean:dist && BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:dist",
+    "build:lib": "yarn clean:lib && BABEL_ENV=lib rollup -c rollup/config.js --environment BUILD:lib",
     "build": "npm-run-all build:*",
     "test": "jest --coverage",
     "test:watch": "yarn test --watch",
@@ -44,7 +47,7 @@
     "lint": "npm-run-all lint:*",
     "clean:dev": "rm -rf src/.dev",
     "clean:example": "rm -rf example .size-snapshot.json",
-    "clean:dist": "rm -rf dist .size-snapshot.json",
+    "clean:lib": "rm -rf lib .size-snapshot.json",
     "clean:test": "rm -rf coverage",
     "clean": "npm-run-all clean:*",
     "coveralls": "yarn test && cat ./coverage/lcov.info | coveralls"
@@ -147,7 +150,7 @@
   },
   "eslintIgnore": [
     "example",
-    "dist"
+    "lib"
   ],
   "prettier": {
     "singleQuote": true

@@ -3,6 +3,6 @@
 
 node_modules
 src/.dev
-dist
+lib
 coverage
 .size-snapshot.json
