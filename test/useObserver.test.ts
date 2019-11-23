@@ -25,13 +25,13 @@ describe('useObserver', () => {
     observerMap.clear();
   });
 
-  it('', () => {
+  it('should skip intersection observer if lazy is turned off', () => {
     let res;
 
     testHook(() => {
       res = useObserver(false, {});
     });
 
-    console.log('LOG ===> ', res);
+    expect(res).toEqual([expect.any(Function), true]);
   });
 });
