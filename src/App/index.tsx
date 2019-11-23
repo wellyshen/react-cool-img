@@ -29,7 +29,7 @@ const App: SFC<{}> = () => {
             <Img
               // className="image"
               placeholder={loadingImg}
-              src={`https://123fakeimg.pl/252/?text=${Math.floor(
+              src={`https://fakeimg.pl/252/?text=${Math.floor(
                 Math.random() * 100
               ) + 1}`}
               error={emptyImg}
