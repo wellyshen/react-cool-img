@@ -1,4 +1,4 @@
-import errorManager, { msgs } from '../errorManager';
+import errorManager, { msgs } from '../src/Img/errorManager';
 
 describe('errorManager', () => {
   // @ts-ignore

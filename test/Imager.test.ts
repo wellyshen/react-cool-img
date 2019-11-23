@@ -1,13 +1,16 @@
-import Imager, { Retry } from '../Imager';
+import Imager, { Retry } from '../src/Img/Imager';
+import { mockImage } from './utils';
 
 describe('Imager', () => {
   jest.useFakeTimers();
   Imager.prototype.clearImgSrc = jest.fn();
 
-  const SUCCESS_SRC = 'SUCCESS_SRC';
   const FAILURE_SRC = 'FAILURE_SRC';
+  const SUCCESS_SRC = 'SUCCESS_SRC';
   const ERROR_EVT = { mock: '' };
   const LOAD_EVT = { mock: '' };
+
+  mockImage(FAILURE_SRC, SUCCESS_SRC, ERROR_EVT, LOAD_EVT);
 
   interface Return {
     load: Function;
@@ -36,40 +39,6 @@ describe('Imager', () => {
     unload: (): void => {
       instance.unload();
     }
-  });
-
-  beforeAll(() => {
-    // @ts-ignore
-    global.Image = jest.fn(() => {
-      let crossOrigin = '';
-      let src = '';
-
-      return {
-        onerror: (): void => {},
-        onload: (): void => {},
-        decode: jest.fn(() => Promise.resolve()),
-        set src(val: string) {
-          if (val === FAILURE_SRC) setTimeout(() => this.onerror(ERROR_EVT));
-          if (val === SUCCESS_SRC) setTimeout(() => this.onload(LOAD_EVT));
-
-          src = val;
-        },
-        get src(): string {
-          return src;
-        },
-        set crossOrigin(val) {
-          crossOrigin = val;
-        },
-        get crossOrigin(): string {
-          return crossOrigin;
-        }
-      };
-    });
-  });
-
-  afterEach(() => {
-    // @ts-ignore
-    global.Image.mockClear();
   });
 
   it('should trigger onError (with auto-retry) when failed to load image', done => {

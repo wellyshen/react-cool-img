@@ -1,3 +1,6 @@
+import useObserver from '../src/Img/useObserver';
+import { testHook } from './utils';
+
 describe('useObserver', () => {
   const observerMap = new Map();
 
@@ -23,6 +26,12 @@ describe('useObserver', () => {
   });
 
   it('', () => {
-    // ...
+    let res;
+
+    testHook(() => {
+      res = useObserver(false, {});
+    });
+
+    console.log('LOG ===> ', res);
   });
 });
