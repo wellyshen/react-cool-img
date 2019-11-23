@@ -88,12 +88,22 @@ describe('Imager', () => {
     expect(setTimeout).toBeCalledTimes(1);
     expect(onLoad).not.toBeCalled();
 
-    // With auto-retry
+    // With default auto-retry
     image.load({ src: FAILURE_SRC, onError, onLoad });
 
     jest.runAllTimers();
 
     expect(setTimeout).toBeCalledTimes(3 * 2 + 2);
+    expect(onLoad).not.toBeCalled();
+
+    // With specific auto-retry
+    const count = 5;
+
+    image.load({ src: FAILURE_SRC, retry: { count }, onError, onLoad });
+
+    jest.runAllTimers();
+
+    expect(setTimeout).toBeCalledTimes(count * 2 + 3);
     expect(onLoad).not.toBeCalled();
   });
 
@@ -147,7 +157,7 @@ describe('Imager', () => {
     const imager = new Imager();
     const image = createImage(imager);
 
-    image.load({ src: FAILURE_SRC, retry: { count: 3, delay: 2 } });
+    image.load({ src: FAILURE_SRC });
 
     jest.runAllTimers();
 

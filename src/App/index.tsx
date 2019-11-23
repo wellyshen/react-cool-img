@@ -29,7 +29,7 @@ const App: SFC<{}> = () => {
             <Img
               // className="image"
               placeholder={loadingImg}
-              src={`https://fakeimg.pl/252/?text=${Math.floor(
+              src={`https://123fakeimg.pl/252/?text=${Math.floor(
                 Math.random() * 100
               ) + 1}`}
               error={emptyImg}
@@ -42,7 +42,7 @@ const App: SFC<{}> = () => {
               // onError={e => {
               //   console.log('LOG ===> Error: ', e);
               // }}
-              // retry={{ count: 3, delay: 2 }}
+              // retry={{ count: 1, delay: 10 }}
               // lazy={false}
               // observerConfig={{ debounce: 1000 }}
               alt="Image"
@@ -66,7 +66,7 @@ const App: SFC<{}> = () => {
             // onError={e => {
             //   console.log('LOG ===> Error: ', e);
             // }}
-            // retry={{ count: 3, delay: 2 }}
+            // retry={{ count: 1, delay: 10 }}
             // lazy={false}
             // observerConfig={{ debounce: 1000 }}
             alt="Image"
