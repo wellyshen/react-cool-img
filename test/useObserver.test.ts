@@ -25,7 +25,7 @@ describe('useObserver', () => {
     observerMap.clear();
   });
 
-  it('should skip intersection observer if lazy is turned off', () => {
+  it("should skip lazy loading if it's turned off", () => {
     let res;
 
     testHook(() => {
@@ -33,5 +33,15 @@ describe('useObserver', () => {
     });
 
     expect(res).toEqual([expect.any(Function), true]);
+  });
+
+  it('should be not in-view state at the beginning', () => {
+    let res;
+
+    testHook(() => {
+      res = useObserver(true, {});
+    });
+
+    expect(res).toEqual([expect.any(Function), false]);
   });
 });
