@@ -30,7 +30,7 @@ describe('Imager', () => {
       retry = {},
       onError = (): void => {},
       onLoad = (): void => {}
-    }: Params): void => {
+    }: Params = {}): void => {
       instance.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
     unload: (): void => {
@@ -39,42 +39,40 @@ describe('Imager', () => {
   });
 
   beforeAll(() => {
-    let crossOrigin: undefined;
-    let source: undefined;
-
-    // Mock Image events
     // @ts-ignore
-    Object.defineProperties(global.Image.prototype, {
-      src: {
-        set(src): void {
-          source = src;
+    global.Image = jest.fn(() => {
+      let crossOrigin = '';
+      let src = '';
 
-          if (src === FAILURE_SRC) {
-            setTimeout(() => this.onerror(ERROR_EVT));
-          } else if (src === SUCCESS_SRC) {
-            setTimeout(() => this.onload(LOAD_EVT));
-          }
+      return {
+        onerror: (): void => {},
+        onload: (): void => {},
+        decode: jest.fn(() => Promise.resolve()),
+        set src(val: string) {
+          if (val === FAILURE_SRC) setTimeout(() => this.onerror(ERROR_EVT));
+          if (val === SUCCESS_SRC) setTimeout(() => this.onload(LOAD_EVT));
+
+          src = val;
         },
-        get(): void {
-          return source;
-        }
-      },
-      crossOrigin: {
-        set(str): void {
-          crossOrigin = str;
+        get src(): string {
+          return src;
         },
-        get(): void {
+        set crossOrigin(val) {
+          crossOrigin = val;
+        },
+        get crossOrigin(): string {
           return crossOrigin;
         }
-      },
-      decode: {
-        value: (): any => Promise.resolve(),
-        writable: true
-      }
+      };
     });
   });
 
-  it('should trigger onError when failed to load image', done => {
+  afterEach(() => {
+    // @ts-ignore
+    global.Image.mockClear();
+  });
+
+  it('should trigger onError (with auto-retry) when failed to load image', done => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
@@ -126,9 +124,9 @@ describe('Imager', () => {
     const imager = new Imager();
     const image = createImage(imager);
 
-    image.load({});
+    image.load();
 
-    expect(imager.img.crossOrigin).toBeUndefined();
+    expect(imager.img.crossOrigin).toBe('');
 
     const crossOrigin = 'anonymous';
 
@@ -140,17 +138,16 @@ describe('Imager', () => {
   });
 
   it('should call decode method', () => {
-    // @ts-ignore
-    const decode = jest.spyOn(global.Image.prototype, 'decode');
-    const image = createImage(new Imager());
+    const imager = new Imager();
+    const image = createImage(imager);
 
-    image.load({});
+    image.load();
 
-    expect(decode).not.toBeCalled();
+    expect(imager.img.decode).not.toBeCalled();
 
     image.load({ decode: true });
 
-    expect(decode).toBeCalled();
+    expect(imager.img.decode).toBeCalled();
   });
 
   it('should clear img.src and reset variables', () => {
