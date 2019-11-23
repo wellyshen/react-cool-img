@@ -3,8 +3,8 @@
 import errorManager from './errorManager';
 
 export interface Retry {
-  count: number;
-  delay: number;
+  count?: number;
+  delay?: number;
   acc?: '+' | '*' | boolean;
 }
 
@@ -23,7 +23,7 @@ export default class Imager {
     src: string,
     crossOrigin: string | null,
     decode: boolean,
-    retry: Retry | null,
+    { count = 3, delay = 2, acc = '*' }: Retry,
     onError: (event: Event) => void,
     onLoad: (event: Event) => void
   ): void {
@@ -33,25 +33,17 @@ export default class Imager {
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
     if (decode)
       this.img.decode().catch(() => {
-        errorManager('decode', { src });
+        errorManager('decode', src);
       });
 
     this.img.onerror = (event: Event): void => {
-      errorManager('retry', { retry });
-
-      if (
-        !retry ||
-        !retry.count ||
-        !retry.delay ||
-        this.retries > retry.count
-      ) {
+      if (!count || this.retries > count) {
         onError(event);
         return;
       }
 
-      let time = retry.delay ** this.retries;
-      if (retry.acc === '+') time = retry.delay * this.retries;
-      if (retry.acc === false) time = retry.delay;
+      let time = acc === '*' ? delay ** this.retries : delay * this.retries;
+      if (acc === false) time = delay;
 
       this.timeout = setTimeout(() => {
         this.clearImgSrc();

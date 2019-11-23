@@ -31,8 +31,8 @@ interface Props
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
-  onLoad?: (event: SyntheticEvent | Event) => void;
-  onError?: (event: SyntheticEvent | Event) => void;
+  onLoad?: (event?: SyntheticEvent | Event) => void;
+  onError?: (event?: SyntheticEvent | Event) => void;
 }
 
 const Img: SFC<Props> = ({
@@ -68,7 +68,7 @@ const Img: SFC<Props> = ({
     // @ts-ignore
     const targetSrc = event.target.src;
 
-    errorManager('load-error', { src: targetSrc });
+    errorManager('load-error', targetSrc);
 
     if (targetSrc === src) {
       if (error) {
@@ -111,7 +111,7 @@ Img.defaultProps = {
   decode: true,
   lazy: true,
   observerConfig: {},
-  retry: null,
+  retry: {},
   srcSet: null,
   sizes: null,
   onLoad: (): void => {},

@@ -1,8 +1,8 @@
 import Imager, { Retry } from '../Imager';
 
 describe('Imager', () => {
-  Imager.prototype.clearImgSrc = jest.fn();
   jest.useFakeTimers();
+  Imager.prototype.clearImgSrc = jest.fn();
 
   const SUCCESS_SRC = 'SUCCESS_SRC';
   const FAILURE_SRC = 'FAILURE_SRC';
@@ -25,9 +25,9 @@ describe('Imager', () => {
   const createImage = (instance: Imager): Return => ({
     load: ({
       src = SUCCESS_SRC,
-      crossOrigin,
+      crossOrigin = null,
       decode = false,
-      retry = null,
+      retry = {},
       onError = (): void => {},
       onLoad = (): void => {}
     }: Params): void => {
@@ -74,27 +74,26 @@ describe('Imager', () => {
     });
   });
 
-  it('should trigger onError (with auto-retry) when failed to load image', done => {
+  it('should trigger onError when failed to load image', done => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
       done();
     };
     const onLoad = jest.fn();
-    const retry = { count: 3, delay: 2 };
 
     // Without auto-retry
-    image.load({ src: FAILURE_SRC, onError, onLoad });
+    image.load({ src: FAILURE_SRC, retry: { count: 0 }, onError, onLoad });
 
     expect(setTimeout).toBeCalledTimes(1);
     expect(onLoad).not.toBeCalled();
 
     // With auto-retry
-    image.load({ src: FAILURE_SRC, retry, onError, onLoad });
+    image.load({ src: FAILURE_SRC, onError, onLoad });
 
     jest.runAllTimers();
 
-    expect(setTimeout).toBeCalledTimes(retry.count * 2 + 2);
+    expect(setTimeout).toBeCalledTimes(3 * 2 + 2);
     expect(onLoad).not.toBeCalled();
   });
 

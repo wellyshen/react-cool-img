@@ -7,16 +7,10 @@ export const msgs = {
   `,
   threshold: 'The threshold of observerConfig must be a number.',
   decode: (src: string): string => `${prefix} error decoding image at ${src}.`,
-  onerror: (src: string): string => `${prefix} error loading image at ${src}.`,
-  retry: `${prefix} you must setup "count" and "delay" to enable auto retry.`
+  onerror: (src: string): string => `${prefix} error loading image at ${src}.`
 };
 
-interface Props {
-  src?: string;
-  retry?: { count?: number; delay?: number };
-}
-
-export default (type: string, props?: Props): void => {
+export default (type: string, src?: string): void => {
   switch (type) {
     case 'observer':
       console.error(msgs[type]);
@@ -25,16 +19,10 @@ export default (type: string, props?: Props): void => {
       console.error(msgs[type]);
       break;
     case 'decode':
-      console.error(msgs[type](props.src));
+      console.error(msgs[type](src));
       break;
     case 'onerror':
-      console.error(msgs[type](props.src));
-      break;
-    case 'retry':
-      {
-        const { retry } = props;
-        if (retry && !(retry.count && retry.delay)) console.error(msgs[type]);
-      }
+      console.error(msgs[type](src));
       break;
     default:
   }

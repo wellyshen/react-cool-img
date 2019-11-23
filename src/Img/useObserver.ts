@@ -12,12 +12,7 @@ type Return = [(node?: Element | null) => void, boolean];
 
 export default (
   lazy: boolean,
-  {
-    root = null,
-    rootMargin = '50px',
-    threshold = 0.01,
-    debounce = 300
-  }: Config = {}
+  { root = null, rootMargin = '50px', threshold = 0.01, debounce = 300 }: Config
 ): Return => {
   if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
     if (!window.IntersectionObserver) errorManager('observer');
