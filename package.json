@@ -4,9 +4,6 @@
   "description": "A cool react <Img /> component.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
-  "files": [
-    "lib/**/*"
-  ],
   "keywords": [
     "react",
     "component",
