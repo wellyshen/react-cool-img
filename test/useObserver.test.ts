@@ -1,7 +1,26 @@
-import useObserver from '../src/Img/useObserver';
+import useObserver, { Config } from '../src/Img/useObserver';
 import { testHook } from './utils';
 
 describe('useObserver', () => {
+  type Return = [Function, boolean];
+  const createHook = (
+    lazy = true,
+    {
+      root = null,
+      rootMargin = '50px',
+      threshold = 0.01,
+      debounce = 300
+    }: Config = {}
+  ): Return => {
+    let res;
+
+    testHook(() => {
+      res = useObserver(lazy, { root, rootMargin, threshold, debounce });
+    });
+
+    return res;
+  };
+
   const observerMap = new Map();
 
   beforeAll(() => {
@@ -26,22 +45,36 @@ describe('useObserver', () => {
   });
 
   it("should skip lazy loading if it's turned off", () => {
-    let res;
-
-    testHook(() => {
-      res = useObserver(false, {});
-    });
-
-    expect(res).toEqual([expect.any(Function), true]);
+    expect(createHook(false)).toEqual([expect.any(Function), true]);
   });
 
-  it('should be not in-view state at the beginning', () => {
-    let res;
+  it('should setup intersection observer options corretly', () => {
+    createHook(true);
 
-    testHook(() => {
-      res = useObserver(true, {});
-    });
+    // @ts-ignore
+    let mockObserver = IntersectionObserver.mock.results[0].value;
 
-    expect(res).toEqual([expect.any(Function), false]);
+    expect(mockObserver.root).toBeNull();
+    expect(mockObserver.rootMargin).toBe('50px');
+    expect(mockObserver.threshold).toBe(0.01);
+
+    const options = { root: document.body, rootMargin: '100px', threshold: 1 };
+
+    createHook(true, options);
+
+    // @ts-ignore
+    mockObserver = IntersectionObserver.mock.results[1].value;
+
+    expect(mockObserver.root).toBe(options.root);
+    expect(mockObserver.rootMargin).toBe(options.rootMargin);
+    expect(mockObserver.threshold).toBe(options.threshold);
+  });
+
+  it('should be out-view state', () => {
+    expect(createHook(true)).toEqual([expect.any(Function), false]);
+  });
+
+  it('should be in-view state', () => {
+    // ...
   });
 });
