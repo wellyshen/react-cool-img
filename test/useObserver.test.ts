@@ -2,7 +2,8 @@ import useObserver, { Config } from '../src/Img/useObserver';
 import { testHook } from './utils';
 
 describe('useObserver', () => {
-  const setNode = expect.any(Function);
+  type Return = [Function, boolean];
+
   const createHook = (
     lazy = true,
     {
@@ -11,7 +12,7 @@ describe('useObserver', () => {
       threshold = 0.01,
       debounce = 300
     }: Config = {}
-  ): [Function, boolean] => {
+  ): Return => {
     let res;
 
     testHook(() => {
@@ -20,6 +21,7 @@ describe('useObserver', () => {
 
     return res;
   };
+  const setNode = expect.any(Function);
 
   const observerMap = new Map();
 
