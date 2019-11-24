@@ -2,7 +2,7 @@ import useObserver, { Config } from '../src/Img/useObserver';
 import { testHook } from './utils';
 
 describe('useObserver', () => {
-  type Return = [Function, boolean];
+  const setNode = expect.any(Function);
   const createHook = (
     lazy = true,
     {
@@ -11,7 +11,7 @@ describe('useObserver', () => {
       threshold = 0.01,
       debounce = 300
     }: Config = {}
-  ): Return => {
+  ): [Function, boolean] => {
     let res;
 
     testHook(() => {
@@ -45,7 +45,7 @@ describe('useObserver', () => {
   });
 
   it("should skip lazy loading if it's turned off", () => {
-    expect(createHook(false)).toEqual([expect.any(Function), true]);
+    expect(createHook(false)).toEqual([setNode, true]);
   });
 
   it('should setup intersection observer options corretly', () => {
@@ -71,7 +71,7 @@ describe('useObserver', () => {
   });
 
   it('should be out-view state', () => {
-    expect(createHook(true)).toEqual([expect.any(Function), false]);
+    expect(createHook(true)).toEqual([setNode, false]);
   });
 
   it('should be in-view state', () => {
