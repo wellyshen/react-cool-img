@@ -1,13 +1,33 @@
-import React from 'react';
-import { mount } from 'enzyme';
+const observerMap = new Map();
 
-const TestHook = ({ cb }: { cb: () => void }): null => {
-  cb();
-  return null;
+export const mockObserver = (): void => {
+  beforeAll(() => {
+    // @ts-ignore
+    global.IntersectionObserver = jest.fn(
+      (cb, { root, rootMargin, threshold }) => ({
+        root,
+        rootMargin,
+        threshold,
+        observe: (el: Element): void => {
+          observerMap.set(el, cb);
+        },
+        disconnect: jest.fn()
+      })
+    );
+  });
+
+  afterEach(() => {
+    // @ts-ignore
+    global.IntersectionObserver.mockClear();
+    observerMap.clear();
+  });
 };
 
-export const testHook = (cb: () => void): void => {
-  mount(<TestHook cb={cb} />);
+export const setIsIntersecting = (
+  el: Element,
+  isIntersecting: boolean
+): void => {
+  observerMap.get(el)([{ isIntersecting }]);
 };
 
 export const mockImage = (

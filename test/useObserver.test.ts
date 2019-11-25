@@ -1,10 +1,14 @@
-import useObserver, { Config } from '../src/Img/useObserver';
-import { testHook } from './utils';
+import { renderHook, act } from '@testing-library/react-hooks';
+
+import useObserver, { Config, Return } from '../src/Img/useObserver';
+import { mockObserver, setIsIntersecting } from './utils';
 
 describe('useObserver', () => {
-  type Return = [Function, boolean];
+  jest.useFakeTimers();
 
-  const createHook = (
+  const img = document.createElement('img');
+  const setState = expect.any(Function);
+  const testHook = (
     lazy = true,
     {
       root = null,
@@ -12,71 +16,76 @@ describe('useObserver', () => {
       threshold = 0.01,
       debounce = 300
     }: Config = {}
-  ): Return => {
-    let res;
-
-    testHook(() => {
-      res = useObserver(lazy, { root, rootMargin, threshold, debounce });
-    });
-
-    return res;
-  };
-  const setNode = expect.any(Function);
-
-  const observerMap = new Map();
-
-  beforeAll(() => {
-    // @ts-ignore
-    global.IntersectionObserver = jest.fn(
-      (cb, { root, rootMargin, threshold }) => ({
-        root,
-        rootMargin,
-        threshold,
-        observer: jest.fn((el: Element) => {
-          observerMap.set(el, cb);
-        }),
-        disconnect: jest.fn()
-      })
+  ): { current: Return } => {
+    const { result } = renderHook(() =>
+      useObserver(lazy, { root, rootMargin, threshold, debounce })
     );
-  });
 
-  afterEach(() => {
-    // @ts-ignore
-    global.IntersectionObserver.mockClear();
-    observerMap.clear();
-  });
+    return result;
+  };
+
+  mockObserver();
 
   it("should skip lazy loading if it's turned off", () => {
-    expect(createHook(false)).toEqual([setNode, true]);
+    expect(testHook(false).current).toEqual([setState, true, setState]);
   });
 
   it('should setup intersection observer options corretly', () => {
-    createHook(true);
+    testHook();
 
     // @ts-ignore
-    let mockObserver = IntersectionObserver.mock.results[0].value;
+    let mkObserver = IntersectionObserver.mock.results[0].value;
 
-    expect(mockObserver.root).toBeNull();
-    expect(mockObserver.rootMargin).toBe('50px');
-    expect(mockObserver.threshold).toBe(0.01);
+    expect(mkObserver.root).toBeNull();
+    expect(mkObserver.rootMargin).toBe('50px');
+    expect(mkObserver.threshold).toBe(0.01);
 
     const options = { root: document.body, rootMargin: '100px', threshold: 1 };
 
-    createHook(true, options);
+    testHook(true, options);
 
     // @ts-ignore
-    mockObserver = IntersectionObserver.mock.results[1].value;
+    mkObserver = IntersectionObserver.mock.results[1].value;
 
-    expect(mockObserver.root).toBe(options.root);
-    expect(mockObserver.rootMargin).toBe(options.rootMargin);
-    expect(mockObserver.threshold).toBe(options.threshold);
+    expect(mkObserver.root).toBe(options.root);
+    expect(mkObserver.rootMargin).toBe(options.rootMargin);
+    expect(mkObserver.threshold).toBe(options.threshold);
   });
 
   it('should be out-view state', () => {
-    expect(createHook(true)).toEqual([setNode, false]);
+    const result = testHook();
+    let [setRef, startLoad] = result.current;
+
+    act(() => {
+      setRef(img);
+    });
+
+    setIsIntersecting(img, false);
+
+    jest.runAllTimers();
+
+    [setRef, startLoad] = result.current;
+
+    expect(setTimeout).toBeCalled();
+    expect(startLoad).toBeFalsy();
   });
 
   it('should be in-view state', () => {
-    // ...
+    const result = testHook();
+    let [setRef, startLoad, setStartLoad] = result.current;
+
+    act(() => {
+      setRef(img);
+      setStartLoad(true);
+    });
+
+    setIsIntersecting(img, true);
+
+    jest.runAllTimers();
+
+    [setRef, startLoad, setStartLoad] = result.current;
+
+    expect(setTimeout).toBeCalled();
+    expect(startLoad).toBeTruthy();
   });
 });

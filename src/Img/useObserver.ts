@@ -8,7 +8,11 @@ export interface Config {
   threshold?: number;
   debounce?: number;
 }
-type Return = [(node?: Element | null) => void, boolean];
+export type Return = [
+  (node?: Element | null) => void,
+  boolean,
+  (val: boolean) => void
+];
 
 export default (
   lazy: boolean,
@@ -16,7 +20,7 @@ export default (
 ): Return => {
   if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
     if (!window.IntersectionObserver) errorManager('observer');
-    return [(): void => {}, true];
+    return [(): void => {}, true, (): void => {}];
   }
 
   const [startLoad, setStartLoad] = useState(false);
@@ -64,5 +68,6 @@ export default (
     };
   }, [node, startLoad, root, rootMargin, numThreshold, debounce]);
 
-  return [setNode, startLoad];
+  // setStartLoad is used for testing
+  return [setNode, startLoad, setStartLoad];
 };
