@@ -94,6 +94,7 @@ describe('useObserver', () => {
 
     // 2 time means the setTimeout of useObserver has been called (the setTimeout comes from act)
     expect(setTimeout).toBeCalledTimes(2);
+    expect(clearTimeout).toBeCalled();
     expect(startLoad).toBeTruthy();
   });
 });
