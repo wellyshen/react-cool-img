@@ -51,7 +51,7 @@ export default (
             setStartLoad(true);
             resetTimeout();
           }, debounce);
-        } else if (timeoutRef.current) {
+        } else {
           resetTimeout();
         }
       },
