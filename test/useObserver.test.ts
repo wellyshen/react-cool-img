@@ -70,6 +70,7 @@ describe('useObserver', () => {
 
     [setRef, startLoad] = result.current;
 
+    // 1 time means the setTimeout of useObserver hasn't been called (the setTimeout comes from act)
     expect(setTimeout).toBeCalledTimes(1);
     expect(startLoad).toBeFalsy();
   });
@@ -84,14 +85,14 @@ describe('useObserver', () => {
 
     setIsIntersecting(img, true);
 
-    jest.runAllTimers();
-
     act(() => {
+      jest.runAllTimers();
       setStartLoad(true);
     });
 
     [setRef, startLoad, setStartLoad] = result.current;
 
+    // 2 time means the setTimeout of useObserver has been called (the setTimeout comes from act)
     expect(setTimeout).toBeCalledTimes(2);
     expect(startLoad).toBeTruthy();
   });
