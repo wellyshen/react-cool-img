@@ -26,6 +26,10 @@ describe('useObserver', () => {
 
   mockObserver();
 
+  beforeEach(() => {
+    jest.clearAllTimers();
+  });
+
   it("should skip lazy loading if it's turned off", () => {
     expect(testHook(false).current).toEqual([setState, true, setState]);
   });
@@ -66,7 +70,7 @@ describe('useObserver', () => {
 
     [setRef, startLoad] = result.current;
 
-    expect(setTimeout).toBeCalled();
+    expect(setTimeout).toBeCalledTimes(1);
     expect(startLoad).toBeFalsy();
   });
 
@@ -76,16 +80,19 @@ describe('useObserver', () => {
 
     act(() => {
       setRef(img);
-      setStartLoad(true);
     });
 
     setIsIntersecting(img, true);
 
     jest.runAllTimers();
 
+    act(() => {
+      setStartLoad(true);
+    });
+
     [setRef, startLoad, setStartLoad] = result.current;
 
-    expect(setTimeout).toBeCalled();
+    expect(setTimeout).toBeCalledTimes(2);
     expect(startLoad).toBeTruthy();
   });
 });
