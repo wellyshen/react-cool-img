@@ -78,7 +78,7 @@ describe('useObserver', () => {
 
     [setRef, startLoad] = result.current;
 
-    // 1 time means the setTimeout of useObserver hasn't been called (the setTimeout comes from act)
+    // Extra setTimeout comes from act, so 1 means no setTimeout
     expect(setTimeout).toBeCalledTimes(1);
     expect(startLoad).toBeFalsy();
   });
@@ -100,7 +100,7 @@ describe('useObserver', () => {
 
     [setRef, startLoad, setStartLoad] = result.current;
 
-    // 2 time means the setTimeout of useObserver has been called (the setTimeout comes from act)
+    // Extra setTimeout comes from act, so 2 means do setTimeout
     expect(setTimeout).toBeCalledTimes(2);
     expect(startLoad).toBeTruthy();
   });
