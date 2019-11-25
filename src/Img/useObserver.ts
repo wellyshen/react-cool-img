@@ -49,7 +49,6 @@ export default (
         if (entry.isIntersecting && !startLoad) {
           timeoutRef.current = setTimeout(() => {
             setStartLoad(true);
-            resetTimeout();
           }, debounce);
         } else {
           resetTimeout();

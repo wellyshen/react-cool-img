@@ -52,6 +52,8 @@ describe('Imager', () => {
     // Without auto-retry
     image.load({ src: FAILURE_SRC, retry: { count: 0 }, onError, onLoad });
 
+    jest.runAllTimers();
+
     expect(setTimeout).toBeCalledTimes(1);
     expect(onLoad).not.toBeCalled();
 
