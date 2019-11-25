@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
-import useObserver, { Config, Return } from '../src/Img/useObserver';
+import useObserver, { Config, Return as Current } from '../src/Img/useObserver';
 import { mockObserver, setIsIntersecting } from './utils';
 
 describe('useObserver', () => {
@@ -8,15 +8,19 @@ describe('useObserver', () => {
 
   const img = document.createElement('img');
   const setState = expect.any(Function);
-  const testHook = (
+
+  interface Params extends Config {
+    lazy?: boolean;
+  }
+  type Return = { current: Current };
+
+  const testHook = ({
     lazy = true,
-    {
-      root = null,
-      rootMargin = '50px',
-      threshold = 0.01,
-      debounce = 300
-    }: Config = {}
-  ): { current: Return } => {
+    root = null,
+    rootMargin = '50px',
+    threshold = 0.01,
+    debounce = 300
+  }: Params = {}): Return => {
     const { result } = renderHook(() =>
       useObserver(lazy, { root, rootMargin, threshold, debounce })
     );
@@ -31,7 +35,11 @@ describe('useObserver', () => {
   });
 
   it("should skip lazy loading if it's turned off", () => {
-    expect(testHook(false).current).toEqual([setState, true, setState]);
+    expect(testHook({ lazy: false }).current).toEqual([
+      setState,
+      true,
+      setState
+    ]);
   });
 
   it('should setup intersection observer options corretly', () => {
@@ -46,7 +54,7 @@ describe('useObserver', () => {
 
     const options = { root: document.body, rootMargin: '100px', threshold: 1 };
 
-    testHook(true, options);
+    testHook(options);
 
     // @ts-ignore
     mkObserver = IntersectionObserver.mock.results[1].value;
