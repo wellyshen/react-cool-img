@@ -62,7 +62,7 @@ describe('Imager', () => {
 
     jest.runAllTimers();
 
-    // Extra setTimeout comes from mock Image
+    // Extra setTimeout comes from mockImage
     expect(setTimeout).toBeCalledTimes(3 * 2 + 2);
     expect(onLoad).not.toBeCalled();
 
