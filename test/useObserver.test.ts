@@ -6,9 +6,6 @@ import { mockObserver, setIsIntersecting } from './utils';
 describe('useObserver', () => {
   jest.useFakeTimers();
 
-  const img = document.createElement('img');
-  const setState = expect.any(Function);
-
   interface Params extends Config {
     lazy?: boolean;
   }
@@ -27,6 +24,8 @@ describe('useObserver', () => {
 
     return result;
   };
+  const img = document.createElement('img');
+  const setState = expect.any(Function);
 
   mockObserver();
 

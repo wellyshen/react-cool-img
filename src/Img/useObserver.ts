@@ -20,7 +20,9 @@ export default (
 ): Return => {
   if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
     if (!window.IntersectionObserver) errorManager('observer');
-    return [(): void => {}, true, (): void => {}];
+
+    const setState = (): void => {};
+    return [setState, true, setState];
   }
 
   const [startLoad, setStartLoad] = useState(false);
