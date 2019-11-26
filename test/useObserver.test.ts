@@ -30,10 +30,6 @@ describe('useObserver', () => {
 
   mockObserver();
 
-  beforeEach(() => {
-    jest.clearAllTimers();
-  });
-
   it("should skip lazy loading if it's turned off", () => {
     expect(testHook({ lazy: false }).current).toEqual([
       setState,
@@ -78,12 +74,56 @@ describe('useObserver', () => {
 
     [setRef, startLoad] = result.current;
 
-    // Extra setTimeout comes from act, so 1 means no setTimeout
+    // setTimeout of intersection-observer didn't be called
     expect(setTimeout).toBeCalledTimes(1);
     expect(startLoad).toBeFalsy();
   });
 
-  it('should be in-view state', () => {
+  it('should be out-view state due to debounce', () => {
+    const result = testHook();
+    let [setRef, startLoad] = result.current;
+
+    act(() => {
+      setRef(img);
+    });
+
+    setIsIntersecting(img, true);
+
+    jest.advanceTimersByTime(100);
+
+    [setRef, startLoad] = result.current;
+
+    expect(setTimeout).toBeCalledTimes(3);
+    expect(startLoad).toBeFalsy();
+
+    setIsIntersecting(img, false);
+
+    expect(clearTimeout).toBeCalled();
+  });
+
+  it('should be in-view state without debounce', () => {
+    const debounce = 0;
+    const result = testHook({ debounce });
+    let [setRef, startLoad, setStartLoad] = result.current;
+
+    act(() => {
+      setRef(img);
+    });
+
+    setIsIntersecting(img, true);
+
+    act(() => {
+      jest.advanceTimersByTime(debounce);
+      setStartLoad(true);
+    });
+
+    [setRef, startLoad, setStartLoad] = result.current;
+
+    expect(setTimeout).toBeCalledTimes(7);
+    expect(startLoad).toBeTruthy();
+  });
+
+  it('should be in-view state with debounce', () => {
     const result = testHook();
     let [setRef, startLoad, setStartLoad] = result.current;
 
@@ -94,14 +134,14 @@ describe('useObserver', () => {
     setIsIntersecting(img, true);
 
     act(() => {
-      jest.runAllTimers();
+      // Default settings
+      jest.advanceTimersByTime(300);
       setStartLoad(true);
     });
 
     [setRef, startLoad, setStartLoad] = result.current;
 
-    // Extra setTimeout comes from act, so 2 means do setTimeout
-    expect(setTimeout).toBeCalledTimes(2);
+    expect(setTimeout).toBeCalledTimes(10);
     expect(startLoad).toBeTruthy();
   });
 });
