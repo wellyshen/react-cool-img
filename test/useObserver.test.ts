@@ -1,10 +1,12 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import useObserver, { Config, Return as Current } from '../src/Img/useObserver';
-import { mockObserver, setIsIntersecting } from './utils';
 
 describe('useObserver', () => {
   jest.useFakeTimers();
+
+  const img = document.createElement('img');
+  const setState = expect.any(Function);
 
   interface Params extends Config {
     lazy?: boolean;
@@ -24,10 +26,32 @@ describe('useObserver', () => {
 
     return result;
   };
-  const img = document.createElement('img');
-  const setState = expect.any(Function);
 
-  mockObserver();
+  const observerMap = new Map();
+  const setIsIntersecting = (el: Element, isIntersecting: boolean): void => {
+    observerMap.get(el)([{ isIntersecting }]);
+  };
+
+  beforeAll(() => {
+    // @ts-ignore
+    global.IntersectionObserver = jest.fn(
+      (cb, { root, rootMargin, threshold }) => ({
+        root,
+        rootMargin,
+        threshold,
+        observe: (el: Element): void => {
+          observerMap.set(el, cb);
+        },
+        disconnect: jest.fn()
+      })
+    );
+  });
+
+  afterEach(() => {
+    // @ts-ignore
+    global.IntersectionObserver.mockClear();
+    observerMap.clear();
+  });
 
   it("should skip lazy loading if it's turned off", () => {
     expect(testHook({ lazy: false }).current).toEqual([
