@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Img /> should render placeholder 1`] = `
+<DocumentFragment>
+  <img
+    alt="Really Cool Image"
+    src="https://placeholder.com"
+  />
+</DocumentFragment>
+`;
