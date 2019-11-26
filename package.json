@@ -36,6 +36,7 @@
     "build:lib": "yarn clean:lib && BABEL_ENV=lib rollup -c rollup/config.js --environment BUILD:lib",
     "build": "run-s build:*",
     "test": "jest --coverage",
+    "test:update": "yarn test -u",
     "test:watch": "yarn test --watch",
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
@@ -168,9 +169,6 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest/setup.ts"
-    ],
     "moduleNameMapper": {
       "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts"
     },
@@ -188,9 +186,8 @@
     "@emotion/babel-preset-css-prop": "^10.0.23",
     "@emotion/core": "^10.0.22",
     "@rollup/plugin-replace": "^2.2.1",
+    "@testing-library/react": "^9.3.2",
     "@testing-library/react-hooks": "^3.2.1",
-    "@types/enzyme": "^3.10.3",
-    "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/jest": "^24.0.23",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
@@ -199,8 +196,6 @@
     "@typescript-eslint/parser": "^2.9.0",
     "babel-plugin-emotion": "^10.0.23",
     "coveralls": "^3.0.8",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.7.0",
