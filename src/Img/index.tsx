@@ -31,8 +31,8 @@ interface Props
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
-  onLoad?: (event?: SyntheticEvent | Event) => void;
   onError?: (event?: SyntheticEvent | Event) => void;
+  onLoad?: (event?: SyntheticEvent | Event) => void;
 }
 
 const Img: SFC<Props> = ({
@@ -46,23 +46,13 @@ const Img: SFC<Props> = ({
   retry,
   srcSet,
   sizes,
-  onLoad,
   onError,
+  onLoad,
   ...rest
 }: Props) => {
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
   const [source, setSource] = useState(placeholder || src || error);
   const isSrc = source === src;
-
-  const handleLoad = (event: SyntheticEvent | Event): void => {
-    // @ts-ignore
-    const targetSrc = event.target.src;
-
-    if (targetSrc === src) {
-      setSource(targetSrc);
-      onLoad(event);
-    }
-  };
 
   const handleError = (event: SyntheticEvent | Event): void => {
     // @ts-ignore
@@ -81,6 +71,16 @@ const Img: SFC<Props> = ({
     }
   };
 
+  const handleLoad = (event: SyntheticEvent | Event): void => {
+    // @ts-ignore
+    const targetSrc = event.target.src;
+
+    if (targetSrc === src) {
+      setSource(targetSrc);
+      onLoad(event);
+    }
+  };
+
   useEffect(() => {
     if (startLoad)
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
@@ -96,8 +96,8 @@ const Img: SFC<Props> = ({
       crossOrigin={crossOrigin}
       srcSet={isSrc ? srcSet : null}
       sizes={isSrc ? sizes : null}
-      onLoad={isSrc ? null : handleLoad}
       onError={isSrc ? null : handleError}
+      onLoad={isSrc ? null : handleLoad}
       ref={setRef}
       {...rest}
     />
@@ -114,8 +114,8 @@ Img.defaultProps = {
   retry: {},
   srcSet: null,
   sizes: null,
-  onLoad: (): void => {},
-  onError: (): void => {}
+  onError: (): void => {},
+  onLoad: (): void => {}
 };
 
 export default memo(Img);
