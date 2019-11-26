@@ -41,7 +41,7 @@ describe('Imager', () => {
     }
   });
 
-  it('should trigger onError (with auto-retry) when failed to load image', done => {
+  it('should trigger onError without auto-retry when failed to load image', done => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
@@ -49,32 +49,37 @@ describe('Imager', () => {
     };
     const onLoad = jest.fn();
 
-    // Without auto-retry
     image.load({ src: FAILURE_SRC, retry: { count: 0 }, onError, onLoad });
 
     jest.runAllTimers();
 
     expect(setTimeout).toBeCalledTimes(1);
     expect(onLoad).not.toBeCalled();
+  });
 
-    // With default auto-retry
+  it('should trigger onError with auto-retry when failed to load image', done => {
+    const image = createImage(new Imager());
+    const onError = (event: Event): void => {
+      expect(event).toMatchObject(ERROR_EVT);
+      done();
+    };
+    const onLoad = jest.fn();
+
     image.load({ src: FAILURE_SRC, onError, onLoad });
 
     jest.runAllTimers();
 
-    // Extra setTimeout comes from mockImage
+    // Default settings
     expect(setTimeout).toBeCalledTimes(3 * 2 + 2);
     expect(onLoad).not.toBeCalled();
 
-    // With specific auto-retry
     const count = 5;
 
-    image.load({ src: FAILURE_SRC, retry: { count }, onError, onLoad });
+    image.load({ src: FAILURE_SRC, retry: { count } });
 
     jest.runAllTimers();
 
     expect(setTimeout).toBeCalledTimes(count * 2 + 3);
-    expect(onLoad).not.toBeCalled();
   });
 
   it('should trigger onLoad when success to load image', done => {
