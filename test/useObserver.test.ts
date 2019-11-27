@@ -6,7 +6,6 @@ describe('useObserver', () => {
   jest.useFakeTimers();
 
   const img = document.createElement('img');
-  const fn = expect.any(Function);
 
   interface Args extends Config {
     lazy?: boolean;
@@ -54,7 +53,11 @@ describe('useObserver', () => {
   });
 
   it("should skip lazy loading if it's turned off", () => {
-    expect(testHook({ lazy: false }).current).toEqual([fn, true, fn]);
+    expect(testHook({ lazy: false }).current).toEqual([
+      expect.any(Function),
+      true,
+      expect.any(Function)
+    ]);
   });
 
   it('should setup intersection observer options corretly', () => {

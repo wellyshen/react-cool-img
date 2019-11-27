@@ -1,6 +1,10 @@
 /* eslint-disable import/first */
 
-const load = jest.fn((...args) => args[5]());
+const FAILURE_SRC = 'FAILURE_SRC';
+const SUCCESS_SRC = 'SUCCESS_SRC';
+const load = jest.fn((...args) =>
+  args[args[0] === FAILURE_SRC ? 4 : 5]({ target: { src: args[0] } })
+);
 const unload = jest.fn();
 
 jest.mock('../src/Img/Imager', () =>
@@ -16,9 +20,8 @@ import useObserver from '../src/Img/useObserver';
 
 describe('<Img />', () => {
   const props = {
-    placeholder: 'https://placeholder.com',
-    src: 'https://src.com',
-    error: 'https://error.com',
+    placeholder: 'PLACEHOLDER',
+    error: 'ERROR',
     crossOrigin: '' as const,
     decode: true,
     retry: { count: 3, delay: 2 },
@@ -29,23 +32,45 @@ describe('<Img />', () => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
   const setStartLoad = (val = false): void => {
-    const fn = (): void => {};
+    const setState = (): void => {};
     // @ts-ignore
-    useObserver.mockImplementation(() => [fn, val, fn]);
+    useObserver.mockImplementation(() => [setState, val, setState]);
   };
 
   it('should render placeholder image', () => {
     setStartLoad();
-    matchSnapshot(<Img {...props} />);
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
   });
 
   it('should render src image', () => {
     setStartLoad(true);
-    matchSnapshot(<Img {...props} />);
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
-    const { src, crossOrigin, decode, retry } = props;
-    const fn = expect.any(Function);
+    const { crossOrigin, decode, retry } = props;
 
-    expect(load).toBeCalledWith(src, crossOrigin, decode, retry, fn, fn);
+    expect(load).toBeCalledWith(
+      SUCCESS_SRC,
+      crossOrigin,
+      decode,
+      retry,
+      expect.any(Function),
+      expect.any(Function)
+    );
+  });
+
+  it('should render error image', () => {
+    setStartLoad(true);
+    matchSnapshot(<Img src={FAILURE_SRC} {...props} />);
+
+    const { crossOrigin, decode, retry } = props;
+
+    expect(load).toBeCalledWith(
+      FAILURE_SRC,
+      crossOrigin,
+      decode,
+      retry,
+      expect.any(Function),
+      expect.any(Function)
+    );
   });
 });

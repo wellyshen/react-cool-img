@@ -1,11 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Img /> should render error image 1`] = `
+<DocumentFragment>
+  <img
+    alt="Really Cool Image"
+    crossorigin=""
+    src="ERROR"
+  />
+</DocumentFragment>
+`;
+
 exports[`<Img /> should render placeholder image 1`] = `
 <DocumentFragment>
   <img
     alt="Really Cool Image"
     crossorigin=""
-    src="https://placeholder.com"
+    src="PLACEHOLDER"
   />
 </DocumentFragment>
 `;
@@ -15,7 +25,7 @@ exports[`<Img /> should render src image 1`] = `
   <img
     alt="Really Cool Image"
     crossorigin=""
-    src="https://src.com"
+    src="SUCCESS_SRC"
   />
 </DocumentFragment>
 `;
