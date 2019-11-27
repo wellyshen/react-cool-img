@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import errorManager from './errorManager';
 
 export interface Config {
-  root?: Element;
+  root?: Element | null;
   rootMargin?: string;
   threshold?: number;
   debounce?: number;

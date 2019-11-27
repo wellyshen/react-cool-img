@@ -22,10 +22,16 @@ describe('<Img />', () => {
   const props = {
     placeholder: 'PLACEHOLDER',
     error: 'ERROR',
-    crossOrigin: '' as const,
+    crossOrigin: 'anonymous' as const,
     decode: true,
-    retry: { count: 3, delay: 2 },
-    alt: 'Really Cool Image'
+    lazy: true,
+    observerConfig: { rootMargin: '30px', threshold: 0.1 },
+    retry: { count: 5, delay: 2 },
+    srcSet: 'cool.png',
+    sizes: '100vw',
+    onError: jest.fn(),
+    onLoad: jest.fn(),
+    alt: 'Cool'
   };
 
   const matchSnapshot = (img: ReactElement): void => {
