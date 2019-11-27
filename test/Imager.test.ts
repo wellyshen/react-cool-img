@@ -13,7 +13,7 @@ describe('Imager', () => {
     load: Function;
     unload: Function;
   }
-  interface Params {
+  interface Args {
     src?: string;
     crossOrigin?: string;
     decode?: boolean;
@@ -30,7 +30,7 @@ describe('Imager', () => {
       retry = {},
       onError = (): void => {},
       onLoad = (): void => {}
-    }: Params = {}): void => {
+    }: Args = {}): void => {
       instance.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
     unload: (): void => {

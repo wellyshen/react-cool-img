@@ -72,13 +72,8 @@ const Img: SFC<Props> = ({
   };
 
   const handleLoad = (event: SyntheticEvent | Event): void => {
-    // @ts-ignore
-    const targetSrc = event.target.src;
-
-    if (targetSrc === src) {
-      setSource(targetSrc);
-      onLoad(event);
-    }
+    setSource(src);
+    onLoad(event);
   };
 
   useEffect(() => {
@@ -97,7 +92,6 @@ const Img: SFC<Props> = ({
       srcSet={isSrc ? srcSet : null}
       sizes={isSrc ? sizes : null}
       onError={isSrc ? null : handleError}
-      onLoad={isSrc ? null : handleLoad}
       ref={setRef}
       {...rest}
     />

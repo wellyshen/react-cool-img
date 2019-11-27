@@ -1,10 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Img /> should render placeholder 1`] = `
+exports[`<Img /> should render placeholder image 1`] = `
 <DocumentFragment>
   <img
     alt="Really Cool Image"
+    crossorigin=""
     src="https://placeholder.com"
+  />
+</DocumentFragment>
+`;
+
+exports[`<Img /> should render src image 1`] = `
+<DocumentFragment>
+  <img
+    alt="Really Cool Image"
+    crossorigin=""
+    src="https://src.com"
   />
 </DocumentFragment>
 `;
