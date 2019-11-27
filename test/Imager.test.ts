@@ -9,6 +9,35 @@ describe('Imager', () => {
   const ERROR_EVT = { mock: '' };
   const LOAD_EVT = { mock: '' };
 
+  interface Return {
+    load: Function;
+    unload: Function;
+  }
+  interface Params {
+    src?: string;
+    crossOrigin?: string;
+    decode?: boolean;
+    retry?: Retry;
+    onError?: (event: Event) => void;
+    onLoad?: (event: Event) => void;
+  }
+
+  const createImage = (instance: Imager): Return => ({
+    load: ({
+      src = SUCCESS_SRC,
+      crossOrigin = null,
+      decode = false,
+      retry = {},
+      onError = (): void => {},
+      onLoad = (): void => {}
+    }: Params = {}): void => {
+      instance.load(src, crossOrigin, decode, retry, onError, onLoad);
+    },
+    unload: (): void => {
+      instance.unload();
+    }
+  });
+
   beforeAll(() => {
     // @ts-ignore
     global.Image = jest.fn(() => {
@@ -41,35 +70,6 @@ describe('Imager', () => {
   afterEach(() => {
     // @ts-ignore
     global.Image.mockClear();
-  });
-
-  interface Return {
-    load: Function;
-    unload: Function;
-  }
-  interface Params {
-    src?: string;
-    crossOrigin?: string;
-    decode?: boolean;
-    retry?: Retry;
-    onError?: (event: Event) => void;
-    onLoad?: (event: Event) => void;
-  }
-
-  const createImage = (instance: Imager): Return => ({
-    load: ({
-      src = SUCCESS_SRC,
-      crossOrigin = null,
-      decode = false,
-      retry = {},
-      onError = (): void => {},
-      onLoad = (): void => {}
-    }: Params = {}): void => {
-      instance.load(src, crossOrigin, decode, retry, onError, onLoad);
-    },
-    unload: (): void => {
-      instance.unload();
-    }
   });
 
   it('should trigger onError without auto-retry when failed to load image', done => {
