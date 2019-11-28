@@ -43,9 +43,23 @@ describe('<Img />', () => {
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
 
+  it('should unload src image', () => {
+    setStartLoad();
+
+    const { unmount } = render(<Img src={SUCCESS_SRC} {...props} />);
+
+    unmount();
+    expect(unload).toBeCalled();
+  });
+
   it('should render placeholder image', () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
+  });
+
+  it('should not render placeholder image', () => {
+    setStartLoad();
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
   });
 
   it('should render src image', () => {
@@ -82,10 +96,8 @@ describe('<Img />', () => {
     expect(onError).toBeCalled();
   });
 
-  it('should unload src image', () => {
-    const { unmount } = render(<Img src={FAILURE_SRC} {...props} />);
-
-    unmount();
-    expect(unload).not.toBeCalledWith(4);
+  it('should render placeholder image insteadly', () => {
+    setStartLoad(true);
+    matchSnapshot(<Img src={FAILURE_SRC} {...props} error={null} />);
   });
 });
