@@ -14,4 +14,4 @@
 - [x] Typescript declaration for module
 - [ ] Example
 - [ ] Documentation
-- [ ] NPM package
+- [ ] NPM package publish
