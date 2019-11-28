@@ -72,8 +72,11 @@ export default class Imager {
   }
 
   clearImgSrc(): void {
+    /* istanbul ignore next */
     this.img.src = '';
+    /* istanbul ignore next */
     try {
+      /* istanbul ignore next */
       delete this.img.src;
     } catch (error) {
       // Ignore the error of deleting object properties in Safari strict mode
