@@ -2,11 +2,11 @@
 
 const FAILURE_SRC = 'FAILURE_SRC';
 const SUCCESS_SRC = 'SUCCESS_SRC';
+
 const load = jest.fn((...args) =>
   args[args[0] === FAILURE_SRC ? 4 : 5]({ target: { src: args[0] } })
 );
 const unload = jest.fn();
-
 jest.mock('../src/Img/Imager', () =>
   jest.fn().mockImplementation(() => ({ load, unload }))
 );
@@ -52,7 +52,7 @@ describe('<Img />', () => {
     setStartLoad(true);
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
-    const { crossOrigin, decode, retry } = props;
+    const { crossOrigin, decode, retry, onLoad } = props;
 
     expect(load).toBeCalledWith(
       SUCCESS_SRC,
@@ -62,13 +62,14 @@ describe('<Img />', () => {
       expect.any(Function),
       expect.any(Function)
     );
+    expect(onLoad).toBeCalled();
   });
 
   it('should render error image', () => {
     setStartLoad(true);
     matchSnapshot(<Img src={FAILURE_SRC} {...props} />);
 
-    const { crossOrigin, decode, retry } = props;
+    const { crossOrigin, decode, retry, onError } = props;
 
     expect(load).toBeCalledWith(
       FAILURE_SRC,
@@ -78,5 +79,13 @@ describe('<Img />', () => {
       expect.any(Function),
       expect.any(Function)
     );
+    expect(onError).toBeCalled();
+  });
+
+  it('should unload src image', () => {
+    const { unmount } = render(<Img src={FAILURE_SRC} {...props} />);
+
+    unmount();
+    expect(unload).not.toBeCalledWith(4);
   });
 });
