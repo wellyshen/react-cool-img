@@ -1,6 +1,6 @@
 {
   "name": "react-cool-img",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A cool React <Img /> component let you handle image UX as a Pro!",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
