@@ -3,8 +3,8 @@
 import React, {
   DetailedHTMLProps,
   ImgHTMLAttributes,
-  SFC,
   SyntheticEvent,
+  SFC,
   useState,
   useEffect,
   memo

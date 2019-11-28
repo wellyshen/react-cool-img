@@ -61,6 +61,16 @@ const plugins = [
     copy({
       targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],
       hook: 'writeBundle'
+    }),
+  isLib &&
+    copy({
+      targets: [
+        {
+          src: 'src/types/react-cool-img.d.ts',
+          dest: pkg.types.split('/')[0],
+          rename: 'index.d.ts'
+        }
+      ]
     })
 ];
 
