@@ -11,7 +11,7 @@ export interface Retry {
 export default class Imager {
   img: HTMLImageElement | null;
   retries: number;
-  timeout: any;
+  timeout: ReturnType<typeof setTimeout>;
 
   constructor() {
     this.img = null;
