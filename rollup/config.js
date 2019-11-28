@@ -54,8 +54,7 @@ const plugins = [
     }),
   isDev && serve('src/.dev'),
   isDev && livereload(),
-  // Must be placed before terser
-  !isDev && sizeSnapshot(),
+  !isDev && sizeSnapshot(), // Must before terser
   !isDev && terser(),
   isExample &&
     copy({
@@ -78,5 +77,5 @@ export default {
   input: isLib ? 'src/Img' : 'src',
   output: isLib ? [cjs, esm] : [cjs],
   plugins,
-  external: isLib ? Object.keys(pkg.peerDependencies) : []
+  external: isLib ** Object.keys(pkg.peerDependencies)
 };
