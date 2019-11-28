@@ -2,7 +2,6 @@
 
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-img/master.svg?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-img)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-img?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-img?branch=master)
-[![dependencies status](https://img.shields.io/david/wellyshen/react-cool-img?style=flat-square)](https://david-dm.org/wellyshen/react-cool-img)
 [![devDependencies status](https://img.shields.io/david/dev/wellyshen/react-cool-img?style=flat-square)](https://david-dm.org/wellyshen/react-cool-img?type=dev)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-img?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-img/master/LICENSE)
