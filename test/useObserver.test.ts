@@ -52,7 +52,7 @@ describe('useObserver', () => {
     observerMap.clear();
   });
 
-  it("should skip lazy loading if it's turned off", () => {
+  it('should skip lazy loading', () => {
     expect(testHook({ lazy: false }).current).toEqual([
       expect.any(Function),
       true,

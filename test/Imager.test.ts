@@ -72,7 +72,7 @@ describe('Imager', () => {
     global.Image.mockClear();
   });
 
-  it('should trigger onError without auto-retry when failed to load image', done => {
+  it('should call onError without auto-retry', done => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
@@ -88,7 +88,7 @@ describe('Imager', () => {
     expect(onLoad).not.toBeCalled();
   });
 
-  it('should trigger onError with auto-retry when failed to load image', done => {
+  it('should call onError with auto-retry', done => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
@@ -113,7 +113,7 @@ describe('Imager', () => {
     expect(setTimeout).toBeCalledTimes(count * 2 + 3);
   });
 
-  it('should trigger onLoad when success to load image', done => {
+  it('should call onLoad', done => {
     const image = createImage(new Imager());
     const onError = jest.fn();
     const onLoad = (event: Event): void => {
