@@ -77,5 +77,5 @@ export default {
   input: isLib ? 'src/Img' : 'src',
   output: isLib ? [cjs, esm] : [cjs],
   plugins,
-  external: isLib ** Object.keys(pkg.peerDependencies)
+  external: isLib ? Object.keys(pkg.peerDependencies) : []
 };
