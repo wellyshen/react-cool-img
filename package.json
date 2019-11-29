@@ -49,7 +49,7 @@
     "clean:cov": "rm -rf coverage",
     "clean": "run-p clean:*",
     "preversion": "run-s lint type-check test",
-    "postversion": "git push --follow-tags && yarn publish",
+    "postversion": "git push --follow-tags && npm publish",
     "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
