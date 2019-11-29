@@ -48,8 +48,8 @@
     "lint:style": "stylelint --fix \"./**/*.css\" \"./**/*.ts\" \"./**/*.tsx\"",
     "lint": "run-p lint:*",
     "clean:dev": "rm -rf src/.dev",
-    "clean:example": "rm -rf example .size-snapshot.json",
-    "clean:lib": "rm -rf lib .size-snapshot.json",
+    "clean:example": "rm -rf example",
+    "clean:lib": "rm -rf lib",
     "clean:test": "rm -rf coverage",
     "clean": "run-p clean:*",
     "coveralls": "yarn test && cat ./coverage/lcov.info | coveralls"
