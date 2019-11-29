@@ -1,19 +1,35 @@
-import React, { SFC, useState } from 'react';
+import React, { SFC, ReactElement } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
 import Img from '../Img';
 import loadingImg from '../static/loading.gif';
 import emptyImg from '../static/empty.svg';
-import { root, app, container } from './styles';
-import './styles.css';
+import { root, container } from './styles';
 
 const App: SFC<{}> = () => {
-  const [showImg, setShowImg] = useState(true);
+  const renderImages = (num: number): ReactElement[] => {
+    const images = [];
 
-  setTimeout(() => {
-    setShowImg(true);
-  }, 1000);
+    while (images.length <= num) {
+      const id = Math.floor(Math.random() * 2000) + 1;
+
+      images.push(
+        <div key={images.length}>
+          <Img
+            placeholder={loadingImg}
+            src={`https://picsum.photos/${id}/500`}
+            error={emptyImg}
+            width="250"
+            height="250"
+            alt="Demo Image"
+          />
+        </div>
+      );
+    }
+
+    return images;
+  };
 
   return (
     <>
@@ -23,56 +39,7 @@ const App: SFC<{}> = () => {
           ${root}
         `}
       />
-      <div css={app}>
-        <div css={container}>
-          {showImg && (
-            <Img
-              // className="image"
-              placeholder={loadingImg}
-              src={`https://fakeimg.pl/252/?text=${Math.floor(
-                Math.random() * 100
-              ) + 1}`}
-              error={emptyImg}
-              // decode={false}
-              // width="252"
-              // height="252"
-              // onLoad={e => {
-              //   console.log('LOG ===> Load: ', e);
-              // }}
-              // onError={e => {
-              //   console.log('LOG ===> Error: ', e);
-              // }}
-              // retry={{ count: 1, delay: 10 }}
-              // lazy={false}
-              // observerConfig={{ debounce: 1000 }}
-              alt="Image"
-            />
-          )}
-        </div>
-        <div css={container}>
-          <Img
-            // className="image"
-            placeholder={loadingImg}
-            src={`https://fakeimg.pl/252/?text=${Math.floor(
-              Math.random() * 100
-            ) + 1}`}
-            error={emptyImg}
-            // decode={false}
-            // width="252"
-            // height="252"
-            // onLoad={e => {
-            //   console.log('LOG ===> Load: ', e);
-            // }}
-            // onError={e => {
-            //   console.log('LOG ===> Error: ', e);
-            // }}
-            // retry={{ count: 1, delay: 10 }}
-            // lazy={false}
-            // observerConfig={{ debounce: 1000 }}
-            alt="Image"
-          />
-        </div>
-      </div>
+      <div css={container}>{renderImages(5)}</div>
     </>
   );
 };
