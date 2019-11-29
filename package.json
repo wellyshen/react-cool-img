@@ -31,11 +31,11 @@
   },
   "scripts": {
     "dev": "yarn clean:dev && rollup -c rollup/config.js -w --environment BUILD:dev",
-    "build:example": "yarn clean:example && yarn clean:dev && rollup -c rollup/config.js --environment BUILD:example",
+    "build:example": "yarn clean:dev && yarn clean:example && rollup -c rollup/config.js --environment BUILD:example",
     "build:lib": "yarn clean:lib && BABEL_ENV=lib rollup -c rollup/config.js --environment BUILD:lib",
     "build": "run-s build:*",
     "test": "jest",
-    "test:cov": "yarn test --coverage",
+    "test:cov": "yarn clean:cov && yarn test --coverage",
     "test:update": "yarn test -u",
     "test:watch": "yarn test --watch",
     "type-check": "tsc --noEmit",
@@ -46,7 +46,7 @@
     "clean:dev": "rm -rf src/.dev",
     "clean:example": "rm -rf example",
     "clean:lib": "rm -rf lib",
-    "clean:test": "rm -rf coverage",
+    "clean:cov": "rm -rf coverage",
     "clean": "run-p clean:*",
     "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
   },
