@@ -12,16 +12,16 @@ const App: SFC<{}> = () => {
     const images = [];
 
     while (images.length <= num) {
-      const id = Math.floor(Math.random() * 2000) + 1;
+      const id = Math.floor(Math.random() * 1500) + 1;
 
       images.push(
         <div key={images.length}>
           <Img
             placeholder={loadingImg}
-            src={`https://picsum.photos/${id}/500`}
+            src={`https://picsum.photos/id/${id}/480`}
             error={emptyImg}
-            width="250"
-            height="250"
+            width="280"
+            height="280"
             alt="Demo Image"
           />
         </div>
@@ -39,7 +39,7 @@ const App: SFC<{}> = () => {
           ${root}
         `}
       />
-      <div css={container}>{renderImages(5)}</div>
+      <div css={container}>{renderImages(4)}</div>
     </>
   );
 };

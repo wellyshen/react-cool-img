@@ -59,7 +59,7 @@ const Img: SFC<Props> = ({
     // @ts-ignore
     const targetSrc = event.target.src;
 
-    errorManager('load-error', targetSrc);
+    errorManager('onerror', targetSrc);
 
     /* istanbul ignore next */
     if (targetSrc === src) {

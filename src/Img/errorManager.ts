@@ -1,4 +1,4 @@
-const prefix = '🤡react-cool-img:';
+const prefix = '😱react-cool-img:';
 export const msgs = {
   // FIXME: Change URL when README ready
   observer: `
