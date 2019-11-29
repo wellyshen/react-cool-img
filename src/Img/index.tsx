@@ -5,6 +5,7 @@ import React, {
   ImgHTMLAttributes,
   SyntheticEvent,
   SFC,
+  useRef,
   useState,
   useEffect,
   memo
@@ -13,8 +14,6 @@ import React, {
 import useObserver, { Config } from './useObserver';
 import Imager, { Retry } from './Imager';
 import errorManager from './errorManager';
-
-const imager = new Imager();
 
 interface Props
   extends DetailedHTMLProps<
@@ -50,7 +49,9 @@ const Img: SFC<Props> = ({
   onLoad,
   ...rest
 }: Props) => {
+  const { current: imager } = useRef(new Imager());
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
+  /* istanbul ignore next */
   const [source, setSource] = useState(placeholder || src || error);
   const isSrc = source === src;
 
@@ -60,7 +61,9 @@ const Img: SFC<Props> = ({
 
     errorManager('load-error', targetSrc);
 
+    /* istanbul ignore next */
     if (targetSrc === src) {
+      /* istanbul ignore if */
       if (error) {
         setSource(error);
       } else if (placeholder) {
