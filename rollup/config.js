@@ -9,8 +9,8 @@ import postcss from 'rollup-plugin-postcss';
 import html from 'rollup-plugin-bundle-html';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 import { terser } from 'rollup-plugin-terser';
+import filesize from 'rollup-plugin-filesize';
 import copy from 'rollup-plugin-copy';
 
 import pkg from '../package.json';
@@ -54,8 +54,8 @@ const plugins = [
     }),
   isDev && serve('src/.dev'),
   isDev && livereload(),
-  !isDev && sizeSnapshot(), // Must before terser
   !isDev && terser(),
+  !isDev && filesize(),
   isExample &&
     copy({
       targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],
