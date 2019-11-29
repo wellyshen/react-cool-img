@@ -1,16 +1,16 @@
 import { css } from '@emotion/core';
 
-export const root = css`
-  body {
-    background: white;
-  }
+export const container = css`
+  padding: 5rem 0;
 `;
 
-export const container = css`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
+export const imageWrapper = css`
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+`;
+
+export const image = css`
+  margin: 1px;
+  vertical-align: bottom;
 `;
