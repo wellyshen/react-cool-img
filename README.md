@@ -16,6 +16,6 @@
 - [x] Library development
 - [x] Unit testing
 - [x] Typescript declaration for module
+- [x] NPM package
 - [ ] Example
 - [ ] Documentation
-- [ ] NPM package
