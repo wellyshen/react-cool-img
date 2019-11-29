@@ -1,6 +1,6 @@
 {
   "name": "react-cool-img",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A cool React <Img /> component let you handle image UX as a Pro!",
   "license": "MIT",
   "homepage": "https://github.com/wellyshen/react-cool-img",
@@ -48,6 +48,8 @@
     "clean:lib": "rm -rf lib",
     "clean:cov": "rm -rf coverage",
     "clean": "run-p clean:*",
+    "preversion": "run-s lint type-check test",
+    "postversion": "git commit -am $npm_package_version && git tag $npm_package_version && git push --follow-tags && yarn publish",
     "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
