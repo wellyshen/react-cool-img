@@ -48,6 +48,7 @@
     "clean:lib": "rm -rf lib",
     "clean:cov": "rm -rf coverage",
     "clean": "run-p clean:*",
+    "preversion": "run-s lint type-check test",
     "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
