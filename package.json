@@ -2,12 +2,10 @@
   "name": "react-cool-img",
   "version": "0.0.3",
   "description": "A cool React <Img /> component let you handle image UX as a Pro!",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib"
-  ],
+  "license": "MIT",
+  "homepage": "https://github.com/wellyshen/react-cool-img",
+  "repository": "https://github.com/wellyshen/react-cool-img",
+  "bugs": "https://github.com/wellyshen/react-cool-img/issues",
   "keywords": [
     "react",
     "component",
@@ -21,15 +19,12 @@
     "intersection-observer"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wellyshen/react-cool-img"
-  },
-  "homepage": "https://github.com/wellyshen/react-cool-img",
-  "bugs": {
-    "url": "https://github.com/wellyshen/react-cool-img/issues"
-  },
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "engines": {
     "node": ">=10",
     "npm": ">=6"
