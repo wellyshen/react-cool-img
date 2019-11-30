@@ -6,7 +6,7 @@ import babel from 'rollup-plugin-babel';
 import replace from '@rollup/plugin-replace';
 import url from '@rollup/plugin-url';
 import postcss from 'rollup-plugin-postcss';
-import html from 'rollup-plugin-bundle-html';
+import html from '@rollup/plugin-html';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
@@ -14,6 +14,7 @@ import filesize from 'rollup-plugin-filesize';
 import copy from 'rollup-plugin-copy';
 
 import pkg from '../package.json';
+import template from './template';
 
 const { BUILD } = process.env;
 const isDev = BUILD === 'dev';
@@ -46,12 +47,7 @@ const plugins = [
   }),
   !isLib && url(),
   !isLib && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
-  !isLib &&
-    html({
-      template: 'rollup/template.html',
-      dest: 'src/.dev',
-      filename: 'index.html'
-    }),
+  !isLib && html({ template }),
   !isLib &&
     copy({
       targets: [

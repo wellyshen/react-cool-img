@@ -1,4 +1,4 @@
-
+export default ({ files }) => `
   <!DOCTYPE html>
   <html lang="en">
     <head>
@@ -10,11 +10,12 @@
       <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
       <link rel="manifest" href="icon/site.webmanifest">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href=bundle.css>
+      <link rel="stylesheet" href=${files.css[0].fileName}>
       <title>React Cool Img</title>
     </head>
     <body>
       <div id="app"></div>
-      <script type="text/javascript" src=bundle.js></script>
+      <script type="text/javascript" src=${files.js[0].fileName}></script>
     </body>
   </html>
+`;
