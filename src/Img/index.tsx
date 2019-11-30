@@ -51,7 +51,6 @@ const Img: SFC<Props> = ({
 }: Props) => {
   const { current: imager } = useRef(new Imager());
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
-  /* istanbul ignore next */
   const [source, setSource] = useState(placeholder || src || error);
   const isSrc = source === src;
 
@@ -61,9 +60,7 @@ const Img: SFC<Props> = ({
 
     errorManager('onerror', targetSrc);
 
-    /* istanbul ignore next */
     if (targetSrc === src) {
-      /* istanbul ignore if */
       if (error) {
         setSource(error);
       } else if (placeholder) {
