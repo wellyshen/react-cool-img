@@ -15,5 +15,5 @@
 - [x] Unit testing
 - [x] Typescript declaration for module
 - [x] NPM package
-- [ ] Example
+- [x] Example
 - [ ] Documentation
