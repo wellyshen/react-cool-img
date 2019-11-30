@@ -18,7 +18,7 @@ export default (
   lazy: boolean,
   { root = null, rootMargin = '50px', threshold = 0.01, debounce = 300 }: Config
 ): Return => {
-  if (!lazy || typeof window === 'undefined' || !window.IntersectionObserver) {
+  if (!lazy || !window.IntersectionObserver) {
     if (!window.IntersectionObserver) errorManager('observer');
 
     const setState = (): void => {};
