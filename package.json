@@ -16,7 +16,8 @@
     "lazy-loading",
     "placeholder",
     "auto-retry",
-    "intersection-observer"
+    "intersection-observer",
+    "ssr"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
   "main": "lib/index.js",

@@ -51,7 +51,9 @@ const Img: SFC<Props> = ({
 }: Props) => {
   const { current: imager } = useRef(new Imager());
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
-  const [source, setSource] = useState(placeholder || src || error);
+  const [source, setSource] = useState(
+    typeof window === 'undefined' ? src : placeholder || src || error
+  );
   const isSrc = source === src;
 
   const handleError = (event: SyntheticEvent | Event): void => {
