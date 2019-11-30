@@ -5,7 +5,7 @@ import normalize from 'normalize.css';
 import Img from '../Img';
 import loadingImg from '../static/loading.gif';
 import errorImg from '../static/error.png';
-import { container, imageWrapper, image } from './styles';
+import { root, container, title, subtitle, cta, image, cp } from './styles';
 
 const App: SFC<{}> = () => {
   const renderImages = (num: number): ReactElement[] => {
@@ -19,7 +19,7 @@ const App: SFC<{}> = () => {
           key={images.length}
           css={image}
           placeholder={loadingImg}
-          src={`https://picsum.photos/id/${id}/360`}
+          src={`https://picsum.photos/id/${id}/480`}
           error={errorImg}
           alt="Demo Image"
         />
@@ -34,10 +34,20 @@ const App: SFC<{}> = () => {
       <Global
         styles={css`
           ${normalize}
+          ${root}
         `}
       />
       <div css={container}>
-        <div css={imageWrapper}>{renderImages(300)}</div>
+        <h1 css={title}>React Cool Img</h1>
+        <p css={subtitle}>
+          placeholder · lazy loading · cancel loading · auto retry · typescript
+          support · lightweight
+        </p>
+        <a href="https://github.com/wellyshen/react-cool-img" css={cta}>
+          Try It Now
+        </a>
+        <div>{renderImages(300)}</div>
+        <small css={cp}>Welly Shen ©</small>
       </div>
     </>
   );

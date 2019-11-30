@@ -52,6 +52,15 @@ const plugins = [
       dest: 'src/.dev',
       filename: 'index.html'
     }),
+  !isLib &&
+    copy({
+      targets: [
+        {
+          src: 'src/static/icon',
+          dest: 'src/.dev'
+        }
+      ]
+    }),
   isDev && serve('src/.dev'),
   isDev && livereload(),
   !isDev && terser(),
