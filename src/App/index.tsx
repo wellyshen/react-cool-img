@@ -46,7 +46,7 @@ const App: SFC<{}> = () => {
         <a href="https://github.com/wellyshen/react-cool-img" css={cta}>
           Try It Now
         </a>
-        <div>{renderImages(1)}</div>
+        <div>{renderImages(300)}</div>
         <small css={cp}>Welly Shen ©</small>
       </div>
     </>
