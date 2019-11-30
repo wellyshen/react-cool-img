@@ -4,7 +4,7 @@ import normalize from 'normalize.css';
 
 import Img from '../Img';
 import loadingImg from '../static/loading.gif';
-import emptyImg from '../static/empty.svg';
+import errorImg from '../static/error.png';
 import { container, imageWrapper, image } from './styles';
 
 const App: SFC<{}> = () => {
@@ -12,7 +12,7 @@ const App: SFC<{}> = () => {
     const images = [];
 
     while (images.length < num) {
-      const id = Math.floor(Math.random() * 1400) + 1;
+      const id = Math.floor(Math.random() * 1000) + 1;
 
       images.push(
         <Img
@@ -20,9 +20,7 @@ const App: SFC<{}> = () => {
           css={image}
           placeholder={loadingImg}
           src={`https://picsum.photos/id/${id}/360`}
-          error={emptyImg}
-          width="280"
-          height="280"
+          error={errorImg}
           alt="Demo Image"
         />
       );
@@ -39,7 +37,7 @@ const App: SFC<{}> = () => {
         `}
       />
       <div css={container}>
-        <div css={imageWrapper}>{renderImages(100)}</div>
+        <div css={imageWrapper}>{renderImages(300)}</div>
       </div>
     </>
   );

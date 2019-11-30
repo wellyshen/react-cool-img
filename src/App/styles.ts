@@ -6,11 +6,12 @@ export const container = css`
 
 export const imageWrapper = css`
   margin: 0 auto;
-  width: 80%;
-  text-align: center;
+  width: 70%;
 `;
 
 export const image = css`
-  margin: 1px;
+  box-sizing: border-box;
+  padding: 0.5px;
+  width: 25%;
   vertical-align: bottom;
 `;
