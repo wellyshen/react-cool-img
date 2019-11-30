@@ -4,7 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import replace from '@rollup/plugin-replace';
-import url from 'rollup-plugin-url';
+import url from '@rollup/plugin-url';
 import postcss from 'rollup-plugin-postcss';
 import html from 'rollup-plugin-bundle-html';
 import serve from 'rollup-plugin-serve';
@@ -44,7 +44,7 @@ const plugins = [
   replace({
     'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
   }),
-  !isLib && url({ limit: 10 * 1024 }),
+  !isLib && url(),
   !isLib && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
   !isLib &&
     html({
