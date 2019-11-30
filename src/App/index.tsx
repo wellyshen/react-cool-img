@@ -3,9 +3,19 @@ import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
 import Img from '../Img';
+import github from '../static/github.svg';
 import loadingImg from '../static/loading.gif';
 import errorImg from '../static/error.png';
-import { root, container, title, subtitle, cta, image, cp } from './styles';
+import {
+  root,
+  container,
+  title,
+  subtitle,
+  cta,
+  icon,
+  image,
+  cp
+} from './styles';
 
 const App: SFC<{}> = () => {
   const renderImages = (num: number): ReactElement[] => {
@@ -44,6 +54,7 @@ const App: SFC<{}> = () => {
           typescript support · lightweight
         </p>
         <a href="https://github.com/wellyshen/react-cool-img" css={cta}>
+          <img css={icon} src={github} alt="Github" />
           Try It Now
         </a>
         <div>{renderImages(300)}</div>

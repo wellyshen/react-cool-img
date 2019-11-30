@@ -14,7 +14,7 @@ export const root = css`
 `;
 
 export const container = css`
-  padding: 3rem 5%;
+  padding: 5rem 5%;
   text-align: center;
   ${mq.sm} {
     padding-left: 10%;
@@ -31,7 +31,7 @@ export const container = css`
 `;
 
 export const title = css`
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.75rem;
 `;
 
 export const subtitle = css`
@@ -39,8 +39,9 @@ export const subtitle = css`
 `;
 
 export const cta = css`
-  display: inline-block;
-  margin: 2rem 0;
+  display: inline-flex;
+  align-items: center;
+  margin: 2.5rem 0;
   padding: 0.5rem 2rem;
   border: 1px solid black;
   border-radius: 4px;
@@ -50,6 +51,12 @@ export const cta = css`
     border-color: gray;
     color: gray;
   }
+`;
+
+export const icon = css`
+  margin-right: 0.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
 `;
 
 export const image = css`
@@ -70,5 +77,5 @@ export const image = css`
 
 export const cp = css`
   display: block;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 `;
