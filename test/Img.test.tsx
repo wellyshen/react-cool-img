@@ -19,9 +19,6 @@ import Img from '../src/Img';
 import useObserver from '../src/Img/useObserver';
 
 describe('<Img />', () => {
-  // @ts-ignore
-  global.console = { error: (): void => {} };
-
   const props = {
     placeholder: 'PLACEHOLDER',
     error: 'ERROR',
