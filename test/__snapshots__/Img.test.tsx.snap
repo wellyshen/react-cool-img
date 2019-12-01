@@ -16,7 +16,6 @@ exports[`<Img /> should render error image 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
-    crossorigin="anonymous"
     src="ERROR"
   />
 </DocumentFragment>
@@ -26,7 +25,6 @@ exports[`<Img /> should render placeholder image 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
-    crossorigin="anonymous"
     src="PLACEHOLDER"
   />
 </DocumentFragment>
@@ -36,7 +34,6 @@ exports[`<Img /> should render placeholder image insteadly 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
-    crossorigin="anonymous"
     src="PLACEHOLDER"
   />
 </DocumentFragment>

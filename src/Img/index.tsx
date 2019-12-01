@@ -13,7 +13,6 @@ import React, {
 
 import useObserver, { Config } from './useObserver';
 import Imager, { Retry } from './Imager';
-import errorManager from './errorManager';
 
 interface Props
   extends DetailedHTMLProps<
@@ -68,11 +67,7 @@ const Img: SFC<Props> = ({
 
   const handleError = (event: SyntheticEvent | Event): void => {
     // @ts-ignore
-    const targetSrc = event.target.src;
-
-    errorManager('onerror', targetSrc);
-
-    if (targetSrc === src) {
+    if (event.target.src === src) {
       if (error) {
         setSource(error);
       } else if (placeholder) {

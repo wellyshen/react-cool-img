@@ -1,7 +1,5 @@
 /* eslint-disable lines-between-class-members */
 
-import errorManager from './errorManager';
-
 export interface Retry {
   count?: number;
   delay?: number;
@@ -31,10 +29,7 @@ export default class Imager {
     this.img.src = src;
 
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
-    if (decode)
-      this.img.decode().catch(() => {
-        errorManager('decode', src);
-      });
+    if (decode) this.img.decode();
 
     this.img.onerror = (event: Event): void => {
       if (!count || this.retries > count) {
