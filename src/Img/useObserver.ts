@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 
-import errorManager from './errorManager';
-
 export interface Config {
   root?: Element | null;
   rootMargin?: string;
@@ -19,7 +17,11 @@ export default (
   { root = null, rootMargin = '50px', threshold = 0.01, debounce = 300 }: Config
 ): Return => {
   if (!lazy || !window.IntersectionObserver) {
-    if (!window.IntersectionObserver) errorManager('observer');
+    if (!window.IntersectionObserver)
+      // FIXME: Use README URL
+      console.error(
+        "💡react-cool-img: this browser doesn't support IntersectionObserver, please install polyfill to enable lazy loading. intersection-observer: https://www.npmjs.com/package/intersection-observer"
+      );
 
     const setState = (): void => {};
     return [setState, true, setState];
@@ -32,7 +34,10 @@ export default (
   let numThreshold = threshold;
 
   if (typeof threshold !== 'number') {
-    errorManager('threshold');
+    console.error(
+      '💡react-cool-img: the threshold of observerConfig must be a number. Use 0 as fallback.'
+    );
+
     numThreshold = 0;
   }
 
