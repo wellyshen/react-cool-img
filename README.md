@@ -9,7 +9,7 @@
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-img?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-img/master/LICENSE)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-img)](https://twitter.com/intent/tweet?text=With%20@React-Cool-Img,%20my%20web%20app%20becomes%20more%20powerful.%20Thanks,%20@Welly%20Shen%20🤩)
 
-🚧 This library is in processing. Please don't install it now. You can check my to-do list:
+🚧 This library is in processing. API might changed rapidly. **Please don't install it now**. You can check my to-do list:
 
 - [x] Library development
 - [x] Unit testing
