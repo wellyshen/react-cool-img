@@ -100,7 +100,7 @@ const Img: SFC<Props> = ({
   return (
     <img
       src={source}
-      crossOrigin={crossOrigin}
+      crossOrigin={isSrc ? crossOrigin : null}
       srcSet={isSrc ? srcSet : null}
       sizes={isSrc ? sizes : null}
       onError={isSrc ? null : handleError}
