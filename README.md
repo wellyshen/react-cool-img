@@ -11,7 +11,7 @@ See the demo: https://keen-goldwasser-415880.netlify.com
 [![npm version](https://img.shields.io/npm/v/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
 [![npm downloads](https://img.shields.io/npm/dt/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-img?style=flat-square)](https://bundlephobia.com/result?p=react-cool-img)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-img?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-img/master/LICENSE)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-img)](https://twitter.com/intent/tweet?text=With%20@React-Cool-Img,%20my%20web%20app%20becomes%20more%20powerful.%20Thanks,%20@Welly%20Shen%20🤩)
 
@@ -24,7 +24,7 @@ See the demo: https://keen-goldwasser-415880.netlify.com
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
 - 🔍 Support server-side rendering for SEO.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
-- 🐦 Tiny size ([~ 2.2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
+- 🦠 Tiny size ([~ 2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
 
 > ⚠️ IntersectionObserver is already [supported by all major modern browsers](https://caniuse.com/#feat=intersectionobserver). You can also [add the polyfill](TBD...) for full browser support.
