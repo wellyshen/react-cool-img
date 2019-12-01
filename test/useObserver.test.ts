@@ -1,6 +1,36 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
-import useObserver, { Config, Return as Current } from '../src/Img/useObserver';
+import useObserver, {
+  observerErr,
+  thresholdErr,
+  Config,
+  Return as Current
+} from '../src/Img/useObserver';
+
+describe('useObserver › errors', () => {
+  it('should handle IntersectionObserver error correctly', () => {
+    global.console.error = jest.fn();
+
+    renderHook(() => useObserver(true, {}));
+
+    expect(console.error).toBeCalledWith(observerErr);
+  });
+
+  it('should handle threshold error correctly', () => {
+    global.console.error = jest.fn();
+    // @ts-ignore
+    global.IntersectionObserver = jest.fn((_, { threshold }) => ({
+      threshold,
+      disconnect: (): void => {}
+    }));
+    // @ts-ignore
+    renderHook(() => useObserver(true, { threshold: [0.5, 1] }));
+
+    expect(console.error).toBeCalledWith(thresholdErr);
+    // @ts-ignore
+    expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
+  });
+});
 
 describe('useObserver', () => {
   jest.useFakeTimers();
@@ -44,12 +74,6 @@ describe('useObserver', () => {
         disconnect: jest.fn()
       })
     );
-  });
-
-  afterEach(() => {
-    // @ts-ignore
-    global.IntersectionObserver.mockClear();
-    observerMap.clear();
   });
 
   it('should skip lazy loading', () => {
