@@ -27,7 +27,7 @@ See the demo: https://keen-goldwasser-415880.netlify.com
 - 🦠 Tiny size ([~ 2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
 
-> ⚠️ IntersectionObserver is already [supported by all major modern browsers](https://caniuse.com/#feat=intersectionobserver). You can also [add the polyfill](TBD...) for full browser support.
+> ⚠️ [Major modern browsers already support IntersectionObserver](https://caniuse.com/#feat=intersectionobserver). You can also [add polyfill](TBD...) for full browser support.
 
 ## Requirements
 
