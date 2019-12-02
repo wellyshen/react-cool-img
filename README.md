@@ -38,9 +38,8 @@ See the demo: https://keen-goldwasser-415880.netlify.com
 This package is distributed via [npm](https://www.npmjs.com/package/react-cool-img).
 
 ```sh
-# Install using Yarn
 $ yarn add react-cool-img
-# or npm
+# or
 $ npm install --save react-cool-img
 ```
 
@@ -88,9 +87,8 @@ Polyfill is something you should do consciously at the application level. So, `r
 You can use the [polyfill](https://www.npmjs.com/package/intersection-observer) or use a service like [polyfill.io](https://polyfill.io/v3) to add it when needed.
 
 ```sh
-# Install using Yarn
 $ yarn add intersection-observer
-# or npm
+# or
 $ npm install --save intersection-observer
 ```
 
