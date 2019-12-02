@@ -81,7 +81,9 @@ Comming Soon...
 
 ## Intersection Observer Polyfill
 
-[Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API has already gained wide support by most modern browsers ([check it](https://caniuse.com/#feat=intersectionobserver)). If you wish to support full browser then you need polyfill. Polyfill is something you should do consciously at the application level. So, `react-cool-img` doesn't include it for you.
+[Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API has already gained wide support by most modern browsers ([check it](https://caniuse.com/#feat=intersectionobserver)). If you wish to support full browser then you need polyfill.
+
+Polyfill is something you should do consciously at the application level. So, `react-cool-img` doesn't include it for you.
 
 You can use the [polyfill](https://www.npmjs.com/package/intersection-observer) or use a service like [polyfill.io](https://polyfill.io/v3) to add it when needed.
 
