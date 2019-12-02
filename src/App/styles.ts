@@ -48,7 +48,11 @@ export const cta = css`
   color: black;
   text-decoration: none;
   &:hover {
-    filter: invert(50%);
+    color: white;
+    background: black;
+    & img {
+      filter: invert(100%);
+    }
   }
 `;
 
