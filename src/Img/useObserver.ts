@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-// FIXME: Use README URL
 export const observerErr =
-  "💡react-cool-img: this browser doesn't support IntersectionObserver, please install polyfill to enable lazy loading. intersection-observer: https://www.npmjs.com/package/intersection-observer";
+  "💡react-cool-img: this browser doesn't support IntersectionObserver, please install polyfill to enable lazy loading. More info: https://github.com/wellyshen/react-cool-img#intersectionobserver-polyfill";
 export const thresholdErr =
   '💡react-cool-img: the threshold of observerConfig must be a number. Use 0 as fallback.';
 
