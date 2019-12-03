@@ -28,8 +28,8 @@ describe('Imager', () => {
       crossOrigin = null,
       decode = false,
       retry = {},
-      onError = (): void => {},
-      onLoad = (): void => {}
+      onError = (): void => null,
+      onLoad = (): void => null
     }: Args = {}): void => {
       instance.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
@@ -45,8 +45,8 @@ describe('Imager', () => {
       let src = '';
 
       return {
-        onerror: (): void => {},
-        onload: (): void => {},
+        onerror: (): void => null,
+        onload: (): void => null,
         decode: jest.fn(() => Promise.resolve()),
         set src(val: string) {
           if (val === FAILURE_SRC) setTimeout(() => this.onerror(ERROR_EVT));

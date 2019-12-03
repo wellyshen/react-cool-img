@@ -115,8 +115,8 @@ Img.defaultProps = {
   retry: {},
   srcSet: null,
   sizes: null,
-  onError: (): void => {},
-  onLoad: (): void => {}
+  onError: (): void => null,
+  onLoad: (): void => null
 };
 
 export default memo(Img);

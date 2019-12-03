@@ -24,7 +24,7 @@ export default (
   if (!lazy || !window.IntersectionObserver) {
     if (!window.IntersectionObserver) console.error(observerErr);
 
-    const setState = (): void => {};
+    const setState = (): void => null;
     return [setState, true, setState];
   }
 

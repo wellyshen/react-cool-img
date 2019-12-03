@@ -21,7 +21,7 @@ describe('useObserver › errors', () => {
     // @ts-ignore
     global.IntersectionObserver = jest.fn((_, { threshold }) => ({
       threshold,
-      disconnect: (): void => {}
+      disconnect: (): void => null
     }));
     // @ts-ignore
     renderHook(() => useObserver(true, { threshold: [0.5, 1] }));

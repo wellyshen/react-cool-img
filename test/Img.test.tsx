@@ -38,7 +38,7 @@ describe('<Img />', () => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
   const setStartLoad = (val = false): void => {
-    const setState = (): void => {};
+    const setState = (): void => null;
     // @ts-ignore
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
