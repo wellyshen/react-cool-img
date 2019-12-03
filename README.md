@@ -1,3 +1,5 @@
+> 🧪 This package is under testing, API might be changed rapidly. Please note any changes via [release](https://github.com/wellyshen/react-cool-img/releases). I'll provide full document as soon as possible.
+
 # React Cool Img
 
 React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professonal guy 🤓
@@ -57,7 +59,7 @@ import errorImage from './images/error.svg';
 const App = () => (
   <Img
     placeholder={loadingImage}
-    src="https://the-image-url"
+    src="https://a-cool-image"
     error={errorImage}
     alt="React Cool Img"
   />
@@ -80,11 +82,11 @@ Comming Soon...
 
 ## Intersection Observer Polyfill
 
-[Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) API has already gained wide support by most modern browsers ([check it](https://caniuse.com/#feat=intersectionobserver)). If you wish to support full browser then you need polyfill.
+[Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) has already gained wide support by most modern browsers ([check it](https://caniuse.com/#feat=intersectionobserver)). If you wish to support full browser then you need polyfill.
 
-Polyfill is something you should do consciously at the application level. So, `react-cool-img` doesn't include it for you.
+Polyfills is something you should do consciously at the application level. Therefore `react-cool-img` doesn't include it.
 
-You can use the [polyfill](https://www.npmjs.com/package/intersection-observer) or use a service like [polyfill.io](https://polyfill.io/v3) to add it when needed.
+You can use the [polyfill](https://www.npmjs.com/package/intersection-observer) from w3c:
 
 ```sh
 $ yarn add intersection-observer
@@ -97,3 +99,11 @@ Then import it at your app's entry point:
 ```javascript
 import 'intersection-observer';
 ```
+
+Or load the polyfill only if needed:
+
+```javascript
+if (!window.IntersectionObserver) require('intersection-observer');
+```
+
+[Polyfill.io](https://polyfill.io/v3) is an alternative way to add the polyfill when needed.
