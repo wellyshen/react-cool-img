@@ -66,7 +66,7 @@ const App = () => (
 );
 ```
 
-Don't want an image placeholder? No worries, you can use CSS or inline styles for it. The component is fully compatible with the development experience of normal `img` tag.
+Don't want an image placeholder? No worries, you can use CSS or [inline styles](https://reactjs.org/docs/dom-elements.html#style) for it. The component is fully compatible with the development experience of normal `img` tag.
 
 ```js
 import Img from 'react-cool-img';
