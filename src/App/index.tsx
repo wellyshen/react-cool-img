@@ -50,7 +50,7 @@ const App: SFC<{}> = () => {
       <div css={container}>
         <h1 css={title}>React Cool Img</h1>
         <p css={subtitle}>
-          placeholder · lazy loading · cancel loading · auto retry · ssr ·
+          placeholder · lazy-loading · cancel loading · auto-retry · ssr ·
           typescript support · lightweight
         </p>
         <a href="https://github.com/wellyshen/react-cool-img" css={cta}>

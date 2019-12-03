@@ -6,7 +6,7 @@ React Cool Img is a lightweight React `<Img />` component, which helps you handl
 
 It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
-See the demo: https://keen-goldwasser-415880.netlify.com
+Live demo: https://keen-goldwasser-415880.netlify.com
 
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-img/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-img)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-img?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-img?branch=master)
@@ -21,8 +21,8 @@ See the demo: https://keen-goldwasser-415880.netlify.com
 
 - 🖼 Placeholders for satisfying various image loading states (e.g. loading image > acutal image > error image).
 - 🛋 Lazy image loading with modern, performant implementation, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
-- ⏳ An image can wait to be downloaded when it's in the viewport (and user is seeing it) for a set time by [debounce](#debounce).
-- 🤖 Built-in [auto-retry](#auto-retry) mechanism. User won't miss out your important image information.
+- ⏳ An image can wait to be downloaded when it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
+- 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important image information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
 - 🔍 Support server-side rendering for SEO.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
@@ -49,7 +49,7 @@ $ npm install --save react-cool-img
 
 The default props of the component has been fine-tuned for the purpose of loading optimization. Let's start it as the following example.
 
-```javascript
+```js
 import Img from 'react-cool-img';
 
 // Suggest to use low quality or vector images
@@ -70,13 +70,24 @@ const App = () => (
 
 The image component working similar with standard `img` tag and with the following props.
 
+| Prop             | Type    | Default                                                             | Required | Description                                                                                                                                                                                                   |
+| ---------------- | ------- | ------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src`            | string  |                                                                     | ✓        | Image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                                  |
+| `srcSet`         | string  |                                                                     |          | Image sources for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                            |
+| `sizes`          | string  |                                                                     |          | Image sizes for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                              |
+| `placeholder`    | string  |                                                                     |          | Placeholder image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                      |
+| `error`          | string  |                                                                     |          | Error image source. It'll replace Placeholder image <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                           |
+| `alt`            | string  |                                                                     |          | An alternate text for an image section                                                                                                                                                                        |
+| `decode`         | boolean | `true`                                                              |          | Use [img.decode()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode) to pre-decode the image before render it. Useful to prevent main thread from blocking by decoding of large image |
+| `lazy`           | boolean | `true`                                                              |          | Turn on/off lazy-loading                                                                                                                                                                                      |
+| `observerConfig` | object  | `{ root: null, rootMargin: '50px',threshold: 0.01, debounce: 300 }` |          | See the [observerConfig](#observerconfig) section                                                                                                                                                             |
+| `retry`          | object  | `{ count: 3, delay: 2, acc: '*' }`                                  |          | See the [retry](#retry) section                                                                                                                                                                               |
+
+### observerConfig
+
 Comming Soon...
 
-### Debounce
-
-Comming Soon...
-
-### Auto-retry
+### retry
 
 Comming Soon...
 
@@ -96,13 +107,13 @@ $ npm install --save intersection-observer
 
 Then import it at your app's entry point:
 
-```javascript
+```js
 import 'intersection-observer';
 ```
 
 Or load the polyfill only if needed:
 
-```javascript
+```js
 if (!window.IntersectionObserver) require('intersection-observer');
 ```
 
