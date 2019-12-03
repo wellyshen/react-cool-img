@@ -126,7 +126,7 @@ All the properties are `optional`.
 
 Polyfills is something you should do consciously at the application level. Therefore `react-cool-img` doesn't include it.
 
-You can use w3c's [polyfill](https://www.npmjs.com/package/intersection-observer):
+You can use W3C's [polyfill](https://www.npmjs.com/package/intersection-observer):
 
 ```sh
 $ yarn add intersection-observer
