@@ -47,7 +47,7 @@ $ npm install --save react-cool-img
 
 ## Quick Start
 
-The default props of the component has been fine-tuned for the purpose of loading optimization. Let's start it as the following example.
+The [default props](#api) of the component has been fine-tuned for the purpose of loading optimization. Let's start it as the following example.
 
 ```js
 import Img from 'react-cool-img';
@@ -66,6 +66,20 @@ const App = () => (
 );
 ```
 
+Don't want an image placeholder? No worries, you can use CSS or inline styles for it. The component is fully compatible with the development experience of normal `img` tag.
+
+```js
+import Img from 'react-cool-img';
+
+const App = () => (
+  <Img
+    style={{ backgroundColor: 'silver', width: '480', height: '320' }}
+    src="https://a-cool-image"
+    alt="React Cool Img"
+  />
+);
+```
+
 ## API
 
 The image component working similar with standard `img` tag and with the following props.
@@ -75,6 +89,8 @@ The image component working similar with standard `img` tag and with the followi
 | `src`            | string  |                                                                      | Image source. It's `required` <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                 |
 | `srcSet`         | string  |                                                                      | Image sources for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                            |
 | `sizes`          | string  |                                                                      | Image sizes for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                              |
+| `width`          | string  |                                                                      | Width of the image in px                                                                                                                                                                                      |
+| `height`         | string  |                                                                      | Height of the image in px                                                                                                                                                                                     |
 | `placeholder`    | string  |                                                                      | Placeholder image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                      |
 | `error`          | string  |                                                                      | Error image source. It'll replace Placeholder image <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                           |
 | `alt`            | string  |                                                                      | An alternate text for an image section                                                                                                                                                                        |
