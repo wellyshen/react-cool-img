@@ -1,5 +1,3 @@
-> 🧪 This package is under testing, API might be changed rapidly. Please note any changes via [release](https://github.com/wellyshen/react-cool-img/releases). Full document will be provided as soon as possible.
-
 # React Cool Img
 
 React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
