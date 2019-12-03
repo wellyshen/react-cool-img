@@ -38,6 +38,12 @@ export const subtitle = css`
   margin: 0;
 `;
 
+export const icon = css`
+  margin-right: 0.5rem;
+  width: 1.3rem;
+  height: 1.3rem;
+`;
+
 export const cta = css`
   display: inline-flex;
   align-items: center;
@@ -50,16 +56,10 @@ export const cta = css`
   &:hover {
     color: white;
     background: black;
-    & img {
+    .css-${icon.name} {
       filter: invert(100%);
     }
   }
-`;
-
-export const icon = css`
-  margin-right: 0.5rem;
-  width: 1.3rem;
-  height: 1.3rem;
 `;
 
 export const image = css`
