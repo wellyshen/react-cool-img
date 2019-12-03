@@ -98,6 +98,7 @@ The image component working similar with standard `img` tag and with the followi
 | `decode`         | boolean | `true`                                                               | Use [img.decode()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode) to pre-decode the image before render it. Useful to prevent main thread from blocking by decoding of large image |
 | `observerConfig` | object  | `{ root: null, rootMargin: '50px', threshold: 0.01, debounce: 300 }` | See the [observerConfig](#observerconfig) section                                                                                                                                                             |
 | `retry`          | object  | `{ count: 3, delay: 2, acc: '*' }`                                   | See the [retry](#retry) section                                                                                                                                                                               |
+| `...`            |         |                                                                      | Find more [props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Attributes) and [events](https://reactjs.org/docs/events.html#image-events)                                                   |
 
 ### observerConfig
 
