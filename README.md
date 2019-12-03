@@ -1,4 +1,4 @@
-> 🧪 This package is under testing, API might be changed rapidly. Please note any changes via [release](https://github.com/wellyshen/react-cool-img/releases). I'll provide full document as soon as possible.
+> 🧪 This package is under testing, API might be changed rapidly. Please note any changes via [release](https://github.com/wellyshen/react-cool-img/releases). Full document will be provided as soon as possible.
 
 # React Cool Img
 
