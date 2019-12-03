@@ -2,7 +2,7 @@
 
 # React Cool Img
 
-React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professonal guy 🤓
+React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
 
 It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
@@ -19,7 +19,7 @@ It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML
 
 ## Features
 
-- 🖼 Placeholders for satisfying various image loading states (e.g. loading image > acutal image > error image).
+- 🖼 Placeholders for satisfying various image loading states (e.g. loading image > actual image > error image).
 - 🛋 Lazy image loading with modern, performant implementation, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 - ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important image information.
@@ -87,7 +87,7 @@ The image component working similar with standard `img` tag and with the followi
 
 All the properties are `optional`.
 
-- `root: Element | null` - the element that is used as the viewport for checking visiblity of the target. Must be the ancestor of the target. Defaults to the browser viewport if not specified or if `null`.
+- `root: Element | null` - the element that is used as the viewport for checking visibility of the target. Must be the ancestor of the target. Defaults to the browser viewport if not specified or if `null`.
 - `rootMargin: string` - margin around the root. Can have values similar to the CSS [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) property, e.g. `'10px 20px 30px 40px'` (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the root element's bounding box before computing intersections.
 - `threshold: number` - a single number between 0 and 1, which indicate at what percentage of the target's visibility the observer's callback should be executed. A value of 0 means as soon as even one pixel is visible, the callback will be run. 1 means that the threshold isn't considered passed until every pixel is visible.
 - `debounce: number` - specifies how much to wait in milliseconds that the image has to be in viewport before starting to load. This can help avoid wasting bandwidth and processing time while the user scrolls quickly past them. A value of 0 means the image to be loaded immediately.
