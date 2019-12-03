@@ -6,7 +6,7 @@ React Cool Img is a lightweight React `<Img />` component, which helps you handl
 
 It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
-Live demo: https://keen-goldwasser-415880.netlify.com
+⚡️ Live demo: https://keen-goldwasser-415880.netlify.com
 
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-img/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-img)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-img?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-img?branch=master)
@@ -21,7 +21,7 @@ Live demo: https://keen-goldwasser-415880.netlify.com
 
 - 🖼 Placeholders for satisfying various image loading states (e.g. loading image > acutal image > error image).
 - 🛋 Lazy image loading with modern, performant implementation, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
-- ⏳ An image can wait to be downloaded when it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
+- ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important image information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
 - 🔍 Support server-side rendering for SEO.
@@ -70,26 +70,38 @@ const App = () => (
 
 The image component working similar with standard `img` tag and with the following props.
 
-| Prop             | Type    | Default                                                             | Description                                                                                                                                                                                                   |
-| ---------------- | ------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src`            | string  |                                                                     | Image source. It's `Required` <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                 |
-| `srcSet`         | string  |                                                                     | Image sources for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                            |
-| `sizes`          | string  |                                                                     | Image sizes for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                              |
-| `placeholder`    | string  |                                                                     | Placeholder image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                      |
-| `error`          | string  |                                                                     | Error image source. It'll replace Placeholder image <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                           |
-| `alt`            | string  |                                                                     | An alternate text for an image section                                                                                                                                                                        |
-| `decode`         | boolean | `true`                                                              | Use [img.decode()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode) to pre-decode the image before render it. Useful to prevent main thread from blocking by decoding of large image |
-| `lazy`           | boolean | `true`                                                              | Turn on/off lazy-loading                                                                                                                                                                                      |
-| `observerConfig` | object  | `{ root: null, rootMargin: '50px',threshold: 0.01, debounce: 300 }` | See the [observerConfig](#observerconfig) section                                                                                                                                                             |
-| `retry`          | object  | `{ count: 3, delay: 2, acc: '*' }`                                  | See the [retry](#retry) section                                                                                                                                                                               |
+| Prop             | Type    | Default                                                              | Description                                                                                                                                                                                                   |
+| ---------------- | ------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src`            | string  |                                                                      | Image source. It's `required` <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                 |
+| `srcSet`         | string  |                                                                      | Image sources for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                            |
+| `sizes`          | string  |                                                                      | Image sizes for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                              |
+| `placeholder`    | string  |                                                                      | Placeholder image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                      |
+| `error`          | string  |                                                                      | Error image source. It'll replace Placeholder image <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                           |
+| `alt`            | string  |                                                                      | An alternate text for an image section                                                                                                                                                                        |
+| `lazy`           | boolean | `true`                                                               | Turn on/off lazy-loading <br />[Using Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)                                                                      |
+| `decode`         | boolean | `true`                                                               | Use [img.decode()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode) to pre-decode the image before render it. Useful to prevent main thread from blocking by decoding of large image |
+| `observerConfig` | object  | `{ root: null, rootMargin: '50px', threshold: 0.01, debounce: 300 }` | See the [observerConfig](#observerconfig) section                                                                                                                                                             |
+| `retry`          | object  | `{ count: 3, delay: 2, acc: '*' }`                                   | See the [retry](#retry) section                                                                                                                                                                               |
 
 ### observerConfig
 
-Comming Soon...
+All the properties are `optional`.
+
+- `root: Element | null`: The element that is used as the viewport for checking visiblity of the target. Must be the ancestor of the target. Defaults to the browser viewport if not specified or if `null`.
+- `rootMargin: string`: Margin around the root. Can have values similar to the CSS [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) property, e.g. `'10px 20px 30px 40px'` (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the root element's bounding box before computing intersections.
+- `threshold: number`: A single number between 0 and 1, which indicate at what percentage of the target's visibility the observer's callback should be executed. A value of 0 means as soon as even one pixel is visible, the callback will be run. 1 means that the threshold isn't considered passed until every pixel is visible.
+- `debounce: number`: Specifies how much to wait in milliseconds that the image has to be in viewport before starting to load. This can help avoid wasting bandwidth and processing time while the user scrolls quickly past them. A value of 0 means the image to be loaded immediately.
 
 ### retry
 
-Comming Soon...
+All the properties are `optional`.
+
+- `count: number`: Specifies the number of times you want to retry. Set it to 0 will disable auto-retry.
+- `delay: number`: Specifies the delay between retries in seconds.
+- `acc: string | false`: Specifies how the delay should be accumulated with each retry. It accepts the following values:
+  - `'*' (default)`: Multiply delay after each subsequent retry by the given `delay` value, e.g. `delay: 2` means retry will run after 2 seconds, 4 seconds, 8 seconds, and so on.
+  - `'+'`: Increment delay after each retry by the given `delay` value, e.g. `delay: 2` means retry will run after 2 seconds, 4 seconds, 6 seconds, and so on.
+  - `false`: Keep the delay constant between retries, e.g. `delay: 2` means retry will run every 2 seconds.
 
 ## Intersection Observer Polyfill
 
