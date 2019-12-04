@@ -50,12 +50,12 @@ const App: SFC<{}> = () => {
       <div css={container}>
         <h1 css={title}>React Cool Img</h1>
         <p css={subtitle}>
-          placeholder · lazy-loading · cancel loading · auto-retry · ssr ·
-          typescript support · lightweight
+          {`A React <Img /> component let you handle image UX and performance as a
+          Pro!`}
         </p>
         <a href="https://github.com/wellyshen/react-cool-img" css={cta}>
           <img css={icon} src={github} alt="Github" />
-          Try It Now
+          Explore More
         </a>
         <div>{renderImages(300)}</div>
         <small css={cp}>Welly Shen ©</small>
