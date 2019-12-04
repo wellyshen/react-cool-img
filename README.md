@@ -4,7 +4,7 @@ React Cool Img is a lightweight React `<Img />` component, which helps you handl
 
 It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
-⚡️ Live demo: https://react-cool-img.netlify.com
+⚡️ Live demo: https://react-cool-img.org
 
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-img/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-img)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-img?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-img?branch=master)
