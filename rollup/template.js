@@ -16,7 +16,7 @@ export default ({ files }) => `
       <meta property="og:title" content="React Cool Img" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://react-cool-img.org" />
-      <meta property="og:image" content="https://react-cool-img.org/assets/og_image.png" />
+      <meta property="og:image" content="assets/og_image.png" />
     </head>
     <body>
       <div id="app"></div>
