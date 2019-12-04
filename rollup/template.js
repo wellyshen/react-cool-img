@@ -18,6 +18,8 @@ export default ({ files }) => `
       <meta property="og:type" content="website" />
       <meta property="og:url" content="https://react-cool-img.org" />
       <meta property="og:image" content="https://react-cool-img.org/assets/og_image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
     </head>
     <body>
       <div id="app"></div>
