@@ -51,10 +51,7 @@ const plugins = [
   !isLib &&
     copy({
       targets: [
-        {
-          src: 'src/static/icon',
-          dest: 'src/.dev'
-        }
+        { src: 'src/static/example_assets', dest: 'src/.dev', rename: 'assets' }
       ]
     }),
   isDev && serve('src/.dev'),
@@ -62,10 +59,7 @@ const plugins = [
   !isDev && terser(),
   !isDev && filesize(),
   isExample &&
-    copy({
-      targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],
-      hook: 'writeBundle'
-    }),
+    copy({ targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }] }),
   isLib &&
     copy({
       targets: [
