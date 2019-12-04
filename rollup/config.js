@@ -59,7 +59,10 @@ const plugins = [
   !isDev && terser(),
   !isDev && filesize(),
   isExample &&
-    copy({ targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }] }),
+    copy({
+      targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],
+      hook: 'writeBundle'
+    }),
   isLib &&
     copy({
       targets: [
