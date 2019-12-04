@@ -20,7 +20,7 @@ It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML
 - 🖼 Placeholders for satisfying various image loading states (e.g. loading image > actual image > error image).
 - 🛋 Lazy image loading with modern, performant implementation, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 - ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
-- 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important image information.
+- 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
 - 🔍 Support server-side rendering for SEO.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
