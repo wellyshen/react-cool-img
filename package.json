@@ -18,7 +18,8 @@
     "auto-retry",
     "intersection-observer",
     "ux",
-    "ssr"
+    "ssr",
+    "seo"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
   "main": "lib/index.js",
