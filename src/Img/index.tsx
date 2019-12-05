@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text, react-hooks/rules-of-hooks, react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text, react-hooks/exhaustive-deps */
 
 import React, {
   DetailedHTMLProps,
@@ -48,18 +48,6 @@ const Img: SFC<Props> = ({
   onLoad,
   ...rest
 }: Props) => {
-  // In server-side, render <img /> directly
-  if (typeof window === 'undefined')
-    return (
-      <img
-        src={src}
-        crossOrigin={crossOrigin}
-        srcSet={srcSet}
-        sizes={sizes}
-        {...rest}
-      />
-    );
-
   const { current: imager } = useRef(new Imager());
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
   const [source, setSource] = useState(placeholder || src || error);
@@ -115,8 +103,8 @@ Img.defaultProps = {
   retry: {},
   srcSet: null,
   sizes: null,
-  onError: (): void => null,
-  onLoad: (): void => null
+  onError: /* istanbul ignore next */ (): void => null,
+  onLoad: /* istanbul ignore next */ (): void => null
 };
 
 export default memo(Img);

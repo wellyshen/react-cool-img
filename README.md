@@ -22,7 +22,7 @@ It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML
 - ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
-- 🔍 Support server-side rendering for SEO.
+- 🔍 Support server-side rendering.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
 - 🦠 Tiny size ([~ 2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.

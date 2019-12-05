@@ -21,11 +21,14 @@ export default (
   lazy: boolean,
   { root = null, rootMargin = '50px', threshold = 0.01, debounce = 300 }: Config
 ): Return => {
-  if (!lazy || !window.IntersectionObserver) {
-    if (!window.IntersectionObserver) console.error(observerErr);
+  const setState = (): void => null;
+  const defaultVal: Return = [setState, true, setState];
 
-    const setState = (): void => null;
-    return [setState, true, setState];
+  if (!lazy || typeof window === 'undefined') return defaultVal;
+
+  if (!window.IntersectionObserver) {
+    console.error(observerErr);
+    return defaultVal;
   }
 
   const [startLoad, setStartLoad] = useState(false);
