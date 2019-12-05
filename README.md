@@ -123,23 +123,33 @@ All the properties are `optional`.
 There're two challenges when doing lazy image loading with server-side rendering. One is Javascript availability the other is SEO. Fortunately, we can use [`<noscript>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript) tag to solve these problems. It will render the actual image as fallback if Javascript is disabled thus user won't see the image which be stuck with the placeholder. Moreover, the `<noscript>` tag ensure the image is indexed by search engine bots even if they cannot fully understand our JavaScript code. Take a look at how magic happens.
 
 ```js
-// Img/index.tsx
+// src/Img/index.tsx
 
-const Img = () => {
+import React from 'react';
+
+// ...
+
+const Img = ({ placeholder, src, srcSet, sizes, ...rest }) => {
   // ...
 
   return (
     <>
       <img
         class="image"
-        src="https://the-placeholder-image"
+        src={placeholder}
+        srcSet={srcSet}
+        sizes={sizes}
         alt="There's no magic"
+        {...rest}
       />
       <noscript>
         <img
           class="image"
-          src="https://the-actual-image"
+          src={src}
+          srcSet={srcSet}
+          sizes={sizes}
           alt="The magic begins in here..."
+          {...rest}
         />
       </noscript>
     </>

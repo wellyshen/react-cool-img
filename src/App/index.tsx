@@ -55,7 +55,7 @@ const App: SFC<{}> = () => {
         </p>
         <a href="https://github.com/wellyshen/react-cool-img" css={cta}>
           <img css={icon} src={github} alt="Github" />
-          Explore More
+          Start Exploring
         </a>
         <div>{renderImages(300)}</div>
         <small css={cp}>Welly Shen ©</small>
