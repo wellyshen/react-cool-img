@@ -24,8 +24,9 @@ declare module 'react-cool-img' {
       ImgHTMLAttributes<HTMLImageElement>,
       HTMLImageElement
     > {
-    src: string;
+    className?: string;
     placeholder?: string;
+    src: string;
     error?: string;
     crossOrigin?: '' | 'anonymous' | 'use-credentials';
     decode?: boolean;

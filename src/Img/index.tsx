@@ -19,8 +19,9 @@ interface Props
     ImgHTMLAttributes<HTMLImageElement>,
     HTMLImageElement
   > {
-  src: string;
+  className?: string;
   placeholder?: string;
+  src: string;
   error?: string;
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
@@ -34,6 +35,7 @@ interface Props
 }
 
 const Img: SFC<Props> = ({
+  className,
   placeholder,
   src,
   error,
@@ -80,20 +82,39 @@ const Img: SFC<Props> = ({
     };
   }, [startLoad, src, crossOrigin, decode, retry]);
 
+  let filename = src ? src.replace(/^.*[\\/]/, '') : '';
+  [filename] = filename.split('.');
+
   return (
-    <img
-      src={source}
-      crossOrigin={isSrc ? crossOrigin : null}
-      srcSet={isSrc ? srcSet : null}
-      sizes={isSrc ? sizes : null}
-      onError={isSrc ? null : handleError}
-      ref={setRef}
-      {...rest}
-    />
+    <>
+      <img
+        className={`${className} no-js-${filename}`}
+        src={source}
+        crossOrigin={isSrc ? crossOrigin : null}
+        srcSet={isSrc ? srcSet : null}
+        sizes={isSrc ? sizes : null}
+        onError={isSrc ? null : handleError}
+        ref={setRef}
+        {...rest}
+      />
+      {/* For SEO and JavaScript unavailable */}
+      <noscript>
+        <style>{`.no-js-${filename} { display: none !important; }`}</style>
+        <img
+          className={className}
+          src={src}
+          crossOrigin={crossOrigin}
+          srcSet={srcSet}
+          sizes={sizes}
+          {...rest}
+        />
+      </noscript>
+    </>
   );
 };
 
 Img.defaultProps = {
+  className: '',
   placeholder: null,
   error: null,
   crossOrigin: null,

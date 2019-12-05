@@ -2,7 +2,7 @@
 
 React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
 
-It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
+It empowers the standard [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `<img>` tag replacement for [React.js](https://reactjs.org).
 
 ⚡️ Live demo: https://react-cool-img.org
 
@@ -22,7 +22,7 @@ It empowers the standard [img](https://developer.mozilla.org/en-US/docs/Web/HTML
 - ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
-- 🔍 Support server-side rendering.
+- 🔍 [Support server-side rendering (even Javascript disabled) and SEO](#javaScript-availability-and-seo).
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
 - 🦠 Tiny size ([~ 2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
@@ -64,7 +64,7 @@ const App = () => (
 );
 ```
 
-Don't want an image placeholder? No worries, you can use CSS or [inline styles](https://reactjs.org/docs/dom-elements.html#style) for it. The component is fully compatible with the development experience of normal `img` tag.
+Don't want an image placeholder? No worries, you can use CSS or [inline styles](https://reactjs.org/docs/dom-elements.html#style) for it. The component is fully compatible with the development experience of normal `<img>` tag.
 
 ```js
 import Img from 'react-cool-img';
@@ -80,7 +80,7 @@ const App = () => (
 
 ## API
 
-The image component working similar with standard `img` tag and with the following props.
+The image component working similar with standard `<img>` tag and with the following props.
 
 | Prop             | Type    | Default                                                              | Description                                                                                                                                                                                                   |
 | ---------------- | ------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -117,6 +117,37 @@ All the properties are `optional`.
   - `'*' (default)` - multiply delay after each subsequent retry by the given `delay` value, e.g. `delay: 2` means retry will run after 2 seconds, 4 seconds, 8 seconds, and so on.
   - `'+'` - increment delay after each retry by the given `delay` value, e.g. `delay: 2` means retry will run after 2 seconds, 4 seconds, 6 seconds, and so on.
   - `false` - keep the delay constant between retries, e.g. `delay: 2` means retry will run every 2 seconds.
+
+## JavaScript Availability and SEO
+
+There're two challenges when doing lazy image loading with server-side rendering. One is Javascript availability the other is SEO. Fortunately, we can use [`<noscript>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript) tag to solve these problems. It will render the actual image as fallback if Javascript is disabled thus user won't see the image which be stuck with the placeholder. Moreover, the `<noscript>` tag ensure the image is indexed by search engine bots even if they cannot fully understand our JavaScript code. Take a look at how magic happens.
+
+```js
+// Img/index.tsx
+
+const Img = () => {
+  // ...
+
+  return (
+    <>
+      <img
+        class="image"
+        src="https://the-placeholder-image"
+        alt="There's no magic"
+      />
+      <noscript>
+        <img
+          class="image"
+          src="https://the-actual-image"
+          alt="The magic begins in here..."
+        />
+      </noscript>
+    </>
+  );
+};
+
+// ...
+```
 
 ## Intersection Observer Polyfill
 

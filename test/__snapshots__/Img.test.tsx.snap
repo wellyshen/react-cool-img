@@ -4,11 +4,13 @@ exports[`<Img /> should not render placeholder image 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
+    class=" no-js-SUCCESS_SRC"
     crossorigin="anonymous"
     sizes="100vw"
     src="SUCCESS_SRC"
     srcset="cool.png"
   />
+  <noscript />
 </DocumentFragment>
 `;
 
@@ -16,8 +18,10 @@ exports[`<Img /> should render error image 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
+    class=" no-js-FAILURE_SRC"
     src="ERROR"
   />
+  <noscript />
 </DocumentFragment>
 `;
 
@@ -25,8 +29,10 @@ exports[`<Img /> should render placeholder image 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
+    class=" no-js-SUCCESS_SRC"
     src="PLACEHOLDER"
   />
+  <noscript />
 </DocumentFragment>
 `;
 
@@ -34,8 +40,10 @@ exports[`<Img /> should render placeholder image insteadly 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
+    class=" no-js-FAILURE_SRC"
     src="PLACEHOLDER"
   />
+  <noscript />
 </DocumentFragment>
 `;
 
@@ -43,10 +51,12 @@ exports[`<Img /> should render src image 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
+    class=" no-js-SUCCESS_SRC"
     crossorigin="anonymous"
     sizes="100vw"
     src="SUCCESS_SRC"
     srcset="cool.png"
   />
+  <noscript />
 </DocumentFragment>
 `;
