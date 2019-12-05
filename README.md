@@ -2,7 +2,7 @@
 
 React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
 
-It empowers the standard [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `<img>` tag replacement for [React.js](https://reactjs.org).
+It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
 ⚡️ Live demo: https://react-cool-img.org
 
@@ -22,9 +22,9 @@ It empowers the standard [`<img>`](https://developer.mozilla.org/en-US/docs/Web/
 - ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#observerconfig).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
-- 🔍 [Support server-side rendering (even Javascript disabled) and SEO](#javaScript-availability-and-seo).
+- 🔍 [Support server-side rendering / Javascript disabled / SEO](#javaScript-availability-and-seo).
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
-- 🦠 Tiny size ([~ 2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
+- 🦠 Tiny size ([~ 2.2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
 
 > ⚠️ [Most modern browsers support Intersection Observer natively](https://caniuse.com/#feat=intersectionobserver). You can also [add polyfill](#intersectionobserver-polyfill) for full browser support.
@@ -64,7 +64,7 @@ const App = () => (
 );
 ```
 
-Don't want an image placeholder? No worries, you can use CSS or [inline styles](https://reactjs.org/docs/dom-elements.html#style) for it. The component is fully compatible with the development experience of normal `<img>` tag.
+Don't want an image placeholder? No worries, you can use CSS or [inline styles](https://reactjs.org/docs/dom-elements.html#style) for it. The component is fully compatible with the development experience of normal `img` tag.
 
 ```js
 import Img from 'react-cool-img';
@@ -80,7 +80,7 @@ const App = () => (
 
 ## API
 
-The image component working similar with standard `<img>` tag and with the following props.
+The image component working similar with standard `img` tag and with the following props.
 
 | Prop             | Type    | Default                                                              | Description                                                                                                                                                                                                   |
 | ---------------- | ------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -125,31 +125,21 @@ There're two challenges when doing lazy image loading with server-side rendering
 ```js
 // src/Img/index.tsx
 
-import React from 'react';
-
-// ...
-
-const Img = ({ placeholder, src, srcSet, sizes, ...rest }) => {
+const Img = () => {
   // ...
 
   return (
     <>
       <img
         class="image"
-        src={placeholder}
-        srcSet={srcSet}
-        sizes={sizes}
+        src="https://the-placeholder-image"
         alt="There's no magic"
-        {...rest}
       />
       <noscript>
         <img
           class="image"
-          src={src}
-          srcSet={srcSet}
-          sizes={sizes}
+          src="https://the-actual-image"
           alt="The magic begins in here..."
-          {...rest}
         />
       </noscript>
     </>
