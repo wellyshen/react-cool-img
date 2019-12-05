@@ -120,7 +120,7 @@ All the properties are `optional`.
 
 ## Intersection Observer Polyfill
 
-[Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) has already gained wide support by most modern browsers ([check it](https://caniuse.com/#feat=intersectionobserver)). If you wish to support full browser then you need polyfill.
+[Intersection Observer has good support amongst browsers](https://caniuse.com/#feat=intersectionobserver), but it's not universal. You'll need to polyfill browsers that don't support it.
 
 Polyfills is something you should do consciously at the application level. Therefore `react-cool-img` doesn't include it.
 
