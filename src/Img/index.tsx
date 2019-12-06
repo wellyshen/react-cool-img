@@ -54,8 +54,7 @@ const Img: SFC<Props> = ({
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
   const [source, setSource] = useState(placeholder || src || error);
   const isSrc = source === src;
-  let filename = src ? src.replace(/^.*[\\/]/, '') : '';
-  [filename] = filename.split('.');
+  const filename = src ? src.replace(/^.*[\\/]/, '').split('.')[0] : '';
 
   const handleError = (event: SyntheticEvent | Event): void => {
     // @ts-ignore
