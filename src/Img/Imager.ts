@@ -1,7 +1,5 @@
 /* eslint-disable lines-between-class-members */
 
-import * as cache from './cache';
-
 export interface Retry {
   count?: number;
   delay?: number;
@@ -51,7 +49,6 @@ export default class Imager {
     };
     this.img.onload = (event: Event): void => {
       onLoad(event);
-      cache.set(src);
     };
   }
 

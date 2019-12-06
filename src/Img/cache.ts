@@ -10,7 +10,7 @@ export const set = (src: string): void => {
   }
 };
 
-export const get = (src: string): boolean => {
+export const match = (src: string): boolean => {
   try {
     const data = JSON.parse(sessionStorage.getItem(key)) || {};
     return !!data[src] || false;
