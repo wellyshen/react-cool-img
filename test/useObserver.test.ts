@@ -84,7 +84,7 @@ describe('useObserver', () => {
     ]);
   });
 
-  it('should setup intersection observer options corretly', () => {
+  it('should setup intersection observer options correctly', () => {
     testHook();
 
     // @ts-ignore
