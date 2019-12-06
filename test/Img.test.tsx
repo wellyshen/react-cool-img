@@ -60,7 +60,7 @@ describe('<Img />', () => {
     expect(props.onLoad).not.toBeCalled();
   });
 
-  it('should not render placeholder image', () => {
+  it('should render default placeholder image', () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
   });
