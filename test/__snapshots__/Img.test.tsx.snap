@@ -1,19 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Img /> should not render placeholder image 1`] = `
-<DocumentFragment>
-  <img
-    alt="Cool"
-    class=" no-js-SUCCESS_SRC"
-    crossorigin="anonymous"
-    sizes="100vw"
-    src="SUCCESS_SRC"
-    srcset="cool.png"
-  />
-  <noscript />
-</DocumentFragment>
-`;
-
 exports[`<Img /> should render error image 1`] = `
 <DocumentFragment>
   <img
@@ -36,7 +22,7 @@ exports[`<Img /> should render placeholder image 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Img /> should render placeholder image insteadly 1`] = `
+exports[`<Img /> should render placeholder image instead 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"
@@ -48,6 +34,20 @@ exports[`<Img /> should render placeholder image insteadly 1`] = `
 `;
 
 exports[`<Img /> should render src image 1`] = `
+<DocumentFragment>
+  <img
+    alt="Cool"
+    class=" no-js-SUCCESS_SRC"
+    crossorigin="anonymous"
+    sizes="100vw"
+    src="SUCCESS_SRC"
+    srcset="cool.png"
+  />
+  <noscript />
+</DocumentFragment>
+`;
+
+exports[`<Img /> should render src image immediately 1`] = `
 <DocumentFragment>
   <img
     alt="Cool"

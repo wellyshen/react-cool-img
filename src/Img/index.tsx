@@ -72,8 +72,15 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    if (startLoad)
+    const loadImg = (): void => {
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
+    };
+
+    if (isSrc) {
+      loadImg();
+    } else if (startLoad) {
+      loadImg();
+    }
 
     return (): void => {
       imager.unload();

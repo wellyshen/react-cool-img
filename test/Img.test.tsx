@@ -57,14 +57,26 @@ describe('<Img />', () => {
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
   });
 
-  it('should not render placeholder image', () => {
-    setStartLoad();
-    matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
-  });
-
   it('should render src image', () => {
     setStartLoad(true);
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
+
+    const { crossOrigin, decode, retry, onLoad } = props;
+
+    expect(load).toBeCalledWith(
+      SUCCESS_SRC,
+      crossOrigin,
+      decode,
+      retry,
+      expect.any(Function),
+      expect.any(Function)
+    );
+    expect(onLoad).toBeCalled();
+  });
+
+  it('should render src image immediately', () => {
+    setStartLoad();
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
 
     const { crossOrigin, decode, retry, onLoad } = props;
 
@@ -96,7 +108,7 @@ describe('<Img />', () => {
     expect(onError).toBeCalled();
   });
 
-  it('should render placeholder image insteadly', () => {
+  it('should render placeholder image instead', () => {
     setStartLoad(true);
     matchSnapshot(<Img src={FAILURE_SRC} {...props} error={null} />);
   });
