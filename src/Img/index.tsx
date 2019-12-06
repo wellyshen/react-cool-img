@@ -57,20 +57,17 @@ const Img: SFC<Props> = ({
   const filename = src ? src.replace(/^.*[\\/]/, '') : '';
 
   const handleError = (event: SyntheticEvent | Event): void => {
-    // @ts-ignore
-    if (event.target.src === src) {
-      if (error) {
-        setSource(error);
-      } else if (placeholder) {
-        setSource(placeholder);
-      }
-
-      onError(event);
+    if (error) {
+      setSource(error);
+    } else if (placeholder) {
+      setSource(placeholder);
     }
+
+    onError(event);
   };
 
   const handleLoad = (event: SyntheticEvent | Event): void => {
-    if (source !== src) setSource(src);
+    setSource(src);
     onLoad(event);
   };
 
@@ -91,7 +88,6 @@ const Img: SFC<Props> = ({
         crossOrigin={isSrc ? crossOrigin : null}
         srcSet={isSrc ? srcSet : null}
         sizes={isSrc ? sizes : null}
-        onError={isSrc ? null : handleError}
         ref={setRef}
         {...rest}
       />
