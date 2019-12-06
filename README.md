@@ -71,7 +71,7 @@ import Img from 'react-cool-img';
 
 const App = () => (
   <Img
-    style={{ backgroundColor: 'silver', width: '480', height: '320' }}
+    style={{ backgroundColor: 'orange', width: '480', height: '320' }}
     src="https://a-cool-image"
     alt="React Cool Img"
   />

@@ -52,7 +52,10 @@ const Img: SFC<Props> = ({
 }: Props) => {
   const { current: imager } = useRef(new Imager());
   const [setRef, startLoad] = useObserver(lazy, observerConfig);
-  const [source, setSource] = useState(placeholder || src || error);
+  const [source, setSource] = useState(
+    placeholder ||
+      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+  );
   const isSrc = source === src;
   const filename = src ? src.replace(/^.*[\\/]/, '') : '';
 
@@ -72,15 +75,8 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
-    const loadImg = (): void => {
+    if (startLoad)
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
-    };
-
-    if (isSrc) {
-      loadImg();
-    } else if (startLoad) {
-      loadImg();
-    }
 
     return (): void => {
       imager.unload();
