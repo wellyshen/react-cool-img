@@ -70,7 +70,7 @@ const Img: SFC<Props> = ({
   };
 
   const handleLoad = (event: SyntheticEvent | Event): void => {
-    setSource(src);
+    if (source !== src) setSource(src);
     onLoad(event);
   };
 
