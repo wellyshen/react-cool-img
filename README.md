@@ -145,8 +145,6 @@ const Img = () => {
     </>
   );
 };
-
-// ...
 ```
 
 ## Intersection Observer Polyfill
