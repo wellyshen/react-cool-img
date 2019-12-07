@@ -129,9 +129,8 @@ By the `debounce` prop, an image can wait to be downloaded while it's in the vie
 
 const App = () => (
   <Img
-    placeholder={require('./images/loading.gif')}
+    placeholder={require('./images/default.svg')}
     src="https://the-image-url"
-    error={require('./images/error.svg')}
     debounce={1000} // Default is 300 (ms)
     alt="React Cool Img"
   />
@@ -145,9 +144,8 @@ By the `cache` prop, images you already have cached will abort lazy loading unti
 
 const App = () => (
   <Img
-    placeholder={require('./images/loading.gif')}
+    placeholder={require('./images/default.svg')}
     src="https://the-image-url"
-    error={require('./images/error.svg')}
     cache // Default is true, just for demo
     alt="React Cool Img"
   />
