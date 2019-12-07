@@ -25,6 +25,9 @@ describe('<Img />', () => {
     error: 'ERROR',
     crossOrigin: 'anonymous' as const,
     decode: true,
+    lazy: true,
+    debounce: 300,
+    observerOptions: { rootMargin: '50px', threshold: 0.01 },
     retry: { count: 5, delay: 2 },
     srcSet: 'cool.png',
     sizes: '100vw',
@@ -41,6 +44,15 @@ describe('<Img />', () => {
     // @ts-ignore
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
+
+  it("should setup useObserver's arguments correctly", () => {
+    setStartLoad();
+    render(<Img src={SUCCESS_SRC} {...props} />);
+
+    const { lazy, debounce, observerOptions } = props;
+
+    expect(useObserver).toBeCalledWith(lazy, debounce, observerOptions);
+  });
 
   it('should unload src image', () => {
     setStartLoad();
@@ -98,7 +110,7 @@ describe('<Img />', () => {
     expect(onError).toBeCalled();
   });
 
-  it('should render placeholder image instead', () => {
+  it('should render placeholder image instead of error image', () => {
     setStartLoad(true);
     matchSnapshot(<Img src={FAILURE_SRC} {...props} error={null} />);
   });
