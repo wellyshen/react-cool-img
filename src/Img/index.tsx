@@ -11,6 +11,7 @@ import React, {
   memo
 } from 'react';
 
+import * as storage from './storage';
 import useObserver, { Options } from './useObserver';
 import Imager, { Retry } from './Imager';
 
@@ -26,6 +27,7 @@ interface Props
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
   lazy?: boolean;
+  cache?: boolean;
   debounce?: number;
   observerOptions?: Options;
   retry?: Retry;
@@ -43,6 +45,7 @@ const Img: SFC<Props> = ({
   crossOrigin,
   decode,
   lazy,
+  cache,
   debounce,
   observerOptions,
   retry,
@@ -62,28 +65,37 @@ const Img: SFC<Props> = ({
   const filename = src ? src.replace(/^.*[\\/]/, '') : '';
 
   const handleError = (event: SyntheticEvent | Event): void => {
+    onError(event);
+
     if (error) {
       setSource(error);
     } else if (placeholder) {
       setSource(placeholder);
     }
-
-    onError(event);
   };
 
   const handleLoad = (event: SyntheticEvent | Event): void => {
-    setSource(src);
     onLoad(event);
+
+    setSource(src);
+    if (cache) storage.set(src);
   };
 
   useEffect(() => {
-    if (startLoad)
+    const loadImg = (): void => {
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
+    };
+
+    if (cache && storage.get(src)) {
+      loadImg();
+    } else if (startLoad) {
+      loadImg();
+    }
 
     return (): void => {
       imager.unload();
     };
-  }, [startLoad, src, crossOrigin, decode, retry]);
+  }, [cache, startLoad, src, crossOrigin, decode, retry]);
 
   return (
     <>
@@ -119,6 +131,7 @@ Img.defaultProps = {
   crossOrigin: null,
   decode: true,
   lazy: true,
+  cache: true,
   debounce: 300,
   observerOptions: {},
   retry: {},

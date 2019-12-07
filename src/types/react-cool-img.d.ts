@@ -30,6 +30,7 @@ declare module 'react-cool-img' {
     crossOrigin?: '' | 'anonymous' | 'use-credentials';
     decode?: boolean;
     lazy?: boolean;
+    cache?: boolean;
     debounce?: number;
     observerOptions?: Options;
     retry?: Retry;
