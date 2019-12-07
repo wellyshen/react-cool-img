@@ -3,26 +3,33 @@
 const FAILURE_SRC = 'FAILURE_SRC';
 const SUCCESS_SRC = 'SUCCESS_SRC';
 
+const set = jest.fn();
+const get = jest.fn(() => false);
+jest.mock('../src/Img/storage', () => ({ set, get }));
+
 const load = jest.fn((...args) =>
   args[args[0] === FAILURE_SRC ? 4 : 5]({ target: { src: args[0] } })
 );
 const unload = jest.fn();
-jest.mock('../src/Img/Imager', () =>
-  jest.fn().mockImplementation(() => ({ load, unload }))
+jest.mock('../src/Img/Imager', () => jest.fn(() => ({ load, unload })));
+
+const setState = (): void => null;
+jest.mock('../src/Img/useObserver', () =>
+  jest.fn(() => [setState, false, setState])
 );
-jest.mock('../src/Img/useObserver');
 
 import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
 
+import * as storage from '../src/Img/storage';
 import Img from '../src/Img';
 import useObserver from '../src/Img/useObserver';
 
 describe('<Img />', () => {
   const props = {
     className: 'cool-image',
-    placeholder: 'PLACEHOLDER',
-    error: 'ERROR',
+    placeholder: 'PLACEHOLDER_SRC',
+    error: 'ERROR_SRC',
     crossOrigin: 'anonymous' as const,
     decode: true,
     lazy: true,
@@ -39,14 +46,17 @@ describe('<Img />', () => {
   const matchSnapshot = (img: ReactElement): void => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
-  const setStartLoad = (val = false): void => {
-    const setState = (): void => null;
+  const setStartLoad = (val: boolean): void => {
     // @ts-ignore
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
 
+  beforeEach(() => {
+    // @ts-ignore
+    storage.get.mockReset();
+  });
+
   it("should setup useObserver's arguments correctly", () => {
-    setStartLoad();
     render(<Img src={SUCCESS_SRC} {...props} />);
 
     const { lazy, debounce, observerOptions } = props;
@@ -55,8 +65,6 @@ describe('<Img />', () => {
   });
 
   it('should unload src image', () => {
-    setStartLoad();
-
     const { unmount } = render(<Img src={SUCCESS_SRC} {...props} />);
 
     unmount();
@@ -64,7 +72,6 @@ describe('<Img />', () => {
   });
 
   it('should render placeholder image', () => {
-    setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
     expect(load).not.toBeCalled();
@@ -72,8 +79,16 @@ describe('<Img />', () => {
   });
 
   it('should render default placeholder image', () => {
-    setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
+  });
+
+  it('should render placeholder image due to cache disabled', () => {
+    // @ts-ignore
+    storage.get.mockImplementation(() => true);
+
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} cache={false} />);
+
+    expect(set).not.toBeCalled();
   });
 
   it('should render src image', () => {
@@ -91,23 +106,33 @@ describe('<Img />', () => {
       expect.any(Function)
     );
     expect(onLoad).toBeCalled();
+    expect(set).toBeCalledWith(SUCCESS_SRC);
   });
 
-  it('should render error image', () => {
-    setStartLoad(true);
-    matchSnapshot(<Img src={FAILURE_SRC} {...props} />);
+  it('should render src image due to image cached', () => {
+    // @ts-ignore
+    storage.get.mockImplementation(() => true);
 
-    const { crossOrigin, decode, retry, onError } = props;
+    setStartLoad(false);
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
+
+    const { crossOrigin, decode, retry, onLoad } = props;
 
     expect(load).toBeCalledWith(
-      FAILURE_SRC,
+      SUCCESS_SRC,
       crossOrigin,
       decode,
       retry,
       expect.any(Function),
       expect.any(Function)
     );
-    expect(onError).toBeCalled();
+    expect(onLoad).toBeCalled();
+    expect(set).toBeCalledWith(SUCCESS_SRC);
+  });
+
+  it('should render error image', () => {
+    setStartLoad(true);
+    matchSnapshot(<Img src={FAILURE_SRC} {...props} />);
   });
 
   it('should render placeholder image instead of error image', () => {
