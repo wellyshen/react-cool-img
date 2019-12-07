@@ -125,11 +125,13 @@ Lazy image loading via the [Intersection Observer API](https://developer.mozilla
 By the `debounce` prop, an image can wait to be downloaded while it's in the viewport for a set time. In cases where you have a long list of images that the user might scroll through inadvertently. At this time loading images can cause unnecessary waste of bandwidth and processing time.
 
 ```js
-// ...
+import Img from 'react-cool-img';
+
+import defaultImg from './images/default.svg';
 
 const App = () => (
   <Img
-    placeholder={require('./images/default.svg')}
+    placeholder={defaultImg}
     src="https://the-image-url"
     debounce={1000} // Default is 300 (ms)
     alt="React Cool Img"
@@ -140,11 +142,13 @@ const App = () => (
 By the `cache` prop, images you already have cached will abort lazy loading until user visit your app next time. Lazy loading is set up for any remaining images which were not cached. This is helpful for UX, because there's not much extra work to load cached images immediately and is an easy win for making the UI looks more intuitive.
 
 ```js
-// ...
+import Img from 'react-cool-img';
+
+import defaultImg from './images/default.svg';
 
 const App = () => (
   <Img
-    placeholder={require('./images/default.svg')}
+    placeholder={defaultImg}
     src="https://the-image-url"
     cache // Default is true, just for demo
     alt="React Cool Img"
