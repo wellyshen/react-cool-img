@@ -18,13 +18,12 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 ## Features
 
 - 🖼 Placeholders for satisfying various image loading states (e.g. loading image > actual image > error image).
-- 🛋 Lazy image loading with modern, performant implementation, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
-- ⏳ An image can wait to be downloaded while it's in the viewport (and user is seeing it) for a set time by [debounce](#api).
+- 🛋 [Smart lazy loading](#the-smart-way-to-load-images) with performant and efficient way, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
 - 🔍 [Support server-side rendering / Javascript is disabled / SEO](#javaScript-availability-and-seo).
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
-- 🦠 Tiny size ([~ 2.2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
+- 🦠 Tiny size ([~ 2.4kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
 
 > ⚠️ [Most modern browsers support Intersection Observer natively](https://caniuse.com/#feat=intersectionobserver). You can also [add polyfill](#intersectionobserver-polyfill) for full browser support.
@@ -57,22 +56,22 @@ import errorImage from './images/error.svg';
 const App = () => (
   <Img
     placeholder={loadingImage}
-    src="https://a-cool-image"
+    src="https://the-image-url"
     error={errorImage}
     alt="React Cool Img"
   />
 );
 ```
 
-Don't want an image placeholder? No worries, you can use CSS or [inline styles](https://reactjs.org/docs/dom-elements.html#style) for it. The component is fully compatible with the development experience of normal `img` tag.
+Don't want an image placeholder? No worries, you can use [inline styles](https://reactjs.org/docs/dom-elements.html#style) or CSS for it. The component is fully compatible with the development experience of normal `img` tag.
 
 ```js
 import Img from 'react-cool-img';
 
 const App = () => (
   <Img
-    style={{ backgroundColor: 'orange', width: '480', height: '320' }}
-    src="https://a-cool-image"
+    style={{ backgroundColor: 'grey', width: '480', height: '320' }}
+    src="https://the-image-url"
     alt="React Cool Img"
   />
 );
@@ -82,23 +81,23 @@ const App = () => (
 
 The image component working similar with standard `img` tag and with the following props.
 
-| Prop              | Type    | Default                                               | Description                                                                                                                                                                                                                      |
-| ----------------- | ------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src`             | string  |                                                       | Image source. It's `required` <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                                    |
-| `srcSet`          | string  |                                                       | Image sources for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                                               |
-| `sizes`           | string  |                                                       | Image sizes for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                                                 |
-| `width`           | string  |                                                       | Width of the image in px                                                                                                                                                                                                         |
-| `height`          | string  |                                                       | Height of the image in px                                                                                                                                                                                                        |
-| `placeholder`     | string  |                                                       | Placeholder image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                                         |
-| `error`           | string  |                                                       | Error image source. It'll replace Placeholder image <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                              |
-| `alt`             | string  |                                                       | An alternate text for an image section                                                                                                                                                                                           |
-| `decode`          | boolean | `true`                                                | Use [img.decode()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode) to pre-decode the image before render it. Useful to prevent main thread from blocking by decoding of large image                    |
-| `lazy`            | boolean | `true`                                                | Turn on/off lazy-loading <br />[Using Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)                                                                                         |
-| `cache`           | boolean | `true`                                                | Instantly load the image which has been cached when possible to abort the lazy-loading behavior <br />[Reference article](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching) |
-| `debounce`        | number  | 300                                                   | How much to wait in milliseconds that the image has to be in viewport before starting to load. This can help avoid wasting bandwidth and processing time while the user scrolls quickly past them.                               |
-| `observerOptions` | object  | `{ root: null, rootMargin: '50px', threshold: 0.01 }` | See the [observerOptions](#observeroptions) section                                                                                                                                                                              |
-| `retry`           | object  | `{ count: 3, delay: 2, acc: '*' }`                    | See the [retry](#retry) section                                                                                                                                                                                                  |
-| `...`             |         |                                                       | Find more [props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Attributes) and [events](https://reactjs.org/docs/events.html#image-events)                                                                      |
+| Prop              | Type    | Default                                               | Description                                                                                                                                                                                                                    |
+| ----------------- | ------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `src`             | string  |                                                       | Image source. It's `required` <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                                  |
+| `srcSet`          | string  |                                                       | Image sources for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                                             |
+| `sizes`           | string  |                                                       | Image sizes for responsive images. For `src` prop only <br />[Reference article](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)                                               |
+| `width`           | string  |                                                       | Width of the image in px                                                                                                                                                                                                       |
+| `height`          | string  |                                                       | Height of the image in px                                                                                                                                                                                                      |
+| `placeholder`     | string  |                                                       | Placeholder image source <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                                                       |
+| `error`           | string  |                                                       | Error image source. It'll replace Placeholder image <br />[Support formats](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types)                                                                            |
+| `alt`             | string  |                                                       | An alternate text for an image section                                                                                                                                                                                         |
+| `decode`          | boolean | `true`                                                | Use [img.decode()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/decode) to pre-decode the image before render it. Useful to prevent main thread from blocking by decoding of large image                  |
+| `lazy`            | boolean | `true`                                                | Turn on/off lazy loading <br />[Using Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)                                                                                       |
+| `cache`           | boolean | `true`                                                | Instantly load images which have been cached when possible to abort the lazy loading behavior <br />[Reference article](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching) |
+| `debounce`        | number  | 300                                                   | How much to wait in milliseconds that the image has to be in viewport before starting to load. This can prevent images from being downloaded while the user scrolls quickly past them                                          |
+| `observerOptions` | object  | `{ root: null, rootMargin: '50px', threshold: 0.01 }` | See the [observerOptions](#observeroptions) section                                                                                                                                                                            |
+| `retry`           | object  | `{ count: 3, delay: 2, acc: '*' }`                    | See the [retry](#retry) section                                                                                                                                                                                                |
+| `...`             |         |                                                       | Find more [props](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Attributes) and [events](https://reactjs.org/docs/events.html#image-events)                                                                    |
 
 ### observerOptions
 
@@ -118,6 +117,42 @@ All the properties are `optional`.
   - `'*' (default)` - multiply delay after each subsequent retry by the given `delay` value, e.g. `delay: 2` means retry will run after 2 seconds, 4 seconds, 8 seconds, and so on.
   - `'+'` - increment delay after each retry by the given `delay` value, e.g. `delay: 2` means retry will run after 2 seconds, 4 seconds, 6 seconds, and so on.
   - `false` - keep the delay constant between retries, e.g. `delay: 2` means retry will run every 2 seconds.
+
+## The Smart Way to Load Images
+
+Lazy image loading via the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) is good. But could it be greater to download an image only when user want to see it? Or bypass lazy loading for [cached images](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching)? The answer is yes and these features already be built into `react-cool-img` by the [`debounce` and `cache`](#api) props.
+
+By the `debounce` prop, an image can wait to be downloaded while it's in the viewport for a set time. In cases where you have a long list of images that the user might scroll through inadvertently. At this time loading images can cause unnecessary waste of bandwidth and processing time.
+
+```js
+// ...
+
+const App = () => (
+  <Img
+    placeholder={require('./images/loading.gif')}
+    src="https://the-image-url"
+    error={require('./images/error.svg')}
+    debounce={1000} // Default is 300 (ms)
+    alt="React Cool Img"
+  />
+);
+```
+
+By the `cache` prop, images you already have cached will abort lazy loading until user visit your app next time. Lazy loading is set up for any remaining images which were not cached. This is helpful for UX, because there's not much extra work to load cached images immediately and is an easy win for making the UI looks more intuitive.
+
+```js
+// ...
+
+const App = () => (
+  <Img
+    placeholder={require('./images/loading.gif')}
+    src="https://the-image-url"
+    error={require('./images/error.svg')}
+    cache // Default is true, just for demo
+    alt="React Cool Img"
+  />
+);
+```
 
 ## JavaScript Availability and SEO
 
