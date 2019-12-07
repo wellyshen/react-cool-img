@@ -3,6 +3,11 @@
 const FAILURE_SRC = 'FAILURE_SRC';
 const SUCCESS_SRC = 'SUCCESS_SRC';
 
+const setState = (): void => null;
+jest.mock('../src/Img/useObserver', () =>
+  jest.fn(() => [setState, false, setState])
+);
+
 const set = jest.fn();
 const get = jest.fn(() => false);
 jest.mock('../src/Img/storage', () => ({ set, get }));
@@ -13,17 +18,12 @@ const load = jest.fn((...args) =>
 const unload = jest.fn();
 jest.mock('../src/Img/Imager', () => jest.fn(() => ({ load, unload })));
 
-const setState = (): void => null;
-jest.mock('../src/Img/useObserver', () =>
-  jest.fn(() => [setState, false, setState])
-);
-
 import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
 
+import useObserver from '../src/Img/useObserver';
 import * as storage from '../src/Img/storage';
 import Img from '../src/Img';
-import useObserver from '../src/Img/useObserver';
 
 describe('<Img />', () => {
   const props = {

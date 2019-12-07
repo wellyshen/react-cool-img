@@ -11,8 +11,8 @@ import React, {
   memo
 } from 'react';
 
-import * as storage from './storage';
 import useObserver, { Options } from './useObserver';
+import * as storage from './storage';
 import Imager, { Retry } from './Imager';
 
 interface Props
