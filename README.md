@@ -26,7 +26,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 - 🦠 Tiny size ([~ 2.4kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
 
-> ⚠️ [Most modern browsers support Intersection Observer natively](https://caniuse.com/#feat=intersectionobserver). You can also [add polyfill](#intersectionobserver-polyfill) for full browser support.
+> ⚠️ [Most modern browsers support Intersection Observer natively](https://caniuse.com/#feat=intersectionobserver). You can also [add polyfill](#intersection-observer-polyfill) for full browser support.
 
 ## Requirements
 
