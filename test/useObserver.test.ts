@@ -3,7 +3,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import useObserver, {
   observerErr,
   thresholdErr,
-  Config,
+  Options,
   Return as Current
 } from '../src/Img/useObserver';
 
@@ -37,7 +37,7 @@ describe('useObserver', () => {
 
   const img = document.createElement('img');
 
-  interface Args extends Config {
+  interface Args extends Options {
     lazy?: boolean;
     debounce?: number;
   }

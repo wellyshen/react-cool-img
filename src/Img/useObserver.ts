@@ -3,9 +3,9 @@ import { useState, useRef, useEffect } from 'react';
 export const observerErr =
   "💡react-cool-img: this browser doesn't support IntersectionObserver, please install polyfill to enable lazy loading. More info: https://github.com/wellyshen/react-cool-img#intersectionobserver-polyfill";
 export const thresholdErr =
-  '💡react-cool-img: the threshold of observerConfig must be a number. Use 0 as fallback.';
+  '💡react-cool-img: the threshold of observerOptions must be a number. Use 0 as fallback.';
 
-export interface Config {
+export interface Options {
   root?: Element | null;
   rootMargin?: string;
   threshold?: number;
@@ -19,7 +19,7 @@ export type Return = [
 export default (
   lazy: boolean,
   debounce: number,
-  { root = null, rootMargin = '50px', threshold = 0.01 }: Config
+  { root = null, rootMargin = '50px', threshold = 0.01 }: Options
 ): Return => {
   const setState = (): void => null;
   const defaultVal: Return = [setState, true, setState];

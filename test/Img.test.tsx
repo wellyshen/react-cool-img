@@ -20,18 +20,17 @@ import useObserver from '../src/Img/useObserver';
 
 describe('<Img />', () => {
   const props = {
+    className: 'cool-image',
     placeholder: 'PLACEHOLDER',
     error: 'ERROR',
     crossOrigin: 'anonymous' as const,
     decode: true,
-    lazy: true,
-    observerConfig: { rootMargin: '30px', threshold: 0.1 },
     retry: { count: 5, delay: 2 },
     srcSet: 'cool.png',
     sizes: '100vw',
     onError: jest.fn(),
     onLoad: jest.fn(),
-    alt: 'Cool'
+    alt: 'Cool Image'
   };
 
   const matchSnapshot = (img: ReactElement): void => {

@@ -11,7 +11,7 @@ import React, {
   memo
 } from 'react';
 
-import useObserver, { Config } from './useObserver';
+import useObserver, { Options } from './useObserver';
 import Imager, { Retry } from './Imager';
 
 interface Props
@@ -27,7 +27,7 @@ interface Props
   decode?: boolean;
   lazy?: boolean;
   debounce?: number;
-  observerConfig?: Config;
+  observerOptions?: Options;
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
@@ -44,7 +44,7 @@ const Img: SFC<Props> = ({
   decode,
   lazy,
   debounce,
-  observerConfig,
+  observerOptions,
   retry,
   srcSet,
   sizes,
@@ -53,7 +53,7 @@ const Img: SFC<Props> = ({
   ...rest
 }: Props) => {
   const { current: imager } = useRef(new Imager());
-  const [setRef, startLoad] = useObserver(lazy, debounce, observerConfig);
+  const [setRef, startLoad] = useObserver(lazy, debounce, observerOptions);
   const [source, setSource] = useState(
     placeholder ||
       'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
@@ -120,7 +120,7 @@ Img.defaultProps = {
   decode: true,
   lazy: true,
   debounce: 300,
-  observerConfig: {},
+  observerOptions: {},
   retry: {},
   srcSet: null,
   sizes: null,

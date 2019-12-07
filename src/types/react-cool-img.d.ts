@@ -6,7 +6,7 @@ declare module 'react-cool-img' {
     SFC
   } from 'react';
 
-  interface Config {
+  interface Options {
     root?: Element | null;
     rootMargin?: string;
     threshold?: number;
@@ -31,7 +31,7 @@ declare module 'react-cool-img' {
     decode?: boolean;
     lazy?: boolean;
     debounce?: number;
-    observerConfig?: Config;
+    observerOptions?: Options;
     retry?: Retry;
     srcSet?: string;
     sizes?: string;
