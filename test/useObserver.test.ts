@@ -11,7 +11,7 @@ describe('useObserver › errors', () => {
   it('should handle IntersectionObserver error correctly', () => {
     global.console.error = jest.fn();
 
-    renderHook(() => useObserver(true, {}));
+    renderHook(() => useObserver(true, 300, {}));
 
     expect(console.error).toBeCalledWith(observerErr);
   });
@@ -24,7 +24,7 @@ describe('useObserver › errors', () => {
       disconnect: (): void => null
     }));
     // @ts-ignore
-    renderHook(() => useObserver(true, { threshold: [0.5, 1] }));
+    renderHook(() => useObserver(true, 300, { threshold: [0.5, 1] }));
 
     expect(console.error).toBeCalledWith(thresholdErr);
     // @ts-ignore
@@ -39,6 +39,7 @@ describe('useObserver', () => {
 
   interface Args extends Config {
     lazy?: boolean;
+    debounce?: number;
   }
   type Return = { current: Current };
 
@@ -50,7 +51,7 @@ describe('useObserver', () => {
     debounce = 300
   }: Args = {}): Return => {
     const { result } = renderHook(() =>
-      useObserver(lazy, { root, rootMargin, threshold, debounce })
+      useObserver(lazy, debounce, { root, rootMargin, threshold })
     );
 
     return result;
@@ -126,7 +127,8 @@ describe('useObserver', () => {
   });
 
   it('should be out-view state due to debounce', () => {
-    const result = testHook();
+    const debounce = 300;
+    const result = testHook({ debounce });
     let [setRef, startLoad] = result.current;
 
     act(() => {
@@ -140,6 +142,7 @@ describe('useObserver', () => {
     [setRef, startLoad] = result.current;
 
     expect(setTimeout).toBeCalledTimes(3);
+    expect(setTimeout).lastCalledWith(expect.any(Function), debounce);
     expect(startLoad).toBeFalsy();
 
     setIsIntersecting(img, false);

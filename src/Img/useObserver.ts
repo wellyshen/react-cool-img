@@ -9,7 +9,6 @@ export interface Config {
   root?: Element | null;
   rootMargin?: string;
   threshold?: number;
-  debounce?: number;
 }
 export type Return = [
   (node?: Element | null) => void,
@@ -19,7 +18,8 @@ export type Return = [
 
 export default (
   lazy: boolean,
-  { root = null, rootMargin = '50px', threshold = 0.01, debounce = 300 }: Config
+  debounce: number,
+  { root = null, rootMargin = '50px', threshold = 0.01 }: Config
 ): Return => {
   const setState = (): void => null;
   const defaultVal: Return = [setState, true, setState];

@@ -10,7 +10,6 @@ declare module 'react-cool-img' {
     root?: Element | null;
     rootMargin?: string;
     threshold?: number;
-    debounce?: number;
   }
 
   interface Retry {
@@ -31,6 +30,7 @@ declare module 'react-cool-img' {
     crossOrigin?: '' | 'anonymous' | 'use-credentials';
     decode?: boolean;
     lazy?: boolean;
+    debounce?: number;
     observerConfig?: Config;
     retry?: Retry;
     srcSet?: string;

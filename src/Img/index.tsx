@@ -26,6 +26,7 @@ interface Props
   crossOrigin?: '' | 'anonymous' | 'use-credentials';
   decode?: boolean;
   lazy?: boolean;
+  debounce?: number;
   observerConfig?: Config;
   retry?: Retry;
   srcSet?: string;
@@ -42,6 +43,7 @@ const Img: SFC<Props> = ({
   crossOrigin,
   decode,
   lazy,
+  debounce,
   observerConfig,
   retry,
   srcSet,
@@ -51,7 +53,7 @@ const Img: SFC<Props> = ({
   ...rest
 }: Props) => {
   const { current: imager } = useRef(new Imager());
-  const [setRef, startLoad] = useObserver(lazy, observerConfig);
+  const [setRef, startLoad] = useObserver(lazy, debounce, observerConfig);
   const [source, setSource] = useState(
     placeholder ||
       'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
@@ -117,6 +119,7 @@ Img.defaultProps = {
   crossOrigin: null,
   decode: true,
   lazy: true,
+  debounce: 300,
   observerConfig: {},
   retry: {},
   srcSet: null,
