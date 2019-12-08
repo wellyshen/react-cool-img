@@ -22,7 +22,7 @@ Please note we have a [code of conduct](https://github.com/wellyshen/react-cool-
 
 After cloning React Cool Img, run `yarn` to fetch its dependencies. Then, you can run several commands:
 
-- `yarn dev` runs the [example app](https://github.com/wellyshen/react-cool-img/tree/master/src/App) as your development environment at `localhost:10001`. Support live reloading
+- `yarn dev` runs the [example app](https://github.com/wellyshen/react-cool-img/tree/master/src/App) as your playground at `localhost:10001`. Support live reloading
 - `yarn lint:code` lints all `.js` and `.tsx?` files
 - `yarn lint:style` lints all `.css` and `.tsx?` (for [Emotion](https://emotion.sh)) files
 - `yarn lint` lints both `code` and `style`
