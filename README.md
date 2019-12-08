@@ -13,6 +13,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 [![npm downloads](https://img.shields.io/npm/dt/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-img?style=flat-square)](https://bundlephobia.com/result?p=react-cool-img)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-img?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-img/master/LICENSE)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-img/blob/master/CONTRIBUTING.md)
 [![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-img)](https://twitter.com/intent/tweet?text=With%20@React-Cool-Img,%20my%20web%20app%20becomes%20more%20powerful.%20Thanks,%20@Welly%20Shen%20🤩)
 
 ## Features
@@ -187,9 +188,7 @@ const Img = () => {
 
 ## Intersection Observer Polyfill
 
-[Intersection Observer has good support amongst browsers](https://caniuse.com/#feat=intersectionobserver), but it's not universal. You'll need to polyfill browsers that don't support it.
-
-Polyfills is something you should do consciously at the application level. Therefore `react-cool-img` doesn't include it.
+[Intersection Observer has good support amongst browsers](https://caniuse.com/#feat=intersectionobserver), but it's not universal. You'll need to polyfill browsers that don't support it. Polyfills is something you should do consciously at the application level. Therefore `react-cool-img` doesn't include it.
 
 You can use W3C's [polyfill](https://www.npmjs.com/package/intersection-observer):
 
