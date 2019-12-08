@@ -12,9 +12,9 @@ Please note we have a [code of conduct](https://github.com/wellyshen/react-cool-
 2. Run `yarn` in the repository root
 3. If you’ve fixed a bug or added code that should be tested
 4. Ensure the test suite passes by running `yarn test`
-5. Update the [README.md](https://github.com/wellyshen/react-cool-img/blob/master/CHANGELOG.md) with details of changes to the interface
+5. Update the [README.md](https://github.com/wellyshen/react-cool-img/blob/master/README.md) with details of changes to the interface
 6. Update the [demo example](https://github.com/wellyshen/react-cool-img/tree/master/src/App) if needed
-7. Format your code with [Prettier](https://github.com/prettier/prettier)
+7. Format your code with [Prettier](https://prettier.io)
 8. Make sure your code lints by running `yarn lint`
 9. Make sure your code passes type check by running `yarn type-check`
 
@@ -43,7 +43,7 @@ After cloning React Cool Img, run `yarn` to fetch its dependencies. Then, you ca
 
 ## Style Guide
 
-We use an automatic code formatter called [Prettier](https://github.com/prettier/prettier). Run `yarn lint` after making any changes to the code. Then, our linter will catch most issues that may exist in your code.
+We use an automatic code formatter called [Prettier](https://prettier.io). Run `yarn lint` after making any changes to the code. Then, our linter will catch most issues that may exist in your code.
 
 However, there are still some styles that the linter cannot pick up. If you are unsure about something, looking at [Airbnb’s Style Guide](https://github.com/airbnb/javascript) will guide you in the right direction.
 
