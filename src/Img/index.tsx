@@ -56,7 +56,7 @@ const Img: SFC<Props> = ({
   ...rest
 }: Props) => {
   const { current: imager } = useRef(new Imager());
-  const [setRef, startLoad] = useObserver(lazy, debounce, observerOptions);
+  const [setRef, startLoad] = useObserver(debounce, observerOptions);
   const [source, setSource] = useState(
     placeholder ||
       'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
@@ -86,7 +86,7 @@ const Img: SFC<Props> = ({
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
     };
 
-    if (cache && storage.get(src)) {
+    if (!lazy || (cache && storage.get(src))) {
       loadImg();
     } else if (startLoad) {
       loadImg();

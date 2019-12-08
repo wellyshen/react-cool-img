@@ -17,14 +17,13 @@ export type Return = [
 ];
 
 export default (
-  lazy: boolean,
   debounce: number,
   { root = null, rootMargin = '50px', threshold = 0.01 }: Options
 ): Return => {
   const setState = (): void => null;
   const defaultVal: Return = [setState, true, setState];
 
-  if (!lazy || typeof window === 'undefined') return defaultVal;
+  if (typeof window === 'undefined') return defaultVal;
 
   if (!window.IntersectionObserver) {
     console.error(observerErr);

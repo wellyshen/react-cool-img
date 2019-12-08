@@ -11,7 +11,7 @@ describe('useObserver › errors', () => {
   it('should handle IntersectionObserver error correctly', () => {
     global.console.error = jest.fn();
 
-    renderHook(() => useObserver(true, 300, {}));
+    renderHook(() => useObserver(300, {}));
 
     expect(console.error).toBeCalledWith(observerErr);
   });
@@ -24,7 +24,7 @@ describe('useObserver › errors', () => {
       disconnect: (): void => null
     }));
     // @ts-ignore
-    renderHook(() => useObserver(true, 300, { threshold: [0.5, 1] }));
+    renderHook(() => useObserver(300, { threshold: [0.5, 1] }));
 
     expect(console.error).toBeCalledWith(thresholdErr);
     // @ts-ignore
@@ -38,20 +38,18 @@ describe('useObserver', () => {
   const img = document.createElement('img');
 
   interface Args extends Options {
-    lazy?: boolean;
     debounce?: number;
   }
   type Return = { current: Current };
 
   const testHook = ({
-    lazy = true,
     root = null,
     rootMargin = '50px',
     threshold = 0.01,
     debounce = 300
   }: Args = {}): Return => {
     const { result } = renderHook(() =>
-      useObserver(lazy, debounce, { root, rootMargin, threshold })
+      useObserver(debounce, { root, rootMargin, threshold })
     );
 
     return result;
@@ -75,14 +73,6 @@ describe('useObserver', () => {
         disconnect: jest.fn()
       })
     );
-  });
-
-  it('should skip lazy loading', () => {
-    expect(testHook({ lazy: false }).current).toEqual([
-      expect.any(Function),
-      true,
-      expect.any(Function)
-    ]);
   });
 
   it('should setup intersection observer options correctly', () => {

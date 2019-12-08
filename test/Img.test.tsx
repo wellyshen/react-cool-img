@@ -3,10 +3,7 @@
 const FAILURE_SRC = 'FAILURE_SRC';
 const SUCCESS_SRC = 'SUCCESS_SRC';
 
-const setState = (): void => null;
-jest.mock('../src/Img/useObserver', () =>
-  jest.fn(() => [setState, false, setState])
-);
+jest.mock('../src/Img/useObserver');
 
 const set = jest.fn();
 const get = jest.fn(() => false);
@@ -46,7 +43,8 @@ describe('<Img />', () => {
   const matchSnapshot = (img: ReactElement): void => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
-  const setStartLoad = (val: boolean): void => {
+  const setStartLoad = (val = false): void => {
+    const setState = (): void => null;
     // @ts-ignore
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
@@ -57,21 +55,23 @@ describe('<Img />', () => {
   });
 
   it("should setup useObserver's arguments correctly", () => {
+    setStartLoad();
     render(<Img src={SUCCESS_SRC} {...props} />);
 
-    const { lazy, debounce, observerOptions } = props;
+    const { debounce, observerOptions } = props;
 
-    expect(useObserver).toBeCalledWith(lazy, debounce, observerOptions);
+    expect(useObserver).toBeCalledWith(debounce, observerOptions);
   });
 
   it('should unload src image', () => {
-    const { unmount } = render(<Img src={SUCCESS_SRC} {...props} />);
+    setStartLoad();
+    render(<Img src={SUCCESS_SRC} {...props} />).unmount();
 
-    unmount();
     expect(unload).toBeCalled();
   });
 
   it('should render placeholder image', () => {
+    setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
     expect(load).not.toBeCalled();
@@ -79,13 +79,15 @@ describe('<Img />', () => {
   });
 
   it('should render default placeholder image', () => {
+    setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
   });
 
-  it('should render placeholder image due to cache disabled', () => {
+  it('should render placeholder image due to cache is disabled', () => {
     // @ts-ignore
     storage.get.mockImplementation(() => true);
 
+    setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} cache={false} />);
 
     expect(set).not.toBeCalled();
@@ -109,11 +111,29 @@ describe('<Img />', () => {
     expect(set).toBeCalledWith(SUCCESS_SRC);
   });
 
-  it('should render src image due to image cached', () => {
+  it('should render src image immediately due to lazy is disabled', () => {
+    setStartLoad();
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} lazy={false} />);
+
+    const { crossOrigin, decode, retry, onLoad } = props;
+
+    expect(load).toBeCalledWith(
+      SUCCESS_SRC,
+      crossOrigin,
+      decode,
+      retry,
+      expect.any(Function),
+      expect.any(Function)
+    );
+    expect(onLoad).toBeCalled();
+    expect(set).toBeCalledWith(SUCCESS_SRC);
+  });
+
+  it('should render src image immediately due to image cached', () => {
     // @ts-ignore
     storage.get.mockImplementation(() => true);
 
-    setStartLoad(false);
+    setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
     const { crossOrigin, decode, retry, onLoad } = props;

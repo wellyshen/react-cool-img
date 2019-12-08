@@ -33,7 +33,7 @@ exports[`<Img /> should render placeholder image 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Img /> should render placeholder image due to cache disabled 1`] = `
+exports[`<Img /> should render placeholder image due to cache is disabled 1`] = `
 <DocumentFragment>
   <img
     alt="Cool Image"
@@ -69,7 +69,21 @@ exports[`<Img /> should render src image 1`] = `
 </DocumentFragment>
 `;
 
-exports[`<Img /> should render src image due to image cached 1`] = `
+exports[`<Img /> should render src image immediately due to image cached 1`] = `
+<DocumentFragment>
+  <img
+    alt="Cool Image"
+    class="cool-image no-js-SUCCESS_SRC"
+    crossorigin="anonymous"
+    sizes="100vw"
+    src="SUCCESS_SRC"
+    srcset="cool.png"
+  />
+  <noscript />
+</DocumentFragment>
+`;
+
+exports[`<Img /> should render src image immediately due to lazy is disabled 1`] = `
 <DocumentFragment>
   <img
     alt="Cool Image"
