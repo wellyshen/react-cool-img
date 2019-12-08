@@ -8,38 +8,38 @@ Please note we have a [code of conduct](https://github.com/wellyshen/react-cool-
 
 ## Pull Request Process
 
-1. Fork the repository and create your branch from `master`.
-2. Run `yarn` in the repository root.
-3. If you’ve fixed a bug or added code that should be tested, add tests!
-4. Ensure the test suite passes by running `yarn test`.
-5. Update the [README.md](https://github.com/wellyshen/react-cool-img/blob/master/CHANGELOG.md) with details of changes to the interface.
-6. Update the [demo example](https://github.com/wellyshen/react-cool-img/tree/master/src/App) if needed.
-7. Format your code with [Prettier](https://github.com/prettier/prettier).
-8. Make sure your code lints by running `yarn lint`.
-9. Make sure your code passes type check by running `yarn type-check`.
+1. Fork the repository and create your branch from `master`
+2. Run `yarn` in the repository root
+3. If you’ve fixed a bug or added code that should be tested
+4. Ensure the test suite passes by running `yarn test`
+5. Update the [README.md](https://github.com/wellyshen/react-cool-img/blob/master/CHANGELOG.md) with details of changes to the interface
+6. Update the [demo example](https://github.com/wellyshen/react-cool-img/tree/master/src/App) if needed
+7. Format your code with [Prettier](https://github.com/prettier/prettier)
+8. Make sure your code lints by running `yarn lint`
+9. Make sure your code passes type check by running `yarn type-check`
 
 ## Development Workflow
 
 After cloning React Cool Img, run `yarn` to fetch its dependencies. Then, you can run several commands:
 
-- `yarn dev` runs the [example app](https://github.com/wellyshen/react-cool-img/tree/master/src/App) as your development environment at `localhost:10001`. Support live reloading.
-- `yarn lint:code` lints all `.js` and `.tsx?` files.
-- `yarn lint:style` lints all `.css` and `.tsx?` (for [emotion](https://emotion.sh)) files.
-- `yarn lint` lints both `code` and `style`.
-- `yarn type-check` runs the [Typescript](https://www.typescriptlang.org) typechecks.
-- `yarn type-check:watch` runs an interactive typechecks watcher (helpful in development).
-- `yarn test` runs the complete test suite.
-- `yarn test:watch` runs an interactive test watcher (helpful in development).
-- `yarn test:cov` runs the complete test suite with coverage report.
-- `yarn test:update` updates the [Jest snapshots](https://github.com/wellyshen/react-cool-img/tree/master/test/__snapshots__).
-- `yarn build:example` creates an `example` folder with all the static files.
-- `yarn build:lib` creates a `lib` folder with package builds (`CJS` & `ESM`) and type definition file. You can test the package locally via [yarn link](https://yarnpkg.com/lang/en/docs/cli/link).
-- `yarn build` creates both `example` and `lib`.
-- `yarn clean:dev` deletes the `src/.dev` build folder.
-- `yarn clean:example` deletes the `example` build folder.
-- `yarn clean:lib` deletes the `lib` build folder.
-- `yarn clean:cov` deletes the `coverage` report folder.
-- `yarn clean` deletes all the build/coverage folders.
+- `yarn dev` runs the [example app](https://github.com/wellyshen/react-cool-img/tree/master/src/App) as your development environment at `localhost:10001`. Support live reloading
+- `yarn lint:code` lints all `.js` and `.tsx?` files
+- `yarn lint:style` lints all `.css` and `.tsx?` (for [emotion](https://emotion.sh)) files
+- `yarn lint` lints both `code` and `style`
+- `yarn type-check` runs the [Typescript](https://www.typescriptlang.org) typechecks
+- `yarn type-check:watch` runs an interactive typechecks watcher (helpful in development)
+- `yarn test` runs the complete test suite
+- `yarn test:watch` runs an interactive test watcher (helpful in development)
+- `yarn test:cov` runs the complete test suite with coverage report
+- `yarn test:update` updates the [Jest snapshots](https://github.com/wellyshen/react-cool-img/tree/master/test/__snapshots__)
+- `yarn build:example` creates an `example` folder with all the static files
+- `yarn build:lib` creates a `lib` folder with package builds (`CJS` & `ESM`) and type definition file. You can test the package locally via [yarn link](https://yarnpkg.com/lang/en/docs/cli/link)
+- `yarn build` creates both `example` and `lib`
+- `yarn clean:dev` deletes the `src/.dev` build folder
+- `yarn clean:example` deletes the `example` build folder
+- `yarn clean:lib` deletes the `lib` build folder
+- `yarn clean:cov` deletes the `coverage` report folder
+- `yarn clean` deletes all the build/coverage folders
 
 ## Style Guide
 
