@@ -111,13 +111,7 @@
       },
       "import/resolver": {
         "typescript": {}
-      },
-      "import/extensions": [
-        ".js",
-        ".ts",
-        ".tsx",
-        ".json"
-      ]
+      }
     },
     "env": {
       "browser": true,
@@ -146,6 +140,8 @@
           ]
         }
       ],
+      "import/extensions": "off",
+      "import/no-extraneous-dependencies": "off",
       "prettier/prettier": [
         "error",
         {
