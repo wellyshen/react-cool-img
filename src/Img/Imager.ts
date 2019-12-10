@@ -29,7 +29,10 @@ export default class Imager {
     this.img.src = src;
 
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
-    if (decode) this.img.decode();
+    if (decode)
+      this.img.decode().catch(() => {
+        // Ignore decoding error
+      });
 
     this.img.onerror = (event: Event): void => {
       if (!count || this.retries > count) {
