@@ -62,7 +62,7 @@ const Img: SFC<Props> = ({
       'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
   );
   const isSrc = source === src;
-  const filename = src ? src.replace(/^.*[\\/]/, '') : '';
+  const filename = src ? src.replace(/^.*[\\/]/, '').split('.')[0] : '';
 
   const handleError = (event: SyntheticEvent | Event): void => {
     onError(event);
