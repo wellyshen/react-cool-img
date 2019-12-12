@@ -14,9 +14,13 @@ export default ({ files }) => `
       <link rel="stylesheet" href=${files.css[0].fileName}>
       <title>React Cool Img</title>
       <meta property="og:title" content="React Cool Img" />
+      <meta property="og:type" content="website" />
       <meta property="og:image" content="https://react-cool-img.org/assets/og_image.png" />
       <meta property="og:description" content="A React <Img /> component let you handle image UX and performance as a Pro!" />
       <meta property="og:url" content="https://react-cool-img.org" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@react-cool-img" />
+      <meta name="twitter:creator" content="@wellyshen" />
     </head>
     <body>
       <div id="app"></div>
