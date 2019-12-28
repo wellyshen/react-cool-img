@@ -2,6 +2,7 @@ import Imager, { Retry } from '../src/Img/Imager';
 
 describe('Imager', () => {
   jest.useFakeTimers();
+  // @ts-ignore
   Imager.prototype.clearImgSrc = jest.fn();
 
   const FAILURE_SRC = 'FAILURE_SRC';
@@ -134,6 +135,7 @@ describe('Imager', () => {
 
     image.load();
 
+    // @ts-ignore
     expect(imager.img.crossOrigin).toBe('');
 
     const crossOrigin = 'anonymous';
@@ -141,6 +143,7 @@ describe('Imager', () => {
     image.load({ crossOrigin });
 
     setTimeout(() => {
+      // @ts-ignore
       expect(imager.img.crossOrigin).toBe(crossOrigin);
     });
   });
@@ -151,10 +154,12 @@ describe('Imager', () => {
 
     image.load();
 
+    // @ts-ignore
     expect(imager.img.decode).not.toBeCalled();
 
     image.load({ decode: true });
 
+    // @ts-ignore
     expect(imager.img.decode).toBeCalled();
   });
 
@@ -166,19 +171,29 @@ describe('Imager', () => {
 
     jest.runAllTimers();
 
+    // @ts-ignore
     expect(imager.img.onerror).not.toBeNull();
+    // @ts-ignore
     expect(imager.img.onload).not.toBeNull();
+    // @ts-ignore
     expect(imager.img.src).toBe(FAILURE_SRC);
+    // @ts-ignore
     expect(imager.img).not.toBeNull();
+    // @ts-ignore
     expect(imager.timeout).not.toBeNull();
+    // @ts-ignore
     expect(imager.retries).not.toBe(1);
 
     image.unload();
 
+    // @ts-ignore
     expect(imager.clearImgSrc).toBeCalled();
+    // @ts-ignore
     expect(imager.img).toBeNull();
     expect(clearTimeout).toBeCalled();
+    // @ts-ignore
     expect(imager.timeout).toBeNull();
+    // @ts-ignore
     expect(imager.retries).toBe(1);
   });
 });

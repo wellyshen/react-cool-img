@@ -7,15 +7,9 @@ export interface Retry {
 }
 
 export default class Imager {
-  img: HTMLImageElement | null;
-  retries: number;
-  timeout: ReturnType<typeof setTimeout>;
-
-  constructor() {
-    this.img = null;
-    this.timeout = null;
-    this.retries = 1;
-  }
+  private img: HTMLImageElement | null = null;
+  private timeout: ReturnType<typeof setTimeout> | null = null;
+  private retries = 1;
 
   load(
     src: string,
@@ -69,7 +63,7 @@ export default class Imager {
     this.retries = 1;
   }
 
-  clearImgSrc(): void {
+  private clearImgSrc(): void {
     /* istanbul ignore next */
     this.img.src = '';
     /* istanbul ignore next */
