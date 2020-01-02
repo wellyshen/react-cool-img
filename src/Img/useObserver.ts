@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 export const observerErr =
   "💡react-cool-img: this browser doesn't support IntersectionObserver, please install polyfill to enable lazy loading. More info: https://github.com/wellyshen/react-cool-img#intersectionobserver-polyfill";
@@ -41,12 +41,12 @@ export default (
     numThreshold = 0;
   }
 
-  const resetTimeout = (): void => {
+  const resetTimeout = useCallback((): void => {
     if (!timeoutRef.current) return;
 
     clearTimeout(timeoutRef.current);
     timeoutRef.current = null;
-  };
+  }, []);
 
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
@@ -72,6 +72,7 @@ export default (
       observer.disconnect();
       resetTimeout();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [node, startLoad, root, rootMargin, numThreshold, debounce]);
 
   // setStartLoad is used for testing
