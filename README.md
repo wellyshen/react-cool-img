@@ -32,7 +32,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 
 ## Requirements
 
-`react-cool-img` is based on [React Hooks](https://reactjs.org/docs/hooks-intro.html). It requires `react v16.8+` and `react-dom v16.8+`.
+`react-cool-img` is based on [React Hooks](https://reactjs.org/docs/hooks-intro.html). It requires `react v16.8+`.
 
 ## Installation
 
