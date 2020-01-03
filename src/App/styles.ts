@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css, keyframes } from '@emotion/core';
 
 const mq = {
   sm: '@media (min-width: 576px)',
@@ -30,36 +30,58 @@ export const container = css`
   }
 `;
 
+const octocatWave = keyframes`
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+`;
+
+export const octo = css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  fill: #151513;
+  color: #fff;
+`;
+
+export const octoArm = css`
+  transform-origin: 130px 106px;
+  animation: ${octocatWave} 560ms ease-in-out;
+  ${mq.sm} {
+    animation: none;
+  }
+`;
+
+export const github = css`
+  position: absolute;
+  top: 0;
+  right: 0;
+  &:hover {
+    .css-${octoArm.name} {
+      animation: none;
+      ${mq.sm} {
+        animation: ${octocatWave} 560ms ease-in-out;
+      }
+    }
+  }
+`;
+
 export const title = css`
   margin: 0 0 0.75rem;
 `;
 
 export const subtitle = css`
-  margin: 0;
-`;
-
-export const icon = css`
-  margin-right: 0.5rem;
-  width: 1.3rem;
-  height: 1.3rem;
-`;
-
-export const cta = css`
-  display: inline-flex;
-  align-items: center;
-  margin: 2.5rem 0;
-  padding: 0.5rem 2rem;
-  border: 1px solid black;
-  border-radius: 4px;
-  color: black;
-  text-decoration: none;
-  &:hover {
-    color: white;
-    background: black;
-    .css-${icon.name} {
-      filter: invert(100%);
-    }
-  }
+  margin: 0 0 2.5rem;
 `;
 
 export const image = css`
