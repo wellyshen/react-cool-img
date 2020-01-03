@@ -18,7 +18,7 @@ import template from './template';
 
 const { BUILD } = process.env;
 const isDev = BUILD === 'dev';
-const isExample = BUILD === 'example';
+const isDemo = BUILD === 'demo';
 const isLib = BUILD === 'lib';
 
 const cjs = {
@@ -58,9 +58,9 @@ const plugins = [
   isDev && livereload(),
   !isDev && terser(),
   !isDev && filesize(),
-  isExample &&
+  isDemo &&
     copy({
-      targets: [{ src: 'src/.dev', dest: '.', rename: 'example' }],
+      targets: [{ src: 'src/.dev', dest: '.', rename: 'demo' }],
       hook: 'writeBundle'
     }),
   isLib &&

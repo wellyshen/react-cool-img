@@ -43,13 +43,13 @@
     "test:cov": "yarn clean:cov && yarn test --coverage",
     "test:update": "yarn test -u",
     "test:watch": "yarn test --watch",
-    "build:example": "yarn clean:dev && yarn clean:example && rollup -c rollup/config.js --environment BUILD:example",
+    "build:demo": "yarn clean:dev && yarn clean:demo && rollup -c rollup/config.js --environment BUILD:demo",
     "build:lib": "yarn clean:lib && BABEL_ENV=lib rollup -c rollup/config.js --environment BUILD:lib",
     "build": "run-s build:*",
     "preversion": "run-s type-check lint test build:lib",
     "postversion": "git push --follow-tags --no-verify && npm publish",
     "clean:dev": "rm -rf src/.dev",
-    "clean:example": "rm -rf example",
+    "clean:demo": "rm -rf demo",
     "clean:lib": "rm -rf lib",
     "clean:cov": "rm -rf coverage",
     "clean": "run-p clean:*",
@@ -153,7 +153,7 @@
     }
   },
   "eslintIgnore": [
-    "example",
+    "demo",
     "lib"
   ],
   "prettier": {
@@ -169,7 +169,7 @@
       "declaration-empty-line-before": null
     },
     "ignoreFiles": [
-      "example/**/*.css",
+      "demo/**/*.css",
       "coverage/**/*.css"
     ]
   },
