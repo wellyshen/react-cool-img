@@ -52,8 +52,7 @@
     "clean:demo": "rm -rf demo",
     "clean:dist": "rm -rf dist",
     "clean:cov": "rm -rf coverage",
-    "clean": "run-p clean:*",
-    "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
+    "clean": "run-p clean:*"
   },
   "husky": {
     "hooks": {
