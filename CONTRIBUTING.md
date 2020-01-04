@@ -33,11 +33,11 @@ After cloning React Cool Img, run `yarn` to fetch its dependencies. Then, you ca
 - `yarn test:cov` runs the complete test suite with coverage report
 - `yarn test:update` updates the [Jest snapshots](https://github.com/wellyshen/react-cool-img/tree/master/test/__snapshots__)
 - `yarn build:demo` creates an `demo` folder with all the static files
-- `yarn build:lib` creates a `lib` folder with package builds (`CJS` & `ESM`) and type definition file. You can test the package locally via [yarn link](https://yarnpkg.com/lang/en/docs/cli/link)
-- `yarn build` creates both `demo` and `lib`
+- `yarn build:dist` creates a `dist` folder with package builds (`CJS` & `ESM`) and type definition file. You can test the package locally via [yarn link](https://yarnpkg.com/lang/en/docs/cli/link)
+- `yarn build` creates both `demo` and `dist`
 - `yarn clean:dev` deletes the `src/.dev` build folder
 - `yarn clean:demo` deletes the `demo` build folder
-- `yarn clean:lib` deletes the `lib` build folder
+- `yarn clean:dist` deletes the `dist` build folder
 - `yarn clean:cov` deletes the `coverage` report folder
 - `yarn clean` deletes all the build/coverage folders
 

@@ -19,10 +19,10 @@ import template from './template';
 const { BUILD } = process.env;
 const isDev = BUILD === 'dev';
 const isDemo = BUILD === 'demo';
-const isLib = BUILD === 'lib';
+const isDist = BUILD === 'dist';
 
 const cjs = {
-  file: isLib ? pkg.main : 'src/.dev/bundle.js',
+  file: isDist ? pkg.main : 'src/.dev/bundle.js',
   format: 'cjs',
   sourcemap: isDev
 };
@@ -45,10 +45,10 @@ const plugins = [
   replace({
     'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production')
   }),
-  !isLib && url(),
-  !isLib && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
-  !isLib && html({ template }),
-  !isLib &&
+  !isDist && url(),
+  !isDist && postcss({ extract: true, sourceMap: isDev, minimize: !isDev }),
+  !isDist && html({ template }),
+  !isDist &&
     copy({
       targets: [
         { src: 'src/static/example_assets', dest: 'src/.dev', rename: 'assets' }
@@ -63,7 +63,7 @@ const plugins = [
       targets: [{ src: 'src/.dev', dest: '.', rename: 'demo' }],
       hook: 'writeBundle'
     }),
-  isLib &&
+  isDist &&
     copy({
       targets: [
         {
@@ -76,8 +76,8 @@ const plugins = [
 ];
 
 export default {
-  input: isLib ? 'src/Img' : 'src',
-  output: isLib ? [cjs, esm] : [cjs],
+  input: isDist ? 'src/Img' : 'src',
+  output: isDist ? [cjs, esm] : [cjs],
   plugins,
-  external: isLib ? Object.keys(pkg.peerDependencies) : []
+  external: isDist ? Object.keys(pkg.peerDependencies) : []
 };

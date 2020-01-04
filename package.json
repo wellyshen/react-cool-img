@@ -22,11 +22,11 @@
     "seo"
   ],
   "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib"
+    "dist"
   ],
   "engines": {
     "node": ">=10",
@@ -44,13 +44,13 @@
     "test:update": "yarn test -u",
     "test:watch": "yarn test --watch",
     "build:demo": "yarn clean:dev && yarn clean:demo && rollup -c rollup/config.js --environment BUILD:demo",
-    "build:lib": "yarn clean:lib && BABEL_ENV=lib rollup -c rollup/config.js --environment BUILD:lib",
+    "build:dist": "yarn clean:dist && BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:dist",
     "build": "run-s build:*",
-    "preversion": "run-s type-check lint test build:lib",
+    "preversion": "run-s type-check lint test build:dist",
     "postversion": "git push --follow-tags --no-verify && npm publish",
     "clean:dev": "rm -rf src/.dev",
     "clean:demo": "rm -rf demo",
-    "clean:lib": "rm -rf lib",
+    "clean:dist": "rm -rf dist",
     "clean:cov": "rm -rf coverage",
     "clean": "run-p clean:*",
     "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
@@ -154,7 +154,7 @@
   },
   "eslintIgnore": [
     "demo",
-    "lib"
+    "dist"
   ],
   "prettier": {
     "singleQuote": true

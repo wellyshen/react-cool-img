@@ -4,5 +4,5 @@
 node_modules
 src/.dev
 demo
-lib
+dist
 coverage
