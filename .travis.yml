@@ -18,4 +18,4 @@ notifications:
     on_failure: change
 
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - yarn coveralls
