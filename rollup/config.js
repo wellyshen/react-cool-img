@@ -51,7 +51,7 @@ const plugins = [
   !isDist &&
     copy({
       targets: [
-        { src: 'src/static/example_assets', dest: 'src/.dev', rename: 'assets' }
+        { src: 'src/static/demo_assets', dest: 'src/.dev', rename: 'assets' }
       ]
     }),
   isDev && serve('src/.dev'),
