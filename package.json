@@ -21,7 +21,7 @@
     "ssr",
     "seo"
   ],
-  "author": "WellyShen <hivoid19@gmail.com> (https://github.com/wellyshen)",
+  "author": "Welly Shen <hivoid19@gmail.com> (https://github.com/wellyshen)",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
