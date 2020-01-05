@@ -53,7 +53,7 @@
     "clean:dist": "rimraf dist",
     "clean:cov": "rimraf coverage",
     "clean": "run-p clean:*",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "yarn test:cov && cat ./coverage/lcov.info | coveralls"
   },
   "husky": {
     "hooks": {
