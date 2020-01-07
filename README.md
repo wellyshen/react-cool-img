@@ -1,6 +1,6 @@
 # React Cool Img
 
-React Cool Img is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
+This is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
 
 It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
