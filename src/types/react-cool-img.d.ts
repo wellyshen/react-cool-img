@@ -7,7 +7,7 @@ declare module 'react-cool-img' {
   } from 'react';
 
   interface Options {
-    root?: Element | null;
+    root?: HTMLElement | null;
     rootMargin?: string;
     threshold?: number;
   }

@@ -6,12 +6,12 @@ export const thresholdErr =
   '💡react-cool-img: the threshold of observerOptions must be a number. Use 0 as fallback.';
 
 export interface Options {
-  root?: Element | null;
+  root?: HTMLElement | null;
   rootMargin?: string;
   threshold?: number;
 }
 export type Return = [
-  (node?: Element | null) => void,
+  (el?: HTMLElement | null) => void,
   boolean,
   (val: boolean) => void
 ];
@@ -31,7 +31,7 @@ export default (
   }
 
   const [startLoad, setStartLoad] = useState(false);
-  const [node, setNode] = useState(null);
+  const [el, setEl] = useState(null);
   const observerRef = useRef(null);
   const timeoutRef = useRef(null);
   let numThreshold = threshold;
@@ -66,15 +66,15 @@ export default (
 
     const { current: observer } = observerRef;
 
-    if (node) observer.observe(node);
+    if (el) observer.observe(el);
 
     return (): void => {
       observer.disconnect();
       resetTimeout();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [node, startLoad, root, rootMargin, numThreshold, debounce]);
+  }, [el, startLoad, root, rootMargin, numThreshold, debounce]);
 
   // setStartLoad is used for testing
-  return [setNode, startLoad, setStartLoad];
+  return [setEl, startLoad, setStartLoad];
 };
