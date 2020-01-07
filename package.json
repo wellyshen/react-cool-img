@@ -200,8 +200,8 @@
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/vfile-message": "^2.0.0",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
     "babel-plugin-emotion": "^10.0.27",
     "coveralls": "^3.0.9",
     "eslint": "^6.1.0",
@@ -214,7 +214,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^2.3.0",
-    "husky": "^3.1.0",
+    "husky": "^4.0.0",
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
     "normalize.css": "^8.0.1",
@@ -237,7 +237,7 @@
     "stylelint": "^12.0.1",
     "stylelint-config-prettier": "^8.0.0",
     "stylelint-config-standard": "^19.0.0",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.7.4"
   },
   "peerDependencies": {
