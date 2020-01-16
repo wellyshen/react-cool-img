@@ -1374,7 +1374,7 @@
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
 
-"@types/fs-extra@^8.0.0":
+"@types/fs-extra@^8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-8.0.1.tgz#a2378d6e7e8afea1564e44aafa2e207dadf77686"
   integrity sha512-J00cVDALmi/hJOYsunyT52Hva5TnJeKP5yd1r+mH/ZU0mbYZflR0Z5kw5kITtKTRYMhm1JMClOFYdHnQszEvqw==
@@ -7086,11 +7086,11 @@ rollup-plugin-commonjs@^10.1.0:
     rollup-pluginutils "^2.8.1"
 
 rollup-plugin-copy@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-copy/-/rollup-plugin-copy-3.1.0.tgz#435589857f4e346ea63fc137d99dcc1b25f51c3b"
-  integrity sha512-oVw3ljRV5jv7Yw/6eCEHntVs9Mc+NFglc0iU0J8ei76gldYmtBQ0M/j6WAkZUFVRSrhgfCrEakUllnN87V2f4w==
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-copy/-/rollup-plugin-copy-3.2.0.tgz#b401674d406d487ee3acb44c4785d424ff80ad75"
+  integrity sha512-ZA/dt4xMjof24zaoqMVdMbP4/6+exqyvJ7J0oU80q/T1nj2zDvXVm2hCcmy4BPzhBHzgCRyIRQz7pg6M5hAkPA==
   dependencies:
-    "@types/fs-extra" "^8.0.0"
+    "@types/fs-extra" "^8.0.1"
     colorette "^1.1.0"
     fs-extra "^8.1.0"
     globby "10.0.1"
