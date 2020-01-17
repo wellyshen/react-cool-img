@@ -10,7 +10,11 @@ export interface Options {
   rootMargin?: string;
   threshold?: number;
 }
-export type Return = [Dispatch<HTMLElement | null>, boolean, Dispatch<boolean>];
+export type Return = readonly [
+  Dispatch<HTMLElement | null>,
+  boolean,
+  Dispatch<boolean>
+];
 
 export default (
   debounce: number,
