@@ -19,3 +19,14 @@ notifications:
 
 after_success:
   - yarn coveralls
+
+before_deploy:
+  - yarn global add netlify-cli
+  - yarn build:demo
+
+deploy:
+  provider: script
+  script: netlify deploy --prod  --message "Deploy from Travis-CI" --site $NETLIFY_SITE_ID --auth $NETLIFY_ACCESS_TOKEN --dir ./demo
+  skip_cleanup: true
+  on:
+    branch: master
