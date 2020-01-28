@@ -3030,10 +3030,10 @@ eslint-plugin-react@^7.14.3:
     prop-types "^15.7.2"
     resolve "^1.14.2"
 
-eslint-plugin-testing-library@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-1.5.0.tgz#c9e9c5fb8320abc78d45dea90ae45781e5c7a52e"
-  integrity sha512-wSfVeCNseDQE+JltDkMbTBhinWwyeDE6aSH27Kbm907RT0YM0YPXjRpXdhAjSsR5T7NEXJDhpUTQE8nD+z/9Iw==
+eslint-plugin-testing-library@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-2.0.0.tgz#9fe047da67df3dc51c952ef4f120df83ab65702b"
+  integrity sha512-HyHpQjcAu7xDUs7yvEw2IXyAzaN+J3bVfFWuABlOlY/KQWGVqdLU+5vkX+i3leexMa7lzNOYOTcHpzlloLvFZA==
 
 eslint-scope@^5.0.0:
   version "5.0.0"
