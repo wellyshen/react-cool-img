@@ -8,16 +8,15 @@ import useObserver, {
 } from '../src/Img/useObserver';
 
 describe('useObserver › errors', () => {
-  it('should handle IntersectionObserver error correctly', () => {
-    global.console.error = jest.fn();
+  global.console.error = jest.fn();
 
+  it('should handle IntersectionObserver error correctly', () => {
     renderHook(() => useObserver(300, {}));
 
     expect(console.error).toBeCalledWith(observerErr);
   });
 
   it('should handle threshold error correctly', () => {
-    global.console.error = jest.fn();
     // @ts-ignore
     global.IntersectionObserver = jest.fn((_, { threshold }) => ({
       threshold,
