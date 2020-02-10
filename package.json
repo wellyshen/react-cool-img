@@ -238,7 +238,7 @@
     "rollup-plugin-terser": "^5.2.0",
     "stylelint": "^13.0.0",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-config-standard": "^19.0.0",
+    "stylelint-config-standard": "^20.0.0",
     "ts-jest": "^25.2.0",
     "typescript": "^3.7.5"
   },
