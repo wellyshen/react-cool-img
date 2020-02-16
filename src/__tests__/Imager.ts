@@ -1,4 +1,4 @@
-import Imager, { Retry } from '../src/Img/Imager';
+import Imager, { Retry } from '../Imager';
 
 describe('Imager', () => {
   jest.useFakeTimers();

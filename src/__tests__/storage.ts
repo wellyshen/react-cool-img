@@ -1,4 +1,4 @@
-import { set, get } from '../src/Img/storage';
+import { set, get } from '../storage';
 
 describe('storage', () => {
   const key = 'REACT_COOL_IMG';

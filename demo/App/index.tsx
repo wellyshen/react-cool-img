@@ -3,7 +3,7 @@ import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
 import GitHubCorner from '../GitHubCorner';
-import Img from '../Img';
+import Img from '../../src';
 import loadingImg from '../static/loading.gif';
 import errorImg from '../static/error.png';
 import { root, container, title, subtitle, image, cp } from './styles';

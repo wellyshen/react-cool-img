@@ -5,7 +5,7 @@ import useObserver, {
   thresholdErr,
   Options,
   Return as Current
-} from '../src/Img/useObserver';
+} from '../useObserver';
 
 describe('useObserver › errors', () => {
   it('should handle IntersectionObserver error correctly', () => {

@@ -40,16 +40,16 @@
     "type-check": "tsc --noEmit",
     "type-check:watch": "yarn type-check --watch",
     "test": "jest",
+    "test:watch": "yarn test --watch",
     "test:cov": "yarn clean:cov && yarn test --coverage",
     "test:update": "yarn test -u",
-    "test:watch": "yarn test --watch",
     "build:demo": "yarn clean:dev && yarn clean:demo && rollup -c rollup/config.js --environment BUILD:demo",
     "build:dist": "yarn clean:dist && BABEL_ENV=dist rollup -c rollup/config.js --environment BUILD:dist",
     "build": "run-s build:*",
     "preversion": "run-s type-check lint test build:dist",
     "postversion": "git push --follow-tags --no-verify && npm publish && yarn clean:dist",
-    "clean:dev": "rimraf src/.dev",
-    "clean:demo": "rimraf demo",
+    "clean:dev": "rimraf demo/.dev",
+    "clean:demo": "rimraf public",
     "clean:dist": "rimraf dist .size-snapshot.json",
     "clean:cov": "rimraf coverage",
     "clean": "run-p clean:*",
@@ -154,7 +154,7 @@
     }
   },
   "eslintIgnore": [
-    "demo",
+    "public",
     "dist"
   ],
   "prettier": {
@@ -170,7 +170,7 @@
       "declaration-empty-line-before": null
     },
     "ignoreFiles": [
-      "demo/**/*.css",
+      "public/**/*.css",
       "coverage/**/*.css"
     ]
   },
@@ -180,7 +180,9 @@
       "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts"
     },
     "collectCoverageFrom": [
-      "src/Img/*.(ts|tsx)"
+      "src/*.(ts|tsx)",
+      "!src/*.d.ts",
+      "!src/index.ts"
     ]
   },
   "devDependencies": {

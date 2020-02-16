@@ -3,24 +3,24 @@
 const FAILURE_SRC = 'FAILURE_SRC';
 const SUCCESS_SRC = 'SUCCESS_SRC';
 
-jest.mock('../src/Img/useObserver');
+jest.mock('../useObserver');
 
 const set = jest.fn();
 const get = jest.fn(() => false);
-jest.mock('../src/Img/storage', () => ({ set, get }));
+jest.mock('../storage', () => ({ set, get }));
 
 const load = jest.fn((...args) =>
   args[args[0] === FAILURE_SRC ? 4 : 5]({ target: { src: args[0] } })
 );
 const unload = jest.fn();
-jest.mock('../src/Img/Imager', () => jest.fn(() => ({ load, unload })));
+jest.mock('../Imager', () => jest.fn(() => ({ load, unload })));
 
 import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
 
-import useObserver from '../src/Img/useObserver';
-import * as storage from '../src/Img/storage';
-import Img from '../src/Img';
+import useObserver from '../useObserver';
+import * as storage from '../storage';
+import Img from '../Img';
 
 describe('<Img />', () => {
   const props = {
