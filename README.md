@@ -165,7 +165,7 @@ const App = () => (
 There're two challenges when doing lazy image loading with server-side rendering. One is Javascript availability the other is SEO. Fortunately, we can use [`<noscript>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/noscript) tag to solve these problems. It will render the actual image as fallback if Javascript is disabled thus user won't see the image which be stuck with the placeholder. Moreover, the `<noscript>` tag ensure the image is indexed by search engine bots even if they cannot fully understand our JavaScript code. Take a look at how magic happens.
 
 ```js
-// src/Img/index.tsx
+// src/Img.tsx
 
 const Img = () => {
   // ...
