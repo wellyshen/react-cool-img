@@ -1,4 +1,11 @@
-import { Dispatch, useState, useRef, useEffect, useCallback } from 'react';
+import {
+  Dispatch,
+  RefObject,
+  useState,
+  useRef,
+  useEffect,
+  useCallback
+} from 'react';
 
 export const observerErr =
   "💡react-cool-img: this browser doesn't support IntersectionObserver, please install polyfill to enable lazy loading. More info: https://github.com/wellyshen/react-cool-img#intersectionobserver-polyfill";
@@ -11,7 +18,7 @@ export interface Options {
   threshold?: number;
 }
 export type Return = readonly [
-  Dispatch<HTMLElement | null>,
+  Dispatch<RefObject<HTMLElement>>,
   boolean,
   Dispatch<boolean>
 ];
