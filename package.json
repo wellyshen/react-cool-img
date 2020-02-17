@@ -181,8 +181,7 @@
     },
     "collectCoverageFrom": [
       "src/*.(ts|tsx)",
-      "!src/*.d.ts",
-      "!src/index.ts"
+      "!src/*.d.ts"
     ]
   },
   "devDependencies": {

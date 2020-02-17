@@ -20,7 +20,7 @@ import { render } from '@testing-library/react';
 
 import useObserver from '../useObserver';
 import * as storage from '../storage';
-import Img from '../Img';
+import Img from '..';
 
 describe('<Img />', () => {
   const props = {
