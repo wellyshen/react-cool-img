@@ -55,7 +55,7 @@ const Img: SFC<Props> = ({
   onLoad,
   ...rest
 }: Props) => {
-  const { current: imager } = useRef(new Imager());
+  const imagerRef = useRef(null);
   const [setRef, startLoad] = useObserver(debounce, observerOptions);
   const [source, setSource] = useState(
     placeholder ||
@@ -82,6 +82,11 @@ const Img: SFC<Props> = ({
   };
 
   useEffect(() => {
+    imagerRef.current = new Imager();
+  }, []);
+
+  useEffect(() => {
+    const { current: imager } = imagerRef;
     const loadImg = (): void => {
       imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
     };
