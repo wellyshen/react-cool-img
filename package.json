@@ -89,6 +89,12 @@
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "prettier",
+      "emotion",
+      "testing-library"
+    ],
     "extends": [
       "airbnb",
       "airbnb/hooks",
@@ -96,12 +102,6 @@
       "plugin:prettier/recommended",
       "prettier/@typescript-eslint",
       "prettier/react"
-    ],
-    "plugins": [
-      "@typescript-eslint",
-      "prettier",
-      "emotion",
-      "testing-library"
     ],
     "settings": {
       "import/parsers": {
@@ -161,12 +161,12 @@
     "singleQuote": true
   },
   "stylelint": {
+    "plugins": [
+      "stylelint-prettier"
+    ],
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-prettier"
-    ],
-    "plugins": [
-      "stylelint-prettier"
     ],
     "rules": {
       "string-quotes": "single",
