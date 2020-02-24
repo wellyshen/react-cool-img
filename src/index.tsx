@@ -64,7 +64,7 @@ const Img: SFC<Props> = ({
   const isSrc = source === src;
   const filename = src ? src.replace(/^.*[\\/]/, '').split('.')[0] : '';
 
-  const handleError = (event: SyntheticEvent | Event): void => {
+  const handleError = (event: Event): void => {
     onError(event);
 
     if (error) {
@@ -74,7 +74,7 @@ const Img: SFC<Props> = ({
     }
   };
 
-  const handleLoad = (event: SyntheticEvent | Event): void => {
+  const handleLoad = (event: Event): void => {
     onLoad(event);
 
     setSource(src);
