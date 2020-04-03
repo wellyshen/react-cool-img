@@ -20,10 +20,10 @@ export default (
   debounce: number,
   { root = null, rootMargin = '50px', threshold = 0.01 }: Options
 ): Return => {
-  const [startLoad, setStartLoad] = useState(false);
-  const [el, setEl] = useState(null);
-  const observerRef = useRef(null);
-  const timeoutRef = useRef(null);
+  const [startLoad, setStartLoad] = useState<boolean>(false);
+  const [el, setEl] = useState<HTMLElement | null>(null);
+  const observerRef = useRef<IntersectionObserver>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
   let numThreshold = threshold;
 
   if (typeof threshold !== 'number') {

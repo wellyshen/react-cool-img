@@ -55,9 +55,9 @@ const Img: SFC<Props> = ({
   onLoad,
   ...rest
 }: Props) => {
-  const imagerRef = useRef(null);
+  const imagerRef = useRef<Imager>(null);
   const [setRef, startLoad] = useObserver(debounce, observerOptions);
-  const [source, setSource] = useState(
+  const [source, setSource] = useState<string>(
     placeholder ||
       'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
   );
