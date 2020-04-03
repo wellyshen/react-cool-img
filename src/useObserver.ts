@@ -20,21 +20,16 @@ export default (
   debounce: number,
   { root = null, rootMargin = '50px', threshold = 0.01 }: Options
 ): Return => {
-  const setState = (): void => null;
-  const defaultVal: Return = [setState, true, setState];
-
-  if (typeof window === 'undefined') return defaultVal;
-
-  if (!window.IntersectionObserver) {
-    console.error(observerErr);
-    return defaultVal;
-  }
-
   const [startLoad, setStartLoad] = useState(false);
   const [el, setEl] = useState(null);
   const observerRef = useRef(null);
   const timeoutRef = useRef(null);
   let numThreshold = threshold;
+
+  if (!window.IntersectionObserver) {
+    console.error(observerErr);
+    return [setEl, startLoad, setStartLoad];
+  }
 
   if (typeof threshold !== 'number') {
     console.error(thresholdErr);
