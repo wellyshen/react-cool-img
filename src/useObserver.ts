@@ -26,11 +26,6 @@ export default (
   const timeoutRef = useRef(null);
   let numThreshold = threshold;
 
-  if (!window.IntersectionObserver) {
-    console.error(observerErr);
-    return [setEl, startLoad, setStartLoad];
-  }
-
   if (typeof threshold !== 'number') {
     console.error(thresholdErr);
     numThreshold = 0;
@@ -44,6 +39,11 @@ export default (
   }, []);
 
   useEffect(() => {
+    if (!window.IntersectionObserver) {
+      console.error(observerErr);
+      return (): void => null;
+    }
+
     if (observerRef.current) observerRef.current.disconnect();
 
     observerRef.current = new IntersectionObserver(
@@ -67,8 +67,7 @@ export default (
       observer.disconnect();
       resetTimeout();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [el, startLoad, root, rootMargin, numThreshold, debounce]);
+  }, [el, startLoad, root, rootMargin, numThreshold, debounce, resetTimeout]);
 
   // setStartLoad is used for testing
   return [setEl, startLoad, setStartLoad];
