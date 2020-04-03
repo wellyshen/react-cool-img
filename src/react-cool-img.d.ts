@@ -3,7 +3,7 @@ declare module 'react-cool-img' {
     DetailedHTMLProps,
     ImgHTMLAttributes,
     SyntheticEvent,
-    SFC
+    SFC,
   } from 'react';
 
   interface Options {

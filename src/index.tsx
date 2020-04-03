@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
   useEffect,
-  memo
+  memo,
 } from 'react';
 
 import useObserver, { Options } from './useObserver';
@@ -143,7 +143,7 @@ Img.defaultProps = {
   srcSet: null,
   sizes: null,
   onError: /* istanbul ignore next */ (): void => null,
-  onLoad: /* istanbul ignore next */ (): void => null
+  onLoad: /* istanbul ignore next */ (): void => null,
 };
 
 export default memo(Img);

@@ -30,13 +30,13 @@ describe('Imager', () => {
       decode = false,
       retry = {},
       onError = (): void => null,
-      onLoad = (): void => null
+      onLoad = (): void => null,
     }: Args = {}): void => {
       instance.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
     unload: (): void => {
       instance.unload();
-    }
+    },
   });
 
   beforeAll(() => {
@@ -63,7 +63,7 @@ describe('Imager', () => {
         },
         get crossOrigin(): string {
           return crossOrigin;
-        }
+        },
       };
     });
   });
@@ -73,7 +73,7 @@ describe('Imager', () => {
     global.Image.mockClear();
   });
 
-  it('should call onError without auto-retry', done => {
+  it('should call onError without auto-retry', (done) => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
@@ -89,7 +89,7 @@ describe('Imager', () => {
     expect(onLoad).not.toBeCalled();
   });
 
-  it('should call onError with auto-retry', done => {
+  it('should call onError with auto-retry', (done) => {
     const image = createImage(new Imager());
     const onError = (event: Event): void => {
       expect(event).toMatchObject(ERROR_EVT);
@@ -114,7 +114,7 @@ describe('Imager', () => {
     expect(setTimeout).toBeCalledTimes(count * 2 + 3);
   });
 
-  it('should call onLoad', done => {
+  it('should call onLoad', (done) => {
     const image = createImage(new Imager());
     const onError = jest.fn();
     const onLoad = (event: Event): void => {

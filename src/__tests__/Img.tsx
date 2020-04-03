@@ -37,7 +37,7 @@ describe('<Img />', () => {
     sizes: '100vw',
     onError: jest.fn(),
     onLoad: jest.fn(),
-    alt: 'Cool Image'
+    alt: 'Cool Image',
   };
 
   const matchSnapshot = (img: ReactElement): void => {

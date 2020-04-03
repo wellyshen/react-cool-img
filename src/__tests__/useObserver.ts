@@ -4,7 +4,7 @@ import useObserver, {
   observerErr,
   thresholdErr,
   Options,
-  Return as Current
+  Return as Current,
 } from '../useObserver';
 
 describe('useObserver › errors', () => {
@@ -21,7 +21,7 @@ describe('useObserver › errors', () => {
     // @ts-ignore
     global.IntersectionObserver = jest.fn((_, { threshold }) => ({
       threshold,
-      disconnect: (): void => null
+      disconnect: (): void => null,
     }));
     // @ts-ignore
     renderHook(() => useObserver(300, { threshold: [0.5, 1] }));
@@ -46,7 +46,7 @@ describe('useObserver', () => {
     root = null,
     rootMargin = '50px',
     threshold = 0.01,
-    debounce = 300
+    debounce = 300,
   }: Args = {}): Return => {
     const { result } = renderHook(() =>
       useObserver(debounce, { root, rootMargin, threshold })
@@ -70,7 +70,7 @@ describe('useObserver', () => {
         observe: (el: Element): void => {
           observerMap.set(el, cb);
         },
-        disconnect: jest.fn()
+        disconnect: jest.fn(),
       })
     );
   });
