@@ -23,7 +23,7 @@ export default class Imager {
     this.img.src = src;
 
     if (crossOrigin) this.img.crossOrigin = crossOrigin;
-    if (decode)
+    if (decode && this.img.decode)
       this.img.decode().catch(() => {
         // Ignore decoding error
       });
