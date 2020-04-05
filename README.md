@@ -22,7 +22,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 ## Features
 
 - 🖼 Placeholders for satisfying various image loading states (e.g. loading image > actual image > error image).
-- 🛋 [Smart lazy loading](#the-smart-way-to-load-images) with performant and efficient way, using [IntersectionObserver](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
+- 🛋 [Smart lazy loading](#the-smart-way-to-load-images) with performant and efficient way, using [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Abort any current image downloads on component unmount potentially saving bandwidth and browser resources.
 - 🔍 [Support server-side rendering / Javascript is disabled / SEO](#javascript-availability-and-seo).
