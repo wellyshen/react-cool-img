@@ -14,7 +14,6 @@ script:
   - yarn type-check
   - yarn lint
   - yarn test:cov
-  - yarn build:demo
   - yarn build:dist
 
 after_success:
