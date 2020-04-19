@@ -108,7 +108,7 @@ The image component working similar with standard `img` tag and with the followi
 All the properties are `optional`.
 
 - `root: Element | null` - the element that is used as the viewport for checking visibility of the target. Must be the ancestor of the target. Defaults to the browser viewport if not specified or if `null`.
-- `rootMargin: string` - margin around the root. Can have values similar to the CSS [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) property, e.g. `'10px 20px 30px 40px'` (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the root element's bounding box before computing intersections.
+- `rootMargin: string` - margin around the root. Can have values similar to the CSS [margin](https://developer.mozilla.org/en-US/docs/Web/CSS/margin) property, e.g. `"10px 20px 30px 40px"` (top, right, bottom, left). The values can be percentages. This set of values serves to grow or shrink each side of the root element's bounding box before computing intersections.
 - `threshold: number` - a single number between 0 and 1, which indicate at what percentage of the target's visibility the observer's callback should be executed. A value of 0 means as soon as even one pixel is visible, the callback will be run. 1 means that the threshold isn't considered passed until every pixel is visible.
 
 ### retry
