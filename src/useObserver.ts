@@ -6,7 +6,7 @@ export const thresholdErr =
   '💡react-cool-img: the threshold of observerOptions must be a number. Use 0 as fallback.';
 
 export interface Options {
-  root?: HTMLElement | null;
+  root?: HTMLElement;
   rootMargin?: string;
   threshold?: number;
 }
@@ -18,7 +18,7 @@ export type Return = readonly [
 
 export default (
   debounce: number,
-  { root = null, rootMargin = '50px', threshold = 0.01 }: Options
+  { root, rootMargin = '50px', threshold = 0.01 }: Options
 ): Return => {
   const [startLoad, setStartLoad] = useState<boolean>(false);
   const [el, setEl] = useState<HTMLElement | null>(null);
