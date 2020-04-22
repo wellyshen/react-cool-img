@@ -42,7 +42,7 @@ export default (
     if (
       !window.IntersectionObserver ||
       (window.IntersectionObserverEntry &&
-        !window.IntersectionObserverEntry.prototype.isIntersecting)
+        !('isIntersecting' in window.IntersectionObserverEntry.prototype))
     ) {
       console.error(observerErr);
       return (): void => null;
