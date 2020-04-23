@@ -8,21 +8,31 @@ import useObserver, {
 } from '../useObserver';
 
 describe('useObserver › errors', () => {
+  global.console.error = jest.fn();
+  const mockIntersectionObserver = jest.fn((_, { threshold }) => ({
+    threshold,
+    disconnect: (): void => null,
+  }));
+
   it('should handle IntersectionObserver error correctly', () => {
-    // console must be mocked locally
-    global.console.error = jest.fn();
+    renderHook(() => useObserver(300, {}));
+
+    expect(console.error).toBeCalledWith(observerErr);
+
+    // @ts-ignore
+    global.IntersectionObserver = mockIntersectionObserver;
     renderHook(() => useObserver(300, {}));
 
     expect(console.error).toBeCalledWith(observerErr);
   });
 
   it('should handle threshold error correctly', () => {
-    global.console.error = jest.fn();
     // @ts-ignore
-    global.IntersectionObserver = jest.fn((_, { threshold }) => ({
-      threshold,
-      disconnect: (): void => null,
-    }));
+    global.IntersectionObserver = mockIntersectionObserver;
+    // @ts-ignore
+    global.IntersectionObserverEntry = jest.fn();
+    // @ts-ignore
+    global.IntersectionObserverEntry.prototype.isIntersecting = false;
     // @ts-ignore
     renderHook(() => useObserver(300, { threshold: [0.5, 1] }));
 
