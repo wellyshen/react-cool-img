@@ -40,9 +40,9 @@ export default (
 
   useEffect(() => {
     if (
-      !window.IntersectionObserver ||
-      (window.IntersectionObserverEntry &&
-        !('isIntersecting' in window.IntersectionObserverEntry.prototype))
+      !('IntersectionObserver' in window) ||
+      !('IntersectionObserverEntry' in window) ||
+      !('isIntersecting' in window.IntersectionObserverEntry.prototype)
     ) {
       console.error(observerErr);
       return (): void => null;
