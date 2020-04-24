@@ -25,7 +25,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 - 🛋 [Smart lazy loading](#the-smart-way-to-load-images) with performant and efficient way, using [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 - 🤖 Built-in [auto-retry](#retry) mechanism. User won't miss out your important information.
 - 🚫 Aborts any current image downloads on component unmount potentially saving bandwidth and browser resources.
-- 🔍 [Support server-side rendering / Javascript is disabled / SEO](#javascript-availability-and-seo).
+- 🔍 [Supports server-side rendering / Javascript is disabled / SEO](#javascript-availability-and-seo).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🦠 Tiny size ([~ 2.5kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
 - 🔧 Easy to use.
