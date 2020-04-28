@@ -17,13 +17,13 @@ describe('useObserver › errors', () => {
   it('should handle IntersectionObserver error correctly', () => {
     renderHook(() => useObserver(300, {}));
 
-    expect(console.error).toBeCalledWith(observerErr);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
 
     // @ts-ignore
     global.IntersectionObserver = mockIntersectionObserver;
     renderHook(() => useObserver(300, {}));
 
-    expect(console.error).toBeCalledWith(observerErr);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
   });
 
   it('should handle threshold error correctly', () => {
@@ -36,7 +36,7 @@ describe('useObserver › errors', () => {
     // @ts-ignore
     renderHook(() => useObserver(300, { threshold: [0.5, 1] }));
 
-    expect(console.error).toBeCalledWith(thresholdErr);
+    expect(console.error).toHaveBeenCalledWith(thresholdErr);
     // @ts-ignore
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
   });
@@ -122,7 +122,7 @@ describe('useObserver', () => {
     [setRef, startLoad] = result.current;
 
     // setTimeout of intersection-observer didn't be called
-    expect(setTimeout).toBeCalledTimes(1);
+    expect(setTimeout).toHaveBeenCalledTimes(1);
     expect(startLoad).toBeFalsy();
   });
 
@@ -141,13 +141,13 @@ describe('useObserver', () => {
 
     [setRef, startLoad] = result.current;
 
-    expect(setTimeout).toBeCalledTimes(3);
-    expect(setTimeout).lastCalledWith(expect.any(Function), debounce);
+    expect(setTimeout).toHaveBeenCalledTimes(3);
+    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), debounce);
     expect(startLoad).toBeFalsy();
 
     setIsIntersecting(img, false);
 
-    expect(clearTimeout).toBeCalled();
+    expect(clearTimeout).toHaveBeenCalled();
   });
 
   it('should be in-view state without debounce', () => {
@@ -168,7 +168,7 @@ describe('useObserver', () => {
 
     [setRef, startLoad, setStartLoad] = result.current;
 
-    expect(setTimeout).toBeCalledTimes(7);
+    expect(setTimeout).toHaveBeenCalledTimes(7);
     expect(startLoad).toBeTruthy();
   });
 
@@ -190,7 +190,7 @@ describe('useObserver', () => {
 
     [setRef, startLoad, setStartLoad] = result.current;
 
-    expect(setTimeout).toBeCalledTimes(10);
+    expect(setTimeout).toHaveBeenCalledTimes(10);
     expect(startLoad).toBeTruthy();
   });
 });

@@ -73,60 +73,66 @@ describe('Imager', () => {
     global.Image.mockClear();
   });
 
-  it('should call onError without auto-retry', (done) => {
-    const image = createImage(new Imager());
-    const onError = (event: Event): void => {
-      expect(event).toMatchObject(ERROR_EVT);
-      done();
-    };
-    const onLoad = jest.fn();
+  it('should call onError without auto-retry', () => {
+    return new Promise((done) => {
+      const image = createImage(new Imager());
+      const onError = (event: Event): void => {
+        expect(event).toMatchObject(ERROR_EVT);
+        done();
+      };
+      const onLoad = jest.fn();
 
-    image.load({ src: FAILURE_SRC, retry: { count: 0 }, onError, onLoad });
+      image.load({ src: FAILURE_SRC, retry: { count: 0 }, onError, onLoad });
 
-    jest.runAllTimers();
+      jest.runAllTimers();
 
-    expect(setTimeout).toBeCalledTimes(1);
-    expect(onLoad).not.toBeCalled();
+      expect(setTimeout).toHaveBeenCalledTimes(1);
+      expect(onLoad).not.toHaveBeenCalled();
+    });
   });
 
-  it('should call onError with auto-retry', (done) => {
-    const image = createImage(new Imager());
-    const onError = (event: Event): void => {
-      expect(event).toMatchObject(ERROR_EVT);
-      done();
-    };
-    const onLoad = jest.fn();
+  it('should call onError with auto-retry', () => {
+    return new Promise((done) => {
+      const image = createImage(new Imager());
+      const onError = (event: Event): void => {
+        expect(event).toMatchObject(ERROR_EVT);
+        done();
+      };
+      const onLoad = jest.fn();
 
-    image.load({ src: FAILURE_SRC, onError, onLoad });
+      image.load({ src: FAILURE_SRC, onError, onLoad });
 
-    jest.runAllTimers();
+      jest.runAllTimers();
 
-    // Default settings
-    expect(setTimeout).toBeCalledTimes(3 * 2 + 2);
-    expect(onLoad).not.toBeCalled();
+      // Default settings
+      expect(setTimeout).toHaveBeenCalledTimes(3 * 2 + 2);
+      expect(onLoad).not.toHaveBeenCalled();
 
-    const count = 5;
+      const count = 5;
 
-    image.load({ src: FAILURE_SRC, retry: { count } });
+      image.load({ src: FAILURE_SRC, retry: { count } });
 
-    jest.runAllTimers();
+      jest.runAllTimers();
 
-    expect(setTimeout).toBeCalledTimes(count * 2 + 3);
+      expect(setTimeout).toHaveBeenCalledTimes(count * 2 + 3);
+    });
   });
 
-  it('should call onLoad', (done) => {
-    const image = createImage(new Imager());
-    const onError = jest.fn();
-    const onLoad = (event: Event): void => {
-      expect(event).toMatchObject(LOAD_EVT);
-      done();
-    };
+  it('should call onLoad', () => {
+    return new Promise((done) => {
+      const image = createImage(new Imager());
+      const onError = jest.fn();
+      const onLoad = (event: Event): void => {
+        expect(event).toMatchObject(LOAD_EVT);
+        done();
+      };
 
-    image.load({ onError, onLoad });
+      image.load({ onError, onLoad });
 
-    jest.runAllTimers();
+      jest.runAllTimers();
 
-    expect(onError).not.toBeCalled();
+      expect(onError).not.toHaveBeenCalled();
+    });
   });
 
   it('should set crossOrigin correctly', () => {
@@ -155,12 +161,12 @@ describe('Imager', () => {
     image.load();
 
     // @ts-ignore
-    expect(imager.img.decode).not.toBeCalled();
+    expect(imager.img.decode).not.toHaveBeenCalled();
 
     image.load({ decode: true });
 
     // @ts-ignore
-    expect(imager.img.decode).toBeCalled();
+    expect(imager.img.decode).toHaveBeenCalled();
   });
 
   it('should clear img.src and reset variables', () => {
@@ -187,10 +193,10 @@ describe('Imager', () => {
     image.unload();
 
     // @ts-ignore
-    expect(imager.clearImgSrc).toBeCalled();
+    expect(imager.clearImgSrc).toHaveBeenCalled();
     // @ts-ignore
     expect(imager.img).toBeNull();
-    expect(clearTimeout).toBeCalled();
+    expect(clearTimeout).toHaveBeenCalled();
     // @ts-ignore
     expect(imager.timeout).toBeNull();
     // @ts-ignore

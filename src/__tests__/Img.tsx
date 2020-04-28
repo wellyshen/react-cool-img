@@ -1,4 +1,4 @@
-/* eslint-disable import/first */
+/* eslint-disable import/first, jest/expect-expect */
 
 const FAILURE_SRC = 'FAILURE_SRC';
 const SUCCESS_SRC = 'SUCCESS_SRC';
@@ -60,22 +60,22 @@ describe('<Img />', () => {
 
     const { debounce, observerOptions } = props;
 
-    expect(useObserver).toBeCalledWith(debounce, observerOptions);
+    expect(useObserver).toHaveBeenCalledWith(debounce, observerOptions);
   });
 
   it('should unload src image', () => {
     setStartLoad();
     render(<Img src={SUCCESS_SRC} {...props} />).unmount();
 
-    expect(unload).toBeCalled();
+    expect(unload).toHaveBeenCalled();
   });
 
   it('should render placeholder image', () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
-    expect(load).not.toBeCalled();
-    expect(props.onLoad).not.toBeCalled();
+    expect(load).not.toHaveBeenCalled();
+    expect(props.onLoad).not.toHaveBeenCalled();
   });
 
   it('should render default placeholder image', () => {
@@ -90,7 +90,7 @@ describe('<Img />', () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} cache={false} />);
 
-    expect(set).not.toBeCalled();
+    expect(set).not.toHaveBeenCalled();
   });
 
   it('should render src image', () => {
@@ -99,7 +99,7 @@ describe('<Img />', () => {
 
     const { crossOrigin, decode, retry, onLoad } = props;
 
-    expect(load).toBeCalledWith(
+    expect(load).toHaveBeenCalledWith(
       SUCCESS_SRC,
       crossOrigin,
       decode,
@@ -107,8 +107,8 @@ describe('<Img />', () => {
       expect.any(Function),
       expect.any(Function)
     );
-    expect(onLoad).toBeCalled();
-    expect(set).toBeCalledWith(SUCCESS_SRC);
+    expect(onLoad).toHaveBeenCalled();
+    expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
   });
 
   it('should render src image immediately due to lazy is disabled', () => {
@@ -117,7 +117,7 @@ describe('<Img />', () => {
 
     const { crossOrigin, decode, retry, onLoad } = props;
 
-    expect(load).toBeCalledWith(
+    expect(load).toHaveBeenCalledWith(
       SUCCESS_SRC,
       crossOrigin,
       decode,
@@ -125,8 +125,8 @@ describe('<Img />', () => {
       expect.any(Function),
       expect.any(Function)
     );
-    expect(onLoad).toBeCalled();
-    expect(set).toBeCalledWith(SUCCESS_SRC);
+    expect(onLoad).toHaveBeenCalled();
+    expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
   });
 
   it('should render src image immediately due to image cached', () => {
@@ -138,7 +138,7 @@ describe('<Img />', () => {
 
     const { crossOrigin, decode, retry, onLoad } = props;
 
-    expect(load).toBeCalledWith(
+    expect(load).toHaveBeenCalledWith(
       SUCCESS_SRC,
       crossOrigin,
       decode,
@@ -146,8 +146,8 @@ describe('<Img />', () => {
       expect.any(Function),
       expect.any(Function)
     );
-    expect(onLoad).toBeCalled();
-    expect(set).toBeCalledWith(SUCCESS_SRC);
+    expect(onLoad).toHaveBeenCalled();
+    expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
   });
 
   it('should render error image', () => {
