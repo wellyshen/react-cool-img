@@ -48,8 +48,6 @@ export default (
       return (): void => null;
     }
 
-    if (observerRef.current) observerRef.current.disconnect();
-
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !startLoad) {
