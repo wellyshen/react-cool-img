@@ -46,6 +46,7 @@ describe('useObserver', () => {
   jest.useFakeTimers();
 
   const img = document.createElement('img');
+  const disconnect = jest.fn();
 
   interface Args extends Options {
     debounce?: number;
@@ -65,9 +66,9 @@ describe('useObserver', () => {
     return result;
   };
 
-  const observerMap = new Map();
-  const setIsIntersecting = (el: Element, isIntersecting: boolean): void => {
-    observerMap.get(el)([{ isIntersecting }]);
+  let callback: Function;
+  const setIsIntersecting = (isIntersecting: boolean): void => {
+    callback([{ isIntersecting }]);
   };
 
   beforeAll(() => {
@@ -77,10 +78,10 @@ describe('useObserver', () => {
         root,
         rootMargin,
         threshold,
-        observe: (el: Element): void => {
-          observerMap.set(el, cb);
+        observe: (): void => {
+          callback = cb;
         },
-        disconnect: jest.fn(),
+        disconnect,
       })
     );
   });
@@ -115,7 +116,7 @@ describe('useObserver', () => {
       setRef(img);
     });
 
-    setIsIntersecting(img, false);
+    setIsIntersecting(false);
 
     jest.runAllTimers();
 
@@ -135,7 +136,7 @@ describe('useObserver', () => {
       setRef(img);
     });
 
-    setIsIntersecting(img, true);
+    setIsIntersecting(true);
 
     jest.advanceTimersByTime(100);
 
@@ -145,7 +146,7 @@ describe('useObserver', () => {
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), debounce);
     expect(startLoad).toBeFalsy();
 
-    setIsIntersecting(img, false);
+    setIsIntersecting(false);
 
     expect(clearTimeout).toHaveBeenCalled();
   });
@@ -159,7 +160,7 @@ describe('useObserver', () => {
       setRef(img);
     });
 
-    setIsIntersecting(img, true);
+    setIsIntersecting(true);
 
     act(() => {
       jest.advanceTimersByTime(debounce);
@@ -180,7 +181,7 @@ describe('useObserver', () => {
       setRef(img);
     });
 
-    setIsIntersecting(img, true);
+    setIsIntersecting(true);
 
     act(() => {
       // Default settings
@@ -192,5 +193,11 @@ describe('useObserver', () => {
 
     expect(setTimeout).toHaveBeenCalledTimes(10);
     expect(startLoad).toBeTruthy();
+  });
+
+  it('should stop observe when un-mount', () => {
+    testHook();
+
+    expect(disconnect).toHaveBeenCalled();
   });
 });
