@@ -22,37 +22,62 @@ const renderHelper = ({
     .result;
 
 describe('useObserver › errors', () => {
-  global.console.error = jest.fn();
   const mockIntersectionObserver = jest.fn((_, { threshold }) => ({
     threshold,
     disconnect: (): void => null,
   }));
 
-  it('should handle IntersectionObserver error correctly', () => {
-    renderHelper();
-
-    expect(console.error).toHaveBeenCalledWith(observerErr);
-
-    // @ts-ignore
-    global.IntersectionObserver = mockIntersectionObserver;
-    renderHelper();
-
-    expect(console.error).toHaveBeenCalledWith(observerErr);
-  });
-
-  it('should handle threshold error correctly', () => {
+  beforeAll(() => {
     // @ts-ignore
     global.IntersectionObserver = mockIntersectionObserver;
     // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
     // @ts-ignore
     global.IntersectionObserverEntry.prototype.isIntersecting = false;
+  });
+
+  beforeEach(() => {
+    global.console.error = jest.fn();
+  });
+
+  it('should throw threshold error', () => {
     // @ts-ignore
     renderHelper({ threshold: [0.5, 1] });
 
     expect(console.error).toHaveBeenCalledWith(thresholdErr);
     // @ts-ignore
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
+  });
+
+  it('should throw intersection observer error', () => {
+    renderHelper();
+
+    expect(console.error).not.toHaveBeenCalled();
+
+    // @ts-ignore
+    delete global.IntersectionObserver;
+    renderHelper();
+
+    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
+
+    // @ts-ignore
+    global.IntersectionObserver = mockIntersectionObserver;
+    // @ts-ignore
+    delete global.IntersectionObserverEntry;
+    renderHelper();
+
+    expect(console.error).toHaveBeenCalledTimes(2);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
+
+    // @ts-ignore
+    global.IntersectionObserverEntry = jest.fn();
+    // @ts-ignore
+    delete global.IntersectionObserverEntry.prototype.isIntersecting;
+    renderHelper();
+
+    expect(console.error).toHaveBeenCalledTimes(3);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
   });
 });
 
@@ -80,6 +105,10 @@ describe('useObserver', () => {
         disconnect,
       })
     );
+    // @ts-ignore
+    global.IntersectionObserverEntry = jest.fn();
+    // @ts-ignore
+    global.IntersectionObserverEntry.prototype.isIntersecting = false;
   });
 
   it('should set the options of intersection observer correctly', () => {
