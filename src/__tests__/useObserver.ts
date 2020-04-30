@@ -17,13 +17,9 @@ const renderHelper = ({
   rootMargin = '50px',
   threshold = 0.01,
   debounce = 300,
-}: Args = {}): Return => {
-  const { result } = renderHook(() =>
-    useObserver(debounce, { root, rootMargin, threshold })
-  );
-
-  return result;
-};
+}: Args = {}): Return =>
+  renderHook(() => useObserver(debounce, { root, rootMargin, threshold }))
+    .result;
 
 describe('useObserver › errors', () => {
   global.console.error = jest.fn();
