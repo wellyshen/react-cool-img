@@ -82,7 +82,7 @@ describe('useObserver', () => {
     );
   });
 
-  it('should set intersection observer options correctly', () => {
+  it('should set the options of intersection observer correctly', () => {
     renderHelper();
 
     // @ts-ignore
