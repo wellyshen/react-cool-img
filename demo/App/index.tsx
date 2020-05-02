@@ -1,4 +1,4 @@
-import React, { SFC, ReactElement } from 'react';
+import React, { SFC } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -9,7 +9,7 @@ import errorImg from '../static/error.png';
 import { root, container, title, subtitle, image, cp } from './styles';
 
 const App: SFC<{}> = () => {
-  const renderImages = (num: number): ReactElement[] => {
+  const renderImages = (num: number): JSX.Element[] => {
     const images = [];
 
     while (images.length < num) {
