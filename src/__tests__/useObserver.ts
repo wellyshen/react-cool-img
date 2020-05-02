@@ -37,7 +37,7 @@ describe('useObserver › errors', () => {
   });
 
   beforeEach(() => {
-    global.console.error = jest.fn();
+    console.error = jest.fn();
   });
 
   it('should throw threshold error', () => {

@@ -15,7 +15,7 @@ const load = jest.fn((...args) =>
 const unload = jest.fn();
 jest.mock('../Imager', () => jest.fn(() => ({ load, unload })));
 
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { render } from '@testing-library/react';
 
 import useObserver from '../useObserver';
@@ -40,7 +40,7 @@ describe('<Img />', () => {
     alt: 'Cool Image',
   };
 
-  const matchSnapshot = (img: ReactElement): void => {
+  const matchSnapshot = (img: JSX.Element): void => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
   const setStartLoad = (val = false): void => {
