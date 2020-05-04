@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -8,7 +8,7 @@ import loadingImg from '../static/loading.gif';
 import errorImg from '../static/error.png';
 import { root, container, title, subtitle, image, cp } from './styles';
 
-const App: SFC<{}> = () => {
+const App: FC<{}> = () => {
   const renderImages = (num: number): JSX.Element[] => {
     const images = [];
 

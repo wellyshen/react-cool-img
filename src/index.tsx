@@ -4,7 +4,7 @@ import React, {
   DetailedHTMLProps,
   ImgHTMLAttributes,
   SyntheticEvent,
-  SFC,
+  FC,
   useRef,
   useState,
   useEffect,
@@ -37,7 +37,7 @@ interface Props
   onLoad?: (event?: SyntheticEvent | Event) => void;
 }
 
-const Img: SFC<Props> = ({
+const Img: FC<Props> = ({
   className,
   placeholder,
   src,

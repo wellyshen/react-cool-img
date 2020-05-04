@@ -3,7 +3,7 @@ declare module 'react-cool-img' {
     DetailedHTMLProps,
     ImgHTMLAttributes,
     SyntheticEvent,
-    SFC,
+    FC,
   } from 'react';
 
   interface Options {
@@ -40,7 +40,7 @@ declare module 'react-cool-img' {
     onLoad?: (event?: SyntheticEvent | Event) => void;
   }
 
-  const Img: SFC<Props>;
+  const Img: FC<Props>;
 
   export default Img;
 }
