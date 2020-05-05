@@ -1,3 +1,5 @@
+/*  eslint-disable compat/compat */
+
 import Imager, { Retry } from "../Imager";
 
 describe("Imager", () => {
