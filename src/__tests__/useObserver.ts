@@ -1,11 +1,11 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from "@testing-library/react-hooks";
 
 import useObserver, {
   observerErr,
   thresholdErr,
   Options,
   Return as Current,
-} from '../useObserver';
+} from "../useObserver";
 
 interface Args extends Options {
   debounce?: number;
@@ -14,14 +14,14 @@ type Return = { current: Current };
 
 const renderHelper = ({
   root = null,
-  rootMargin = '50px',
+  rootMargin = "50px",
   threshold = 0.01,
   debounce = 300,
 }: Args = {}): Return =>
   renderHook(() => useObserver(debounce, { root, rootMargin, threshold }))
     .result;
 
-describe('useObserver › errors', () => {
+describe("useObserver › errors", () => {
   const mockIntersectionObserver = jest.fn((_, { threshold }) => ({
     threshold,
     disconnect: (): void => null,
@@ -40,7 +40,7 @@ describe('useObserver › errors', () => {
     console.error = jest.fn();
   });
 
-  it('should throw threshold error', () => {
+  it("should throw threshold error", () => {
     // @ts-ignore
     renderHelper({ threshold: [0.5, 1] });
 
@@ -49,7 +49,7 @@ describe('useObserver › errors', () => {
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
   });
 
-  it('should throw intersection observer error', () => {
+  it("should throw intersection observer error", () => {
     renderHelper();
 
     expect(console.error).not.toHaveBeenCalled();
@@ -81,10 +81,10 @@ describe('useObserver › errors', () => {
   });
 });
 
-describe('useObserver', () => {
+describe("useObserver", () => {
   jest.useFakeTimers();
 
-  const img = document.createElement('img');
+  const img = document.createElement("img");
   const disconnect = jest.fn();
 
   let callback: Function;
@@ -111,17 +111,17 @@ describe('useObserver', () => {
     global.IntersectionObserverEntry.prototype.isIntersecting = false;
   });
 
-  it('should set the options of intersection observer correctly', () => {
+  it("should set the options of intersection observer correctly", () => {
     renderHelper();
 
     // @ts-ignore
     let mkObserver = IntersectionObserver.mock.results[0].value;
 
     expect(mkObserver.root).toBeNull();
-    expect(mkObserver.rootMargin).toBe('50px');
+    expect(mkObserver.rootMargin).toBe("50px");
     expect(mkObserver.threshold).toBe(0.01);
 
-    const options = { root: document.body, rootMargin: '100px', threshold: 1 };
+    const options = { root: document.body, rootMargin: "100px", threshold: 1 };
 
     renderHelper(options);
 
@@ -133,7 +133,7 @@ describe('useObserver', () => {
     expect(mkObserver.threshold).toBe(options.threshold);
   });
 
-  it('should be out-view state', () => {
+  it("should be out-view state", () => {
     const result = renderHelper();
     let [setRef, startLoad] = result.current;
 
@@ -152,7 +152,7 @@ describe('useObserver', () => {
     expect(startLoad).toBeFalsy();
   });
 
-  it('should be out-view state due to debounce', () => {
+  it("should be out-view state due to debounce", () => {
     const debounce = 300;
     const result = renderHelper({ debounce });
     let [setRef, startLoad] = result.current;
@@ -176,7 +176,7 @@ describe('useObserver', () => {
     expect(clearTimeout).toHaveBeenCalled();
   });
 
-  it('should be in-view state without debounce', () => {
+  it("should be in-view state without debounce", () => {
     const debounce = 0;
     const result = renderHelper({ debounce });
     let [setRef, startLoad, setStartLoad] = result.current;
@@ -198,7 +198,7 @@ describe('useObserver', () => {
     expect(startLoad).toBeTruthy();
   });
 
-  it('should be in-view state with debounce', () => {
+  it("should be in-view state with debounce", () => {
     const result = renderHelper();
     let [setRef, startLoad, setStartLoad] = result.current;
 
@@ -220,7 +220,7 @@ describe('useObserver', () => {
     expect(startLoad).toBeTruthy();
   });
 
-  it('should stop observe when un-mount', () => {
+  it("should stop observe when un-mount", () => {
     renderHelper();
 
     expect(disconnect).toHaveBeenCalled();

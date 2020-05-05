@@ -1,10 +1,10 @@
-import { set, get } from '../storage';
+import { set, get } from "../storage";
 
-describe('storage', () => {
-  const key = 'REACT_COOL_IMG';
-  const src = 'https://test-image-url';
+describe("storage", () => {
+  const key = "REACT_COOL_IMG";
+  const src = "https://test-image-url";
 
-  it('should set session storage', () => {
+  it("should set session storage", () => {
     set(src);
 
     expect(
@@ -12,7 +12,7 @@ describe('storage', () => {
     ).toMatchSnapshot();
   });
 
-  it('should get session storage', () => {
+  it("should get session storage", () => {
     window.sessionStorage.removeItem(key);
 
     expect(get(src)).toBeFalsy();

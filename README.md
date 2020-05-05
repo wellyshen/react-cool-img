@@ -51,11 +51,11 @@ $ npm install --save react-cool-img
 The [default props](#api) of the component has been fine-tuned for the purpose of loading optimization. Let's start it as the following example.
 
 ```js
-import Img from 'react-cool-img';
+import Img from "react-cool-img";
 
 // Suggest to use low quality or vector images
-import loadingImage from './images/loading.gif';
-import errorImage from './images/error.svg';
+import loadingImage from "./images/loading.gif";
+import errorImage from "./images/error.svg";
 
 const App = () => (
   <Img
@@ -70,11 +70,11 @@ const App = () => (
 Don't want an image placeholder? No worries, you can use [inline styles](https://reactjs.org/docs/dom-elements.html#style) or CSS for it. The component is fully compatible with the development experience of normal `img` tag.
 
 ```js
-import Img from 'react-cool-img';
+import Img from "react-cool-img";
 
 const App = () => (
   <Img
-    style={{ backgroundColor: 'grey', width: '480', height: '320' }}
+    style={{ backgroundColor: "grey", width: "480", height: "320" }}
     src="https://the-image-url"
     alt="React Cool Img"
   />
@@ -129,9 +129,9 @@ Lazy image loading via the [Intersection Observer API](https://developer.mozilla
 By the `debounce` prop, an image can wait to be downloaded while it's in the viewport for a set time. In cases where you have a long list of images that the user might scroll through inadvertently. At this time loading images can cause unnecessary waste of bandwidth and processing time.
 
 ```js
-import Img from 'react-cool-img';
+import Img from "react-cool-img";
 
-import defaultImg from './images/default.svg';
+import defaultImg from "./images/default.svg";
 
 const App = () => (
   <Img
@@ -146,9 +146,9 @@ const App = () => (
 By the `cache` prop, images you already have cached will abort lazy loading until user visit your app next time. Lazy loading is set up for any remaining images which were not cached. This is helpful for UX, because there's not much extra work to load cached images immediately and is an easy win for making the UI looks more intuitive.
 
 ```js
-import Img from 'react-cool-img';
+import Img from "react-cool-img";
 
-import defaultImg from './images/default.svg';
+import defaultImg from "./images/default.svg";
 
 const App = () => (
   <Img
@@ -204,13 +204,13 @@ $ npm install --save intersection-observer
 Then import it at your app's entry point:
 
 ```js
-import 'intersection-observer';
+import "intersection-observer";
 ```
 
 Or load the polyfill only if needed:
 
 ```js
-if (!window.IntersectionObserver) require('intersection-observer');
+if (!window.IntersectionObserver) require("intersection-observer");
 ```
 
 [Polyfill.io](https://polyfill.io/v3) is an alternative way to add the polyfill when needed.

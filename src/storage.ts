@@ -1,4 +1,4 @@
-const key = 'REACT_COOL_IMG';
+const key = "REACT_COOL_IMG";
 
 export const set = (src: string): void => {
   try {

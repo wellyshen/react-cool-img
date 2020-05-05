@@ -9,11 +9,11 @@ import React, {
   useState,
   useEffect,
   memo,
-} from 'react';
+} from "react";
 
-import useObserver, { Options } from './useObserver';
-import * as storage from './storage';
-import Imager, { Retry } from './Imager';
+import useObserver, { Options } from "./useObserver";
+import * as storage from "./storage";
+import Imager, { Retry } from "./Imager";
 
 interface Props
   extends DetailedHTMLProps<
@@ -24,7 +24,7 @@ interface Props
   placeholder?: string;
   src: string;
   error?: string;
-  crossOrigin?: '' | 'anonymous' | 'use-credentials';
+  crossOrigin?: "" | "anonymous" | "use-credentials";
   decode?: boolean;
   lazy?: boolean;
   cache?: boolean;
@@ -59,10 +59,10 @@ const Img: FC<Props> = ({
   const [setRef, startLoad] = useObserver(debounce, observerOptions);
   const [source, setSource] = useState<string>(
     placeholder ||
-      'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+      "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
   );
   const isSrc = source === src;
-  const filename = src ? src.replace(/^.*[\\/]/, '').split('.')[0] : '';
+  const filename = src ? src.replace(/^.*[\\/]/, "").split(".")[0] : "";
 
   const handleError = (event: Event): void => {
     onError(event);
@@ -126,7 +126,7 @@ const Img: FC<Props> = ({
 };
 
 Img.defaultProps = {
-  className: '',
+  className: "",
   placeholder: null,
   error: null,
   crossOrigin: null,

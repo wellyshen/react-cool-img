@@ -1,10 +1,10 @@
-declare module 'react-cool-img' {
+declare module "react-cool-img" {
   import {
     DetailedHTMLProps,
     ImgHTMLAttributes,
     SyntheticEvent,
     FC,
-  } from 'react';
+  } from "react";
 
   interface Options {
     root?: HTMLElement | null;
@@ -15,7 +15,7 @@ declare module 'react-cool-img' {
   interface Retry {
     count?: number;
     delay?: number;
-    acc?: '+' | '*' | boolean;
+    acc?: "+" | "*" | boolean;
   }
 
   interface Props
@@ -27,7 +27,7 @@ declare module 'react-cool-img' {
     placeholder?: string;
     src: string;
     error?: string;
-    crossOrigin?: '' | 'anonymous' | 'use-credentials';
+    crossOrigin?: "" | "anonymous" | "use-credentials";
     decode?: boolean;
     lazy?: boolean;
     cache?: boolean;

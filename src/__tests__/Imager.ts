@@ -1,14 +1,14 @@
-import Imager, { Retry } from '../Imager';
+import Imager, { Retry } from "../Imager";
 
-describe('Imager', () => {
+describe("Imager", () => {
   jest.useFakeTimers();
   // @ts-ignore
   Imager.prototype.clearImgSrc = jest.fn();
 
-  const FAILURE_SRC = 'FAILURE_SRC';
-  const SUCCESS_SRC = 'SUCCESS_SRC';
-  const ERROR_EVT = { mock: '' };
-  const LOAD_EVT = { mock: '' };
+  const FAILURE_SRC = "FAILURE_SRC";
+  const SUCCESS_SRC = "SUCCESS_SRC";
+  const ERROR_EVT = { mock: "" };
+  const LOAD_EVT = { mock: "" };
 
   interface Return {
     load: Function;
@@ -42,8 +42,8 @@ describe('Imager', () => {
   beforeAll(() => {
     // @ts-ignore
     global.Image = jest.fn(() => {
-      let crossOrigin = '';
-      let src = '';
+      let crossOrigin = "";
+      let src = "";
 
       return {
         onerror: (): void => null,
@@ -73,7 +73,7 @@ describe('Imager', () => {
     global.Image.mockClear();
   });
 
-  it('should call onError without auto-retry', () => {
+  it("should call onError without auto-retry", () => {
     return new Promise((done) => {
       const image = createImage(new Imager());
       const onError = (event: Event): void => {
@@ -91,7 +91,7 @@ describe('Imager', () => {
     });
   });
 
-  it('should call onError with auto-retry', () => {
+  it("should call onError with auto-retry", () => {
     return new Promise((done) => {
       const image = createImage(new Imager());
       const onError = (event: Event): void => {
@@ -118,7 +118,7 @@ describe('Imager', () => {
     });
   });
 
-  it('should call onLoad', () => {
+  it("should call onLoad", () => {
     return new Promise((done) => {
       const image = createImage(new Imager());
       const onError = jest.fn();
@@ -135,16 +135,16 @@ describe('Imager', () => {
     });
   });
 
-  it('should set crossOrigin correctly', () => {
+  it("should set crossOrigin correctly", () => {
     const imager = new Imager();
     const image = createImage(imager);
 
     image.load();
 
     // @ts-ignore
-    expect(imager.img.crossOrigin).toBe('');
+    expect(imager.img.crossOrigin).toBe("");
 
-    const crossOrigin = 'anonymous';
+    const crossOrigin = "anonymous";
 
     image.load({ crossOrigin });
 
@@ -154,7 +154,7 @@ describe('Imager', () => {
     });
   });
 
-  it('should call decode method', () => {
+  it("should call decode method", () => {
     const imager = new Imager();
     const image = createImage(imager);
 
@@ -169,7 +169,7 @@ describe('Imager', () => {
     expect(imager.img.decode).toHaveBeenCalled();
   });
 
-  it('should clear img.src and reset variables', () => {
+  it("should clear img.src and reset variables", () => {
     const imager = new Imager();
     const image = createImage(imager);
 

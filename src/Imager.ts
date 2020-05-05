@@ -3,7 +3,7 @@
 export interface Retry {
   count?: number;
   delay?: number;
-  acc?: '+' | '*' | boolean;
+  acc?: "+" | "*" | boolean;
 }
 
 export default class Imager {
@@ -15,7 +15,7 @@ export default class Imager {
     src: string,
     crossOrigin: string | null,
     decode: boolean,
-    { count = 3, delay = 2, acc = '*' }: Retry,
+    { count = 3, delay = 2, acc = "*" }: Retry,
     onError: (event: Event) => void,
     onLoad: (event: Event) => void
   ): void {
@@ -34,7 +34,7 @@ export default class Imager {
         return;
       }
 
-      let time = acc === '*' ? delay ** this.retries : delay * this.retries;
+      let time = acc === "*" ? delay ** this.retries : delay * this.retries;
       if (acc === false) time = delay;
 
       this.timeout = setTimeout(() => {
@@ -65,7 +65,7 @@ export default class Imager {
 
   private clearImgSrc(): void {
     /* istanbul ignore next */
-    this.img.src = '';
+    this.img.src = "";
     /* istanbul ignore next */
     try {
       /* istanbul ignore next */

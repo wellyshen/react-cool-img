@@ -1,43 +1,43 @@
 /* eslint-disable import/first, jest/expect-expect */
 
-const FAILURE_SRC = 'FAILURE_SRC';
-const SUCCESS_SRC = 'SUCCESS_SRC';
+const FAILURE_SRC = "FAILURE_SRC";
+const SUCCESS_SRC = "SUCCESS_SRC";
 
-jest.mock('../useObserver');
+jest.mock("../useObserver");
 
 const set = jest.fn();
 const get = jest.fn(() => false);
-jest.mock('../storage', () => ({ set, get }));
+jest.mock("../storage", () => ({ set, get }));
 
 const load = jest.fn((...args) =>
   args[args[0] === FAILURE_SRC ? 4 : 5]({ target: { src: args[0] } })
 );
 const unload = jest.fn();
-jest.mock('../Imager', () => jest.fn(() => ({ load, unload })));
+jest.mock("../Imager", () => jest.fn(() => ({ load, unload })));
 
-import React from 'react';
-import { render } from '@testing-library/react';
+import React from "react";
+import { render } from "@testing-library/react";
 
-import useObserver from '../useObserver';
-import * as storage from '../storage';
-import Img from '..';
+import useObserver from "../useObserver";
+import * as storage from "../storage";
+import Img from "..";
 
-describe('<Img />', () => {
+describe("<Img />", () => {
   const props = {
-    className: 'cool-image',
-    placeholder: 'PLACEHOLDER_SRC',
-    error: 'ERROR_SRC',
-    crossOrigin: 'anonymous' as const,
+    className: "cool-image",
+    placeholder: "PLACEHOLDER_SRC",
+    error: "ERROR_SRC",
+    crossOrigin: "anonymous" as const,
     decode: true,
     lazy: true,
     debounce: 300,
-    observerOptions: { rootMargin: '50px', threshold: 0.01 },
+    observerOptions: { rootMargin: "50px", threshold: 0.01 },
     retry: { count: 5, delay: 2 },
-    srcSet: 'cool.png',
-    sizes: '100vw',
+    srcSet: "cool.png",
+    sizes: "100vw",
     onError: jest.fn(),
     onLoad: jest.fn(),
-    alt: 'Cool Image',
+    alt: "Cool Image",
   };
 
   const matchSnapshot = (img: JSX.Element): void => {
@@ -63,14 +63,14 @@ describe('<Img />', () => {
     expect(useObserver).toHaveBeenCalledWith(debounce, observerOptions);
   });
 
-  it('should unload src image', () => {
+  it("should unload src image", () => {
     setStartLoad();
     render(<Img src={SUCCESS_SRC} {...props} />).unmount();
 
     expect(unload).toHaveBeenCalled();
   });
 
-  it('should render placeholder image', () => {
+  it("should render placeholder image", () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
@@ -78,12 +78,12 @@ describe('<Img />', () => {
     expect(props.onLoad).not.toHaveBeenCalled();
   });
 
-  it('should render default placeholder image', () => {
+  it("should render default placeholder image", () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
   });
 
-  it('should render placeholder image due to cache is disabled', () => {
+  it("should render placeholder image due to cache is disabled", () => {
     // @ts-ignore
     storage.get.mockImplementation(() => true);
 
@@ -93,7 +93,7 @@ describe('<Img />', () => {
     expect(set).not.toHaveBeenCalled();
   });
 
-  it('should render src image', () => {
+  it("should render src image", () => {
     setStartLoad(true);
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} />);
 
@@ -111,7 +111,7 @@ describe('<Img />', () => {
     expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
   });
 
-  it('should render src image immediately due to lazy is disabled', () => {
+  it("should render src image immediately due to lazy is disabled", () => {
     setStartLoad();
     matchSnapshot(<Img src={SUCCESS_SRC} {...props} lazy={false} />);
 
@@ -129,7 +129,7 @@ describe('<Img />', () => {
     expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
   });
 
-  it('should render src image immediately due to image cached', () => {
+  it("should render src image immediately due to image cached", () => {
     // @ts-ignore
     storage.get.mockImplementation(() => true);
 
@@ -150,12 +150,12 @@ describe('<Img />', () => {
     expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
   });
 
-  it('should render error image', () => {
+  it("should render error image", () => {
     setStartLoad(true);
     matchSnapshot(<Img src={FAILURE_SRC} {...props} />);
   });
 
-  it('should render placeholder image instead of error image', () => {
+  it("should render placeholder image instead of error image", () => {
     setStartLoad(true);
     matchSnapshot(<Img src={FAILURE_SRC} {...props} error={null} />);
   });
