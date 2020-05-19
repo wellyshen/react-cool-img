@@ -36,8 +36,8 @@ declare module "react-cool-img" {
     retry?: Retry;
     srcSet?: string;
     sizes?: string;
-    onError?: (event?: SyntheticEvent | Event) => void;
-    onLoad?: (event?: SyntheticEvent | Event) => void;
+    onError?: (event: SyntheticEvent | Event) => void;
+    onLoad?: (event: SyntheticEvent | Event) => void;
   }
 
   const Img: FC<Props>;

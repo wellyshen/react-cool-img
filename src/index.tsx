@@ -33,8 +33,8 @@ interface Props
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
-  onError?: (event?: SyntheticEvent | Event) => void;
-  onLoad?: (event?: SyntheticEvent | Event) => void;
+  onError?: (event: SyntheticEvent | Event) => void;
+  onLoad?: (event: SyntheticEvent | Event) => void;
 }
 
 const Img: FC<Props> = ({
