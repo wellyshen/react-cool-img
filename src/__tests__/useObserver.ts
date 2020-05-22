@@ -57,19 +57,11 @@ describe("useObserver › errors", () => {
     // @ts-ignore
     delete global.IntersectionObserver;
     renderHelper();
-
-    expect(console.error).toHaveBeenCalledTimes(1);
-    expect(console.error).toHaveBeenCalledWith(observerErr);
-
     // @ts-ignore
     global.IntersectionObserver = mockIntersectionObserver;
     // @ts-ignore
     delete global.IntersectionObserverEntry;
     renderHelper();
-
-    expect(console.error).toHaveBeenCalledTimes(2);
-    expect(console.error).toHaveBeenCalledWith(observerErr);
-
     // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
     // @ts-ignore
