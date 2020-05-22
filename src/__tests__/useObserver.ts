@@ -43,7 +43,6 @@ describe("useObserver › errors", () => {
   it("should throw threshold error", () => {
     // @ts-ignore
     renderHelper({ threshold: [0.5, 1] });
-
     expect(console.error).toHaveBeenCalledWith(thresholdErr);
     // @ts-ignore
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
@@ -51,7 +50,6 @@ describe("useObserver › errors", () => {
 
   it("should throw intersection observer error", () => {
     renderHelper();
-
     expect(console.error).not.toHaveBeenCalled();
 
     // @ts-ignore
