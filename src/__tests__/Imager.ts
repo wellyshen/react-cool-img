@@ -12,17 +12,17 @@ describe("Imager", () => {
   const ERROR_EVT = { mock: "" };
   const LOAD_EVT = { mock: "" };
 
-  interface Return {
-    load: Function;
-    unload: Function;
-  }
-  interface Args {
+  interface E {
     src?: string;
     crossOrigin?: string;
     decode?: boolean;
     retry?: Retry;
     onError?: (event: Event) => void;
     onLoad?: (event: Event) => void;
+  }
+  interface Return {
+    load: (e?: E) => void;
+    unload: () => void;
   }
 
   const createImage = (instance: Imager): Return => ({
@@ -33,7 +33,7 @@ describe("Imager", () => {
       retry = {},
       onError = (): void => null,
       onLoad = (): void => null,
-    }: Args = {}): void => {
+    }: E = {}): void => {
       instance.load(src, crossOrigin, decode, retry, onError, onLoad);
     },
     unload: (): void => {

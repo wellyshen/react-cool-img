@@ -8,7 +8,7 @@ import loadingImg from "../static/loading.gif";
 import errorImg from "../static/error.png";
 import { root, container, title, subtitle, image, cp } from "./styles";
 
-const App: FC<{}> = () => {
+const App: FC = () => {
   const renderImages = (num: number): JSX.Element[] => {
     const images = [];
 
