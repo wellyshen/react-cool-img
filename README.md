@@ -211,7 +211,8 @@ Or use dynamic imports to only load the file when the polyfill is required:
 
 ```js
 (async () => {
-  if (!"IntersectionObserver" in window) await import("intersection-observer");
+  if (!("IntersectionObserver" in window))
+    await import("intersection-observer");
 })();
 ```
 
