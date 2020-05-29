@@ -2,7 +2,7 @@ import { renderHook, act } from "@testing-library/react-hooks";
 
 import useObserver, {
   observerErr,
-  thresholdErr,
+  thresholdWarn,
   Options,
   Return as Current,
 } from "../useObserver";
@@ -21,7 +21,7 @@ const renderHelper = ({
   renderHook(() => useObserver(debounce, { root, rootMargin, threshold }))
     .result;
 
-describe("useObserver › errors", () => {
+describe("useObserver › messages", () => {
   const mockIntersectionObserver = jest.fn((_, { threshold }) => ({
     threshold,
     disconnect: (): void => null,
@@ -36,38 +36,47 @@ describe("useObserver › errors", () => {
     global.IntersectionObserverEntry.prototype.isIntersecting = false;
   });
 
-  beforeEach(() => {
-    console.error = jest.fn();
-  });
+  it("should throw threshold warn", () => {
+    console.warn = jest.fn();
 
-  it("should throw threshold error", () => {
     // @ts-ignore
     renderHelper({ threshold: [0.5, 1] });
-    expect(console.error).toHaveBeenCalledWith(thresholdErr);
+    expect(console.warn).toHaveBeenCalledWith(thresholdWarn);
     // @ts-ignore
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
   });
 
   it("should throw intersection observer error", () => {
-    renderHelper();
+    console.error = jest.fn();
+
+    let cur = renderHelper().current;
     expect(console.error).not.toHaveBeenCalled();
+    expect(cur[1]).toBeFalsy();
 
     // @ts-ignore
     delete global.IntersectionObserver;
-    renderHelper();
+    cur = renderHelper().current;
+    expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
+    expect(cur[1]).toBeTruthy();
+
     // @ts-ignore
     global.IntersectionObserver = mockIntersectionObserver;
     // @ts-ignore
     delete global.IntersectionObserverEntry;
-    renderHelper();
+    cur = renderHelper().current;
+    expect(console.error).toHaveBeenCalledTimes(2);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
+    expect(cur[1]).toBeTruthy();
+
     // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
     // @ts-ignore
     delete global.IntersectionObserverEntry.prototype.isIntersecting;
-    renderHelper();
-
+    cur = renderHelper().current;
     expect(console.error).toHaveBeenCalledTimes(3);
     expect(console.error).toHaveBeenCalledWith(observerErr);
+    expect(cur[1]).toBeTruthy();
   });
 });
 

@@ -2,7 +2,7 @@ import { Dispatch, useState, useRef, useEffect, useCallback } from "react";
 
 export const observerErr =
   "💡react-cool-img: the browser doesn't support Intersection Observer, please install polyfill to enable lazy loading: https://github.com/wellyshen/react-cool-img#intersection-observer-polyfill";
-export const thresholdErr =
+export const thresholdWarn =
   "💡react-cool-img: the threshold of observerOptions must be a number. Use 0 as fallback.";
 
 export interface Options {
@@ -24,10 +24,11 @@ export default (
   const [el, setEl] = useState<HTMLElement | null>(null);
   const observerRef = useRef<IntersectionObserver>(null);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
+  const erroredRef = useRef<boolean>(false);
   let numThreshold = threshold;
 
   if (typeof threshold !== "number") {
-    console.error(thresholdErr);
+    console.warn(thresholdWarn);
     numThreshold = 0;
   }
 
@@ -44,7 +45,11 @@ export default (
       !("IntersectionObserverEntry" in window) ||
       !("isIntersecting" in window.IntersectionObserverEntry.prototype)
     ) {
-      console.error(observerErr);
+      if (!erroredRef.current) {
+        console.error(observerErr);
+        erroredRef.current = true;
+      }
+      setStartLoad(true);
       return (): void => null;
     }
 
