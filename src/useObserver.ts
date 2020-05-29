@@ -10,11 +10,7 @@ export interface Options {
   rootMargin?: string;
   threshold?: number;
 }
-export type Return = readonly [
-  Dispatch<HTMLElement | null>,
-  boolean,
-  Dispatch<boolean>
-];
+export type Return = readonly [Dispatch<HTMLElement | null>, boolean];
 
 export default (
   debounce: number,
@@ -42,8 +38,7 @@ export default (
   useEffect(() => {
     if (
       !("IntersectionObserver" in window) ||
-      !("IntersectionObserverEntry" in window) ||
-      !("isIntersecting" in window.IntersectionObserverEntry.prototype)
+      !("IntersectionObserverEntry" in window)
     ) {
       if (!erroredRef.current) {
         console.error(observerErr);
@@ -55,8 +50,11 @@ export default (
 
     // eslint-disable-next-line compat/compat
     observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !startLoad) {
+      ([{ isIntersecting, intersectionRatio }]) => {
+        const inView =
+          isIntersecting !== undefined ? isIntersecting : intersectionRatio > 0;
+
+        if (inView && !startLoad) {
           timeoutRef.current = setTimeout(() => {
             setStartLoad(true);
           }, debounce);
@@ -77,6 +75,5 @@ export default (
     };
   }, [el, startLoad, root, rootMargin, numThreshold, debounce, resetTimeout]);
 
-  // setStartLoad is used for testing
-  return [setEl, startLoad, setStartLoad];
+  return [setEl, startLoad];
 };

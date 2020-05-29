@@ -32,8 +32,6 @@ describe("useObserver › messages", () => {
     global.IntersectionObserver = mockIntersectionObserver;
     // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
-    // @ts-ignore
-    global.IntersectionObserverEntry.prototype.isIntersecting = false;
   });
 
   it("should throw threshold warn", () => {
@@ -68,15 +66,6 @@ describe("useObserver › messages", () => {
     expect(console.error).toHaveBeenCalledTimes(2);
     expect(console.error).toHaveBeenCalledWith(observerErr);
     expect(cur[1]).toBeTruthy();
-
-    // @ts-ignore
-    global.IntersectionObserverEntry = jest.fn();
-    // @ts-ignore
-    delete global.IntersectionObserverEntry.prototype.isIntersecting;
-    cur = renderHelper().current;
-    expect(console.error).toHaveBeenCalledTimes(3);
-    expect(console.error).toHaveBeenCalledWith(observerErr);
-    expect(cur[1]).toBeTruthy();
   });
 });
 
@@ -87,8 +76,11 @@ describe("useObserver", () => {
   const disconnect = jest.fn();
 
   let callback: Function;
-  const setIsIntersecting = (isIntersecting: boolean): void => {
-    callback([{ isIntersecting }]);
+  const setIsIntersecting = (
+    isIntersecting: boolean,
+    intersectionRatio?: number
+  ): void => {
+    callback([{ isIntersecting, intersectionRatio }]);
   };
 
   beforeAll(() => {
@@ -106,8 +98,6 @@ describe("useObserver", () => {
     );
     // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
-    // @ts-ignore
-    global.IntersectionObserverEntry.prototype.isIntersecting = false;
   });
 
   it("should set the options of intersection observer correctly", () => {
@@ -178,7 +168,7 @@ describe("useObserver", () => {
   it("should be in-view state without debounce", () => {
     const debounce = 0;
     const result = renderHelper({ debounce });
-    let [setRef, startLoad, setStartLoad] = result.current;
+    let [setRef, startLoad] = result.current;
 
     act(() => {
       setRef(img);
@@ -188,18 +178,17 @@ describe("useObserver", () => {
 
     act(() => {
       jest.advanceTimersByTime(debounce);
-      setStartLoad(true);
     });
 
-    [setRef, startLoad, setStartLoad] = result.current;
+    [setRef, startLoad] = result.current;
 
-    expect(setTimeout).toHaveBeenCalledTimes(7);
+    expect(setTimeout).toHaveBeenCalledTimes(6);
     expect(startLoad).toBeTruthy();
   });
 
   it("should be in-view state with debounce", () => {
     const result = renderHelper();
-    let [setRef, startLoad, setStartLoad] = result.current;
+    let [setRef, startLoad] = result.current;
 
     act(() => {
       setRef(img);
@@ -210,12 +199,11 @@ describe("useObserver", () => {
     act(() => {
       // Default settings
       jest.advanceTimersByTime(300);
-      setStartLoad(true);
     });
 
-    [setRef, startLoad, setStartLoad] = result.current;
+    [setRef, startLoad] = result.current;
 
-    expect(setTimeout).toHaveBeenCalledTimes(10);
+    expect(setTimeout).toHaveBeenCalledTimes(9);
     expect(startLoad).toBeTruthy();
   });
 
@@ -223,5 +211,24 @@ describe("useObserver", () => {
     renderHelper();
 
     expect(disconnect).toHaveBeenCalled();
+  });
+
+  it("should use intersectionRatio instead of isIntersecting", () => {
+    const result = renderHelper();
+    let [setRef, startLoad] = result.current;
+
+    act(() => {
+      setRef(img);
+    });
+
+    setIsIntersecting(undefined, 1);
+
+    act(() => {
+      jest.advanceTimersByTime(300);
+    });
+
+    [setRef, startLoad] = result.current;
+
+    expect(startLoad).toBeTruthy();
   });
 });
