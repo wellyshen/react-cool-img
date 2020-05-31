@@ -8,7 +8,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 
 ❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-img/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@React-Cool-Img,%20my%20web%20app%20becomes%20more%20powerful.%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
-[![build status](https://img.shields.io/travis/wellyshen/react-cool-img/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-img)
+[![build status](https://img.shields.io/github/workflow/status/wellyshen/react-cool-img/CI?style=flat-square)](https://github.com/wellyshen/react-cool-img/actions?query=workflow%3ACI)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-img?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-img?branch=master)
 [![npm version](https://img.shields.io/npm/v/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-img?style=flat-square)](https://www.npmtrends.com/react-cool-img)
