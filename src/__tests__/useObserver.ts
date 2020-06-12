@@ -75,12 +75,16 @@ describe("useObserver", () => {
   const img = document.createElement("img");
   const disconnect = jest.fn();
 
-  let callback: (
-    e: {
-      isIntersecting: boolean;
-      intersectionRatio?: number;
-    }[]
-  ) => void;
+  interface Callback {
+    (
+      e: {
+        isIntersecting: boolean;
+        intersectionRatio?: number;
+      }[]
+    ): void;
+  }
+
+  let callback: Callback;
   const setIsIntersecting = (
     isIntersecting: boolean,
     intersectionRatio?: number
@@ -91,7 +95,7 @@ describe("useObserver", () => {
   beforeAll(() => {
     // @ts-ignore
     global.IntersectionObserver = jest.fn(
-      (cb, { root, rootMargin, threshold }) => ({
+      (cb: Callback, { root, rootMargin, threshold }) => ({
         root,
         rootMargin,
         threshold,
