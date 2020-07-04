@@ -4,20 +4,18 @@ import useObserver, {
   observerErr,
   thresholdWarn,
   Options,
-  Return as Current,
 } from "../useObserver";
 
 interface Args extends Options {
   debounce?: number;
 }
-type Return = { current: Current };
 
 const renderHelper = ({
   root = null,
   rootMargin = "50px",
   threshold = 0.01,
   debounce = 300,
-}: Args = {}): Return =>
+}: Args = {}) =>
   renderHook(() => useObserver(debounce, { root, rootMargin, threshold }))
     .result;
 
