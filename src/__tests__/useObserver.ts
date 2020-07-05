@@ -54,8 +54,7 @@ describe("useObserver › messages", () => {
     // @ts-ignore
     delete global.IntersectionObserver;
     cur = renderHelper().current;
-    expect(console.error).toHaveBeenCalledTimes(1);
-    expect(console.error).toHaveBeenCalledWith(observerErr);
+    expect(console.error).toHaveBeenNthCalledWith(1, observerErr);
     expect(cur[1]).toBeTruthy();
 
     // @ts-ignore
@@ -63,8 +62,7 @@ describe("useObserver › messages", () => {
     // @ts-ignore
     delete global.IntersectionObserverEntry;
     cur = renderHelper().current;
-    expect(console.error).toHaveBeenCalledTimes(2);
-    expect(console.error).toHaveBeenCalledWith(observerErr);
+    expect(console.error).toHaveBeenNthCalledWith(2, observerErr);
     expect(cur[1]).toBeTruthy();
   });
 });
@@ -165,8 +163,11 @@ describe("useObserver", () => {
 
     [setRef, startLoad] = result.current;
 
-    expect(setTimeout).toHaveBeenCalledTimes(3);
-    expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), debounce);
+    expect(setTimeout).toHaveBeenNthCalledWith(
+      3,
+      expect.any(Function),
+      debounce
+    );
     expect(startLoad).toBeFalsy();
 
     setIsIntersecting(false);
