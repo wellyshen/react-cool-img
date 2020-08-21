@@ -45,12 +45,12 @@ describe("<Img />", () => {
   };
   const setStartLoad = (val = false): void => {
     const setState = (): void => null;
-    // @ts-ignore
+    // @ts-expect-error
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
 
   beforeEach(() => {
-    // @ts-ignore
+    // @ts-expect-error
     storage.get.mockReset();
   });
 
@@ -84,7 +84,7 @@ describe("<Img />", () => {
   });
 
   it("should render placeholder image due to cache is disabled", () => {
-    // @ts-ignore
+    // @ts-expect-error
     storage.get.mockImplementation(() => true);
 
     setStartLoad();
@@ -130,7 +130,7 @@ describe("<Img />", () => {
   });
 
   it("should render src image immediately due to image cached", () => {
-    // @ts-ignore
+    // @ts-expect-error
     storage.get.mockImplementation(() => true);
 
     setStartLoad();

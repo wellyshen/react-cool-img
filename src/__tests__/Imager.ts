@@ -4,7 +4,7 @@ import Imager, { Retry } from "../Imager";
 
 describe("Imager", () => {
   jest.useFakeTimers();
-  // @ts-ignore
+  // @ts-expect-error
   Imager.prototype.clearImgSrc = jest.fn();
 
   const FAILURE_SRC = "FAILURE_SRC";
@@ -42,7 +42,7 @@ describe("Imager", () => {
   });
 
   beforeAll(() => {
-    // @ts-ignore
+    // @ts-expect-error
     global.Image = jest.fn(() => {
       let crossOrigin = "";
       let src = "";
@@ -71,7 +71,7 @@ describe("Imager", () => {
   });
 
   afterEach(() => {
-    // @ts-ignore
+    // @ts-expect-error
     global.Image.mockClear();
   });
 
@@ -143,7 +143,7 @@ describe("Imager", () => {
 
     image.load();
 
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img.crossOrigin).toBe("");
 
     const crossOrigin = "anonymous";
@@ -151,7 +151,7 @@ describe("Imager", () => {
     image.load({ crossOrigin });
 
     setTimeout(() => {
-      // @ts-ignore
+      // @ts-expect-error
       expect(imager.img.crossOrigin).toBe(crossOrigin);
     });
   });
@@ -162,12 +162,12 @@ describe("Imager", () => {
 
     image.load();
 
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img.decode).not.toHaveBeenCalled();
 
     image.load({ decode: true });
 
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img.decode).toHaveBeenCalled();
   });
 
@@ -179,29 +179,29 @@ describe("Imager", () => {
 
     jest.runAllTimers();
 
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img.onerror).not.toBeNull();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img.onload).not.toBeNull();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img.src).toBe(FAILURE_SRC);
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img).not.toBeNull();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.timeout).not.toBeNull();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.retries).not.toBe(1);
 
     image.unload();
 
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.clearImgSrc).toHaveBeenCalled();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.img).toBeNull();
     expect(clearTimeout).toHaveBeenCalled();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.timeout).toBeNull();
-    // @ts-ignore
+    // @ts-expect-error
     expect(imager.retries).toBe(1);
   });
 });

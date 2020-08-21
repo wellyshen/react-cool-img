@@ -28,19 +28,18 @@ describe("useObserver › messages", () => {
   }));
 
   beforeAll(() => {
-    // @ts-ignore
+    // @ts-expect-error
     global.IntersectionObserver = mockIntersectionObserver;
-    // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
   });
 
   it("should throw threshold warn", () => {
     console.warn = jest.fn();
 
-    // @ts-ignore
+    // @ts-expect-error
     renderHelper({ threshold: [0.5, 1] });
     expect(console.warn).toHaveBeenCalledWith(thresholdWarn);
-    // @ts-ignore
+    // @ts-expect-error
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
   });
 
@@ -51,15 +50,13 @@ describe("useObserver › messages", () => {
     expect(console.error).not.toHaveBeenCalled();
     expect(cur[1]).toBeFalsy();
 
-    // @ts-ignore
     delete global.IntersectionObserver;
     cur = renderHelper().current;
     expect(console.error).toHaveBeenNthCalledWith(1, observerErr);
     expect(cur[1]).toBeTruthy();
 
-    // @ts-ignore
+    // @ts-expect-error
     global.IntersectionObserver = mockIntersectionObserver;
-    // @ts-ignore
     delete global.IntersectionObserverEntry;
     cur = renderHelper().current;
     expect(console.error).toHaveBeenNthCalledWith(2, observerErr);
@@ -91,7 +88,7 @@ describe("useObserver", () => {
   };
 
   beforeAll(() => {
-    // @ts-ignore
+    // @ts-expect-error
     global.IntersectionObserver = jest.fn(
       (cb: Callback, { root, rootMargin, threshold }) => ({
         root,
@@ -103,14 +100,13 @@ describe("useObserver", () => {
         disconnect,
       })
     );
-    // @ts-ignore
     global.IntersectionObserverEntry = jest.fn();
   });
 
   it("should set the options of intersection observer correctly", () => {
     renderHelper();
 
-    // @ts-ignore
+    // @ts-expect-error
     let mkObserver = IntersectionObserver.mock.results[0].value;
 
     expect(mkObserver.root).toBeNull();
@@ -121,7 +117,7 @@ describe("useObserver", () => {
 
     renderHelper(options);
 
-    // @ts-ignore
+    // @ts-expect-error
     mkObserver = IntersectionObserver.mock.results[1].value;
 
     expect(mkObserver.root).toBe(options.root);
