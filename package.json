@@ -3,7 +3,7 @@
   "version": "1.2.1",
   "description": "A React <Img /> component let you handle image UX and performance as a Pro!",
   "license": "MIT",
-  "homepage": "https://react-cool-img.org",
+  "homepage": "https://react-cool-img.netlify.app",
   "repository": "https://github.com/wellyshen/react-cool-img",
   "bugs": "https://github.com/wellyshen/react-cool-img/issues",
   "keywords": [

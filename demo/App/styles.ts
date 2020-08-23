@@ -6,7 +6,11 @@ const { sm, md, lg, xl } = mq;
 
 export const root = css`
   body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Roboto", sans-serif;
+
+    h1 {
+      font-family: "Bungee Shade", cursive;
+    }
   }
 `;
 
@@ -28,16 +32,25 @@ export const container = css`
 `;
 
 export const title = css`
-  margin: 0 0 0.75rem;
+  margin: 0 0 1rem;
+  font-size: 8vw;
+
+  ${md} {
+    font-size: 4vw;
+  }
 `;
 
 export const subtitle = css`
-  margin: 0 0 2.5rem;
+  margin: 0 0 5rem;
+  font-size: 3vw;
+
+  ${md} {
+    font-size: 1.5vw;
+  }
 `;
 
 export const image = css`
   box-sizing: border-box;
-  padding: 0.5px;
   width: 50%;
   vertical-align: bottom;
   ${md} {
@@ -49,9 +62,4 @@ export const image = css`
   ${xl} {
     width: 20%;
   }
-`;
-
-export const cp = css`
-  display: block;
-  margin-top: 2.5rem;
 `;

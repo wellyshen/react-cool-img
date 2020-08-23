@@ -6,7 +6,7 @@ import GitHubCorner from "../GitHubCorner";
 import Img from "../../src";
 import loadingImg from "../static/loading.gif";
 import errorImg from "../static/error.png";
-import { root, container, title, subtitle, image, cp } from "./styles";
+import { root, container, title, subtitle, image } from "./styles";
 
 const App: FC = () => {
   const renderImages = (num: number): JSX.Element[] => {
@@ -40,13 +40,12 @@ const App: FC = () => {
       />
       <div css={container}>
         <GitHubCorner url="https://github.com/wellyshen/react-cool-img" />
-        <h1 css={title}>React Cool Img</h1>
+        <h1 css={title}>REACT COOL IMG</h1>
         <p css={subtitle}>
           {`A React <Img /> component let you handle image UX and performance as a
           Pro!`}
         </p>
         <div>{renderImages(300)}</div>
-        <small css={cp}>Welly Shen ©</small>
       </div>
     </>
   );

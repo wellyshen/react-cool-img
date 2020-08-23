@@ -1,10 +1,10 @@
-# React Cool Img
+# <em><b>REACT COOL IMG</b></em>
 
 This is a lightweight React `<Img />` component, which helps you handle image UX (user experience) and performance optimization as a professional guy 🤓
 
 It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag by many cool [features](#features) without breaking your original development experience. Ideally, it can be an `img` tag replacement for [React.js](https://reactjs.org).
 
-⚡️ Live demo: https://react-cool-img.org
+⚡️ Live demo: https://react-cool-img.netlify.app
 
 ❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-img/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@React-Cool-Img,%20my%20web%20app%20becomes%20more%20powerful.%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
@@ -62,7 +62,7 @@ const App = () => (
     placeholder={loadingImage}
     src="https://the-image-url"
     error={errorImage}
-    alt="React Cool Img"
+    alt="REACT COOL IMG"
   />
 );
 ```
@@ -76,7 +76,7 @@ const App = () => (
   <Img
     style={{ backgroundColor: "grey", width: "480", height: "320" }}
     src="https://the-image-url"
-    alt="React Cool Img"
+    alt="REACT COOL IMG"
   />
 );
 ```
@@ -138,7 +138,7 @@ const App = () => (
     placeholder={defaultImg}
     src="https://the-image-url"
     debounce={1000} // Default is 300 (ms)
-    alt="React Cool Img"
+    alt="REACT COOL IMG"
   />
 );
 ```
@@ -155,7 +155,7 @@ const App = () => (
     placeholder={defaultImg}
     src="https://the-image-url"
     cache // Default is true, just for demo
-    alt="React Cool Img"
+    alt="REACT COOL IMG"
   />
 );
 ```
