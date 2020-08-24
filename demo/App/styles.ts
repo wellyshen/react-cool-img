@@ -34,7 +34,6 @@ export const container = css`
 export const title = css`
   margin: 0 0 1rem;
   font-size: 8vw;
-
   ${md} {
     font-size: 4vw;
   }
@@ -43,7 +42,6 @@ export const title = css`
 export const subtitle = css`
   margin: 0 0 5rem;
   font-size: 3vw;
-
   ${md} {
     font-size: 1.5vw;
   }
