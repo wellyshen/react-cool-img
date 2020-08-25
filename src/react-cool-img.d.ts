@@ -18,7 +18,7 @@ declare module "react-cool-img" {
     acc?: "+" | "*" | boolean;
   }
 
-  interface Props
+  export interface ImgProps
     extends DetailedHTMLProps<
       ImgHTMLAttributes<HTMLImageElement>,
       HTMLImageElement
@@ -40,7 +40,7 @@ declare module "react-cool-img" {
     onLoad?: (event: SyntheticEvent | Event) => void;
   }
 
-  const Img: FC<Props>;
+  const Img: FC<ImgProps>;
 
   export default Img;
 }
