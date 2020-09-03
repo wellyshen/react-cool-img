@@ -37,7 +37,7 @@ export default (
     numThreshold = 0;
   }
 
-  const resetTimeout = useCallback((): void => {
+  const resetTimeout = useCallback(() => {
     if (!timeoutRef.current) return;
 
     clearTimeout(timeoutRef.current);
@@ -78,7 +78,7 @@ export default (
 
     if (el) observer.observe(el);
 
-    return (): void => {
+    return () => {
       observer.disconnect();
       resetTimeout();
     };

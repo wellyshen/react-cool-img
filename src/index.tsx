@@ -64,7 +64,7 @@ const Img: FC<Props> = ({
   const isSrc = source === src;
   const filename = src ? src.replace(/^.*[\\/]/, "").split(".")[0] : "";
 
-  const handleError = (event: Event): void => {
+  const handleError = (event: Event) => {
     if (onError) onError(event);
 
     if (error) {
@@ -74,7 +74,7 @@ const Img: FC<Props> = ({
     }
   };
 
-  const handleLoad = (event: Event): void => {
+  const handleLoad = (event: Event) => {
     if (onLoad) onLoad(event);
 
     setSource(src);
@@ -83,7 +83,7 @@ const Img: FC<Props> = ({
 
   useEffect(() => {
     const { current: imager } = imagerRef;
-    const loadImg = (): void => {
+    const loadImg = () => {
       imager.load(src, decode, retry, handleError, handleLoad, crossOrigin);
     };
 
@@ -93,7 +93,7 @@ const Img: FC<Props> = ({
       loadImg();
     }
 
-    return (): void => {
+    return () => {
       imager.unload();
     };
   }, [cache, startLoad, src, crossOrigin, decode, retry]);

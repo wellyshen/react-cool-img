@@ -29,7 +29,7 @@ export default class Imager {
       });
 
     // @ts-expect-error
-    this.img.onerror = (event: Event): void => {
+    this.img.onerror = (event: Event) => {
       if (!count || this.retries > count) {
         onError(event);
         return;
@@ -45,7 +45,7 @@ export default class Imager {
 
       this.retries += 1;
     };
-    this.img.onload = (event: Event): void => {
+    this.img.onload = (event: Event) => {
       onLoad(event);
     };
   }
@@ -64,7 +64,7 @@ export default class Imager {
     this.retries = 1;
   }
 
-  private clearImgSrc(): void {
+  private clearImgSrc() {
     /* istanbul ignore next */
     (this.img as HTMLImageElement).src = "";
     /* istanbul ignore next */

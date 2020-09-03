@@ -86,7 +86,7 @@ describe("useObserver", () => {
   const setIsIntersecting = (
     isIntersecting: boolean,
     intersectionRatio?: number
-  ): void => {
+  ) => {
     callback([{ isIntersecting, intersectionRatio }]);
   };
 
@@ -98,7 +98,7 @@ describe("useObserver", () => {
         root,
         rootMargin,
         threshold,
-        observe: (): void => {
+        observe: () => {
           callback = cb;
         },
         disconnect,

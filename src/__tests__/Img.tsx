@@ -40,10 +40,10 @@ describe("<Img />", () => {
     alt: "Cool Image",
   };
 
-  const matchSnapshot = (img: JSX.Element): void => {
+  const matchSnapshot = (img: JSX.Element) => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
-  const setStartLoad = (val = false): void => {
+  const setStartLoad = (val = false) => {
     const setState = () => null;
     // @ts-expect-error
     useObserver.mockImplementation(() => [setState, val, setState]);

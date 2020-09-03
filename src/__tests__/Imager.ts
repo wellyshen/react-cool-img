@@ -33,10 +33,10 @@ describe("Imager", () => {
       onError = () => null,
       onLoad = () => null,
       crossOrigin,
-    }: E = {}): void => {
+    }: E = {}) => {
       instance.load(src, decode, retry, onError, onLoad, crossOrigin);
     },
-    unload: (): void => {
+    unload: () => {
       instance.unload();
     },
   });
@@ -78,7 +78,7 @@ describe("Imager", () => {
   it("should call onError without auto-retry", () => {
     return new Promise((done) => {
       const image = createImage(new Imager());
-      const onError = (event: Event): void => {
+      const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
         done();
       };
@@ -96,7 +96,7 @@ describe("Imager", () => {
   it("should call onError with auto-retry", () => {
     return new Promise((done) => {
       const image = createImage(new Imager());
-      const onError = (event: Event): void => {
+      const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
         done();
       };
@@ -124,7 +124,7 @@ describe("Imager", () => {
     return new Promise((done) => {
       const image = createImage(new Imager());
       const onError = jest.fn();
-      const onLoad = (event: Event): void => {
+      const onLoad = (event: Event) => {
         expect(event).toMatchObject(LOAD_EVT);
         done();
       };
