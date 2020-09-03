@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text, react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/alt-text, react/require-default-props, react-hooks/exhaustive-deps */
 
 import React, {
   DetailedHTMLProps,
@@ -38,17 +38,17 @@ interface Props
 }
 
 const Img: FC<Props> = ({
-  className,
+  className = "",
   placeholder,
   src,
   error,
   crossOrigin,
-  decode,
-  lazy,
-  cache,
-  debounce,
-  observerOptions,
-  retry,
+  decode = true,
+  lazy = true,
+  cache = true,
+  debounce = 300,
+  observerOptions = {},
+  retry = {},
   srcSet,
   sizes,
   onError,
@@ -65,7 +65,7 @@ const Img: FC<Props> = ({
   const filename = src ? src.replace(/^.*[\\/]/, "").split(".")[0] : "";
 
   const handleError = (event: Event): void => {
-    onError(event);
+    if (onError) onError(event);
 
     if (error) {
       setSource(error);
@@ -75,7 +75,7 @@ const Img: FC<Props> = ({
   };
 
   const handleLoad = (event: Event): void => {
-    onLoad(event);
+    if (onLoad) onLoad(event);
 
     setSource(src);
     if (cache) storage.set(src);
@@ -84,7 +84,7 @@ const Img: FC<Props> = ({
   useEffect(() => {
     const { current: imager } = imagerRef;
     const loadImg = (): void => {
-      imager.load(src, crossOrigin, decode, retry, handleError, handleLoad);
+      imager.load(src, decode, retry, handleError, handleLoad, crossOrigin);
     };
 
     if (!lazy || (cache && storage.get(src))) {
@@ -103,9 +103,9 @@ const Img: FC<Props> = ({
       <img
         className={`${className} no-js-${filename}`}
         src={source}
-        crossOrigin={isSrc ? crossOrigin : null}
-        srcSet={isSrc ? srcSet : null}
-        sizes={isSrc ? sizes : null}
+        crossOrigin={isSrc ? crossOrigin : undefined}
+        srcSet={isSrc ? srcSet : undefined}
+        sizes={isSrc ? sizes : undefined}
         ref={setRef}
         {...rest}
       />
@@ -123,23 +123,6 @@ const Img: FC<Props> = ({
       </noscript>
     </>
   );
-};
-
-Img.defaultProps = {
-  className: "",
-  placeholder: null,
-  error: null,
-  crossOrigin: null,
-  decode: true,
-  lazy: true,
-  cache: true,
-  debounce: 300,
-  observerOptions: {},
-  retry: {},
-  srcSet: null,
-  sizes: null,
-  onError: /* istanbul ignore next */ (): void => null,
-  onLoad: /* istanbul ignore next */ (): void => null,
 };
 
 export default memo(Img);

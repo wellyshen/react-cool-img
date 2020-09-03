@@ -1,4 +1,4 @@
-/*  eslint-disable compat/compat */
+/*  eslint-disable compat/compat, @typescript-eslint/no-unused-vars */
 
 import Imager, { Retry } from "../Imager";
 
@@ -28,13 +28,13 @@ describe("Imager", () => {
   const createImage = (instance: Imager): Return => ({
     load: ({
       src = SUCCESS_SRC,
-      crossOrigin = null,
       decode = false,
       retry = {},
-      onError = (): void => null,
-      onLoad = (): void => null,
+      onError = () => null,
+      onLoad = () => null,
+      crossOrigin,
     }: E = {}): void => {
-      instance.load(src, crossOrigin, decode, retry, onError, onLoad);
+      instance.load(src, decode, retry, onError, onLoad, crossOrigin);
     },
     unload: (): void => {
       instance.unload();
@@ -48,8 +48,8 @@ describe("Imager", () => {
       let src = "";
 
       return {
-        onerror: (): void => null,
-        onload: (): void => null,
+        onerror: (e: any) => null,
+        onload: (e: any) => null,
         decode: jest.fn(() => Promise.resolve()),
         set src(val: string) {
           if (val === FAILURE_SRC) setTimeout(() => this.onerror(ERROR_EVT));

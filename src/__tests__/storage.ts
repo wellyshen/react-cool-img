@@ -8,7 +8,7 @@ describe("storage", () => {
     set(src);
 
     expect(
-      Object.keys(JSON.parse(window.sessionStorage.getItem(key)))
+      Object.keys(JSON.parse(window.sessionStorage.getItem(key) || "{}"))
     ).toMatchSnapshot();
   });
 

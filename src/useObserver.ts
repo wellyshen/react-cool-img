@@ -54,7 +54,7 @@ export default (
         erroredRef.current = true;
       }
       setStartLoad(true);
-      return (): void => null;
+      return () => null;
     }
 
     // eslint-disable-next-line compat/compat

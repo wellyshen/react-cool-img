@@ -10,7 +10,7 @@ const get = jest.fn(() => false);
 jest.mock("../storage", () => ({ set, get }));
 
 const load = jest.fn((...args) =>
-  args[args[0] === FAILURE_SRC ? 4 : 5]({ target: { src: args[0] } })
+  args[args[0] === FAILURE_SRC ? 3 : 4]({ target: { src: args[0] } })
 );
 const unload = jest.fn();
 jest.mock("../Imager", () => jest.fn(() => ({ load, unload })));
@@ -44,7 +44,7 @@ describe("<Img />", () => {
     expect(render(img).asFragment()).toMatchSnapshot();
   };
   const setStartLoad = (val = false): void => {
-    const setState = (): void => null;
+    const setState = () => null;
     // @ts-expect-error
     useObserver.mockImplementation(() => [setState, val, setState]);
   };
@@ -80,7 +80,7 @@ describe("<Img />", () => {
 
   it("should render default placeholder image", () => {
     setStartLoad();
-    matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={null} />);
+    matchSnapshot(<Img src={SUCCESS_SRC} {...props} placeholder={undefined} />);
   });
 
   it("should render placeholder image due to cache is disabled", () => {
@@ -101,11 +101,11 @@ describe("<Img />", () => {
 
     expect(load).toHaveBeenCalledWith(
       SUCCESS_SRC,
-      crossOrigin,
       decode,
       retry,
       expect.any(Function),
-      expect.any(Function)
+      expect.any(Function),
+      crossOrigin
     );
     expect(onLoad).toHaveBeenCalled();
     expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
@@ -119,11 +119,11 @@ describe("<Img />", () => {
 
     expect(load).toHaveBeenCalledWith(
       SUCCESS_SRC,
-      crossOrigin,
       decode,
       retry,
       expect.any(Function),
-      expect.any(Function)
+      expect.any(Function),
+      crossOrigin
     );
     expect(onLoad).toHaveBeenCalled();
     expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
@@ -140,11 +140,11 @@ describe("<Img />", () => {
 
     expect(load).toHaveBeenCalledWith(
       SUCCESS_SRC,
-      crossOrigin,
       decode,
       retry,
       expect.any(Function),
-      expect.any(Function)
+      expect.any(Function),
+      crossOrigin
     );
     expect(onLoad).toHaveBeenCalled();
     expect(set).toHaveBeenCalledWith(SUCCESS_SRC);
@@ -157,6 +157,6 @@ describe("<Img />", () => {
 
   it("should render placeholder image instead of error image", () => {
     setStartLoad(true);
-    matchSnapshot(<Img src={FAILURE_SRC} {...props} error={null} />);
+    matchSnapshot(<Img src={FAILURE_SRC} {...props} error={undefined} />);
   });
 });
