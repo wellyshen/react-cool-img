@@ -8,9 +8,9 @@ import {
 } from "react";
 
 export const observerErr =
-  "💡react-cool-img: the browser doesn't support Intersection Observer, please install polyfill to enable lazy loading: https://github.com/wellyshen/react-cool-img#intersection-observer-polyfill";
+  "> 💡react-cool-img: the browser doesn't support Intersection Observer, please install polyfill to enable lazy loading: https://github.com/wellyshen/react-cool-img#intersection-observer-polyfill";
 export const thresholdWarn =
-  "💡react-cool-img: the threshold of observerOptions must be a number. Use 0 as fallback.";
+  "> 💡react-cool-img: the threshold of observerOptions must be a number. Use 0 as fallback.";
 
 export interface Options {
   root?: HTMLElement;

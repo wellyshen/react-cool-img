@@ -7,7 +7,7 @@ export const set = (src: string): void => {
     sessionStorage.setItem(key, JSON.stringify(data));
   } catch (error) {
     /* istanbul ignore next */
-    console.error(`💡react-cool-img: ${error}`);
+    console.error(`> 💡react-cool-img: ${error}`);
   }
 };
 
@@ -17,7 +17,7 @@ export const get = (src: string): boolean => {
     return !!data[src];
   } catch (error) {
     /* istanbul ignore next */
-    console.error(`💡react-cool-img: ${error}`);
+    console.error(`> 💡react-cool-img: ${error}`);
     /* istanbul ignore next */
     return false;
   }
