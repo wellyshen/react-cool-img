@@ -48,7 +48,9 @@ describe("Imager", () => {
       let src = "";
 
       return {
+        // @ts-expect-error
         onerror: (e: any) => null,
+        // @ts-expect-error
         onload: (e: any) => null,
         decode: jest.fn(() => Promise.resolve()),
         set src(val: string) {
