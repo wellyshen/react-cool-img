@@ -8,7 +8,7 @@ export interface Retry {
 
 export default class Imager {
   private img: HTMLImageElement | null = null;
-  private timeout: NodeJS.Timeout | null = null;
+  private timeout: ReturnType<typeof setTimeout> | null = null;
   private retries = 1;
 
   load(
