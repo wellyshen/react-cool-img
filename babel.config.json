@@ -6,14 +6,11 @@
         "loose": true
       }
     ],
-    "@babel/typescript",
-    "@babel/react"
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ]
   ],
-  "plugins": ["@babel/proposal-class-properties"],
-  "env": {
-    "development": {
-      "presets": ["@emotion/babel-preset-css-prop"],
-      "plugins": ["@emotion"]
-    }
-  }
+  "plugins": ["@babel/proposal-class-properties", "@emotion/babel-plugin"]
 }

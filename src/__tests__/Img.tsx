@@ -15,7 +15,6 @@ const load = jest.fn((...args) =>
 const unload = jest.fn();
 jest.mock("../Imager", () => jest.fn(() => ({ load, unload })));
 
-import React from "react";
 import { render } from "@testing-library/react";
 
 import useObserver from "../useObserver";
