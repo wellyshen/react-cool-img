@@ -82,6 +82,7 @@ describe("Imager", () => {
       const image = createImage(new Imager());
       const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
+        // @ts-expect-error
         done();
       };
       const onLoad = jest.fn();
@@ -100,6 +101,7 @@ describe("Imager", () => {
       const image = createImage(new Imager());
       const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
+        // @ts-expect-error
         done();
       };
       const onLoad = jest.fn();
@@ -128,6 +130,7 @@ describe("Imager", () => {
       const onError = jest.fn();
       const onLoad = (event: Event) => {
         expect(event).toMatchObject(LOAD_EVT);
+        // @ts-expect-error
         done();
       };
 
