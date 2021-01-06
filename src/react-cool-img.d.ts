@@ -3,7 +3,8 @@ declare module "react-cool-img" {
     DetailedHTMLProps,
     ImgHTMLAttributes,
     SyntheticEvent,
-    FC,
+    RefObject,
+    ForwardRefExoticComponent,
   } from "react";
 
   interface Options {
@@ -36,11 +37,12 @@ declare module "react-cool-img" {
     retry?: Retry;
     srcSet?: string;
     sizes?: string;
+    ref: RefObject<HTMLImageElement>;
     onError?: (event: SyntheticEvent | Event) => void;
     onLoad?: (event: SyntheticEvent | Event) => void;
   }
 
-  const Img: FC<ImgProps>;
+  const Img: ForwardRefExoticComponent<HTMLImageElement, ImgProps>;
 
   export default Img;
 }

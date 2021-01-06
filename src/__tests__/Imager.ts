@@ -77,8 +77,8 @@ describe("Imager", () => {
     global.Image.mockClear();
   });
 
-  it("should call onError without auto-retry", () => {
-    return new Promise((done) => {
+  it("should call onError without auto-retry", () =>
+    new Promise((done) => {
       const image = createImage(new Imager());
       const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
@@ -93,11 +93,10 @@ describe("Imager", () => {
 
       expect(setTimeout).toHaveBeenCalledTimes(1);
       expect(onLoad).not.toHaveBeenCalled();
-    });
-  });
+    }));
 
-  it("should call onError with auto-retry", () => {
-    return new Promise((done) => {
+  it("should call onError with auto-retry", () =>
+    new Promise((done) => {
       const image = createImage(new Imager());
       const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
@@ -121,11 +120,10 @@ describe("Imager", () => {
       jest.runAllTimers();
 
       expect(setTimeout).toHaveBeenCalledTimes(count * 2 + 3);
-    });
-  });
+    }));
 
-  it("should call onLoad", () => {
-    return new Promise((done) => {
+  it("should call onLoad", () =>
+    new Promise((done) => {
       const image = createImage(new Imager());
       const onError = jest.fn();
       const onLoad = (event: Event) => {
@@ -139,8 +137,7 @@ describe("Imager", () => {
       jest.runAllTimers();
 
       expect(onError).not.toHaveBeenCalled();
-    });
-  });
+    }));
 
   it("should set crossOrigin correctly", () => {
     const imager = new Imager();
