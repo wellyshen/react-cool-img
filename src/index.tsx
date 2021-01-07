@@ -71,12 +71,12 @@ const Img = forwardRef<HTMLImageElement, Props>(
     const filename = src ? src.replace(/^.*[\\/]/, "").split(".")[0] : "";
 
     const setRef = (el: HTMLImageElement) => {
-      if (el) {
-        setImg(el);
-        // @ts-expect-error
-        // eslint-disable-next-line no-param-reassign
-        ref.current = el;
-      }
+      if (!el) return;
+
+      setImg(el);
+      // @ts-expect-error
+      // eslint-disable-next-line no-param-reassign
+      if (ref) ref.current = el;
     };
 
     const handleError = (event: Event) => {
