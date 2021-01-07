@@ -62,13 +62,22 @@ const Img = forwardRef<HTMLImageElement, Props>(
     ref
   ) => {
     const imagerRef = useRef<Imager>(new Imager());
-    const [setRef, startLoad] = useObserver(debounce, observerOptions);
+    const [setImg, startLoad] = useObserver(debounce, observerOptions);
     const [source, setSource] = useState<string>(
       placeholder ||
         "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
     );
     const isSrc = source === src;
     const filename = src ? src.replace(/^.*[\\/]/, "").split(".")[0] : "";
+
+    const setRef = (el: HTMLImageElement) => {
+      if (el) {
+        setImg(el);
+        // @ts-expect-error
+        // eslint-disable-next-line no-param-reassign
+        ref.current = el;
+      }
+    };
 
     const handleError = (event: Event) => {
       if (onError) onError(event);
@@ -113,12 +122,7 @@ const Img = forwardRef<HTMLImageElement, Props>(
           srcSet={isSrc ? srcSet : undefined}
           sizes={isSrc ? sizes : undefined}
           {...rest}
-          ref={(el) => {
-            setRef(el);
-            // @ts-expect-error
-            // eslint-disable-next-line no-param-reassign
-            ref.current = el;
-          }}
+          ref={setRef}
         />
         {/* For SEO and JavaScript unavailable */}
         <noscript>
