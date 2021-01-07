@@ -23,6 +23,7 @@ import * as storage from "../storage";
 import Img from "..";
 
 describe("<Img />", () => {
+  const ref = createRef<HTMLImageElement>();
   const props = {
     className: "cool-image",
     placeholder: "PLACEHOLDER_SRC",
@@ -38,7 +39,7 @@ describe("<Img />", () => {
     onError: jest.fn(),
     onLoad: jest.fn(),
     alt: "Cool Image",
-    ref: createRef<HTMLImageElement>(),
+    ref,
   };
 
   const matchSnapshot = (img: JSX.Element) => {
@@ -159,5 +160,11 @@ describe("<Img />", () => {
   it("should render placeholder image instead of error image", () => {
     setStartLoad(true);
     matchSnapshot(<Img src={FAILURE_SRC} {...props} error={undefined} />);
+  });
+
+  it("should set ref correctly", () => {
+    render(<Img src={SUCCESS_SRC} />);
+
+    expect(ref.current).not.toBeNull();
   });
 });
