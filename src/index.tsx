@@ -4,7 +4,7 @@ import React, {
   DetailedHTMLProps,
   ImgHTMLAttributes,
   SyntheticEvent,
-  RefObject,
+  MutableRefObject,
   useRef,
   useState,
   useEffect,
@@ -34,7 +34,7 @@ interface Props
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
-  ref: RefObject<HTMLImageElement>;
+  ref: MutableRefObject<HTMLImageElement>;
   onError?: (event: SyntheticEvent | Event) => void;
   onLoad?: (event: SyntheticEvent | Event) => void;
 }
@@ -74,9 +74,8 @@ const Img = forwardRef<HTMLImageElement, Props>(
       if (!el) return;
 
       setImg(el);
-      // @ts-expect-error
       // eslint-disable-next-line no-param-reassign
-      if (ref) ref.current = el;
+      if (ref) (ref as MutableRefObject<HTMLImageElement>).current = el;
     };
 
     const handleError = (event: Event) => {
