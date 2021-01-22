@@ -34,7 +34,7 @@ interface Props
   retry?: Retry;
   srcSet?: string;
   sizes?: string;
-  ref: MutableRefObject<HTMLImageElement>;
+  ref?: MutableRefObject<HTMLImageElement>;
   onError?: (event: SyntheticEvent | Event) => void;
   onLoad?: (event: SyntheticEvent | Event) => void;
 }

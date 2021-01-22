@@ -37,7 +37,7 @@ declare module "react-cool-img" {
     retry?: Retry;
     srcSet?: string;
     sizes?: string;
-    ref: RefObject<HTMLImageElement>;
+    ref?: RefObject<HTMLImageElement>;
     onError?: (event: SyntheticEvent | Event) => void;
     onLoad?: (event: SyntheticEvent | Event) => void;
   }
