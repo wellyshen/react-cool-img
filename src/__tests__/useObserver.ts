@@ -55,6 +55,7 @@ describe("useObserver › messages", () => {
     delete global.IntersectionObserver;
     cur = renderHelper().current;
     expect(console.error).toHaveBeenCalledTimes(1);
+    expect(console.error).toHaveBeenCalledWith(observerErr);
     expect(cur[1]).toBeTruthy();
 
     // @ts-expect-error
@@ -64,8 +65,6 @@ describe("useObserver › messages", () => {
     cur = renderHelper().current;
     expect(console.error).toHaveBeenCalledTimes(2);
     expect(cur[1]).toBeTruthy();
-
-    expect(console.error).toHaveBeenCalledWith(observerErr);
   });
 });
 
