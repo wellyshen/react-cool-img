@@ -1,0 +1,31 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "21:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.13.16
+  - dependency-name: stylelint-config-standard
+    versions:
+    - 21.0.0
+  - dependency-name: husky
+    versions:
+    - 5.0.9
+    - 5.1.1
+  - dependency-name: "@babel/preset-env"
+    versions:
+    - 7.13.5
+  - dependency-name: "@testing-library/react-hooks"
+    versions:
+    - 5.0.3
+- package-ecosystem: github-actions
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "21:00"
+  open-pull-requests-limit: 10
