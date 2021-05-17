@@ -28,7 +28,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 - 🔍 [Supports server-side rendering / Javascript is disabled / SEO](#javascript-availability-and-seo).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🦔 Tiny size ([~ 2kB gzipped](https://bundlephobia.com/result?p=react-cool-img)). No external dependencies, aside for the `react` and `react-dom`.
-- 🔧 Easy to use.
+- 🍰 Easy to use.
 
 > ⚠️ [Most modern browsers support Intersection Observer natively](https://caniuse.com/#feat=intersectionobserver). You can also [add polyfill](#intersection-observer-polyfill) for full browser support.
 
