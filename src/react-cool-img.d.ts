@@ -7,13 +7,13 @@ declare module "react-cool-img" {
     ForwardRefExoticComponent,
   } from "react";
 
-  interface Options {
+  export interface Options {
     root?: HTMLElement | null;
     rootMargin?: string;
     threshold?: number;
   }
 
-  interface Retry {
+  export interface Retry {
     count?: number;
     delay?: number;
     acc?: "+" | "*" | boolean;
