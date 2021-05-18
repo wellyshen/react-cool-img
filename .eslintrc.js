@@ -7,5 +7,6 @@ module.exports = {
         allow: ["warn", "error"],
       },
     ],
+    "testing-library/render-result-naming-convention": "off",
   },
 };
