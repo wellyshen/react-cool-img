@@ -13,7 +13,7 @@ It empowers the standard [`img`](https://developer.mozilla.org/en-US/docs/Web/HT
 [![npm version](https://img.shields.io/npm/v/react-cool-img?style=flat-square)](https://www.npmjs.com/package/react-cool-img)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-img?style=flat-square)](https://www.npmtrends.com/react-cool-img)
 [![npm downloads](https://img.shields.io/npm/dt/react-cool-img?style=flat-square)](https://www.npmtrends.com/react-cool-img)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-img?style=flat-square)](https://bundlephobia.com/result?p=react-cool-img)
+[![gzip size](https://badgen.net/bundlephobia/minzip/react-cool-img?label=gzip%20size&style=flat-square)](https://bundlephobia.com/result?p=react-cool-img)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-img?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-img/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange?style=flat-square)](#contributors-)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
