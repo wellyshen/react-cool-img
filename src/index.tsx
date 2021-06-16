@@ -40,6 +40,9 @@ interface Props
   onLoad?: (event: SyntheticEvent | Event) => void;
 }
 
+const DEFAULT_SRC =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+
 const Img = forwardRef<HTMLImageElement, Props>(
   (
     {
@@ -63,10 +66,7 @@ const Img = forwardRef<HTMLImageElement, Props>(
     ref
   ) => {
     const [setImg, startLoad] = useObserver(debounce, observerOptions);
-    const [source, setSource] = useState<string>(
-      placeholder ||
-        "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-    );
+    const [source, setSource] = useState(placeholder || DEFAULT_SRC);
     const imagerRef = useRef<Imager>(new Imager());
     const onErrorRef = useLatest(onError);
     const onLoadRef = useLatest(onLoad);
@@ -82,9 +82,14 @@ const Img = forwardRef<HTMLImageElement, Props>(
     };
 
     useEffect(() => {
+      if (!src) {
+        setSource(placeholder || DEFAULT_SRC);
+        return () => null;
+      }
+
       const { current: imager } = imagerRef;
 
-      const loadImg = () => {
+      const loadImg = () =>
         imager.load(
           src,
           decode,
@@ -106,7 +111,6 @@ const Img = forwardRef<HTMLImageElement, Props>(
           },
           crossOrigin
         );
-      };
 
       if (!lazy || (cache && storage.get(src))) {
         loadImg();
@@ -114,9 +118,7 @@ const Img = forwardRef<HTMLImageElement, Props>(
         loadImg();
       }
 
-      return () => {
-        imager.unload();
-      };
+      return () => imager.unload();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       cache,

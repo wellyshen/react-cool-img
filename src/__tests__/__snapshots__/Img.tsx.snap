@@ -96,3 +96,25 @@ exports[`<Img /> should render src image immediately due to lazy is disabled 1`]
   <noscript />
 </DocumentFragment>
 `;
+
+exports[`<Img /> should reset image with default src correctly 1`] = `
+<DocumentFragment>
+  <img
+    alt="Cool Image"
+    class="cool-image no-js-"
+    src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+  />
+  <noscript />
+</DocumentFragment>
+`;
+
+exports[`<Img /> should reset image with placeholder correctly 1`] = `
+<DocumentFragment>
+  <img
+    alt="Cool Image"
+    class="cool-image no-js-"
+    src="PLACEHOLDER_SRC"
+  />
+  <noscript />
+</DocumentFragment>
+`;
