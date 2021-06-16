@@ -2,13 +2,18 @@
   "presets": [
     ["@babel/preset-env", { "loose": true }],
     "@babel/preset-typescript",
-    "@babel/preset-react"
+    [
+      "@babel/preset-react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ]
   ],
-  "plugins": ["@babel/proposal-class-properties"],
+  "plugins": [
+    "@babel/proposal-class-properties",
+    ["@babel/plugin-proposal-private-methods", { "loose": false }]
+  ],
   "env": {
     "development": {
-      "presets": ["@emotion/babel-preset-css-prop"],
-      "plugins": ["@emotion"]
+      "plugins": ["@emotion/babel-plugin"]
     }
   }
 }
