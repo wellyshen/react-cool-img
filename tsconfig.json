@@ -4,7 +4,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "react-jsx",
+    "jsx": "react",
     // Specify module resolution strategy: "node" (Node.js) or "classic" (TypeScript pre-1.6)
     "moduleResolution": "node",
     // Ensure that Babel can safely transpile files in the TypeScript project

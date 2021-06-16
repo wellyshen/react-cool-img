@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types, jsx-a11y/alt-text */
 
-import {
+import React, {
   DetailedHTMLProps,
   ImgHTMLAttributes,
   SyntheticEvent,
