@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types, jsx-a11y/alt-text, react/require-default-props, react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types, jsx-a11y/alt-text */
 
 import React, {
   DetailedHTMLProps,
@@ -15,6 +15,7 @@ import React, {
 import useObserver, { Options } from "./useObserver";
 import * as storage from "./storage";
 import Imager, { Retry } from "./Imager";
+import useLatest from "./useLatest";
 
 interface Props
   extends DetailedHTMLProps<
@@ -39,6 +40,9 @@ interface Props
   onLoad?: (event: SyntheticEvent | Event) => void;
 }
 
+const DEFAULT_SRC =
+  "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
+
 const Img = forwardRef<HTMLImageElement, Props>(
   (
     {
@@ -61,12 +65,11 @@ const Img = forwardRef<HTMLImageElement, Props>(
     },
     ref
   ) => {
-    const imagerRef = useRef<Imager>(new Imager());
     const [setImg, startLoad] = useObserver(debounce, observerOptions);
-    const [source, setSource] = useState<string>(
-      placeholder ||
-        "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-    );
+    const [source, setSource] = useState(placeholder || DEFAULT_SRC);
+    const imagerRef = useRef<Imager>(new Imager());
+    const onErrorRef = useLatest(onError);
+    const onLoadRef = useLatest(onLoad);
     const isSrc = source === src;
     const filename = src ? src.replace(/^.*[\\/]/, "").split(".")[0] : "";
 
@@ -78,28 +81,36 @@ const Img = forwardRef<HTMLImageElement, Props>(
       if (ref) (ref as MutableRefObject<HTMLImageElement>).current = el;
     };
 
-    const handleError = (event: Event) => {
-      if (onError) onError(event);
-
-      if (error) {
-        setSource(error);
-      } else if (placeholder) {
-        setSource(placeholder);
-      }
-    };
-
-    const handleLoad = (event: Event) => {
-      if (onLoad) onLoad(event);
-
-      setSource(src);
-      if (cache) storage.set(src);
-    };
-
     useEffect(() => {
+      if (!src) {
+        setSource(placeholder || DEFAULT_SRC);
+        return () => null;
+      }
+
       const { current: imager } = imagerRef;
-      const loadImg = () => {
-        imager.load(src, decode, retry, handleError, handleLoad, crossOrigin);
-      };
+
+      const loadImg = () =>
+        imager.load(
+          src,
+          decode,
+          retry,
+          (e) => {
+            if (onErrorRef.current) onErrorRef.current(e);
+
+            if (error) {
+              setSource(error);
+            } else if (placeholder) {
+              setSource(placeholder);
+            }
+          },
+          (e) => {
+            if (onLoadRef.current) onLoadRef.current(e);
+
+            setSource(src);
+            if (cache) storage.set(src);
+          },
+          crossOrigin
+        );
 
       if (!lazy || (cache && storage.get(src))) {
         loadImg();
@@ -107,10 +118,20 @@ const Img = forwardRef<HTMLImageElement, Props>(
         loadImg();
       }
 
-      return () => {
-        imager.unload();
-      };
-    }, [cache, startLoad, src, crossOrigin, decode, retry]);
+      return () => imager.unload();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+      cache,
+      crossOrigin,
+      decode,
+      error,
+      lazy,
+      onErrorRef,
+      onLoadRef,
+      placeholder,
+      src,
+      startLoad,
+    ]);
 
     return (
       <>

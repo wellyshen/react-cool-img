@@ -42,19 +42,15 @@ describe("<Img />", () => {
     ref,
   };
 
-  const matchSnapshot = (img: JSX.Element) => {
+  const matchSnapshot = (img: JSX.Element) =>
     expect(render(img).asFragment()).toMatchSnapshot();
-  };
-  const setStartLoad = (val = false) => {
-    const setState = () => null;
-    // @ts-expect-error
-    useObserver.mockImplementation(() => [setState, val, setState]);
-  };
 
-  beforeEach(() => {
+  const setStartLoad = (val = false) =>
     // @ts-expect-error
-    storage.get.mockReset();
-  });
+    useObserver.mockImplementation(() => [() => null, val, () => null]);
+
+  // @ts-expect-error
+  beforeEach(() => storage.get.mockReset());
 
   it("should setup useObserver's arguments correctly", () => {
     setStartLoad();
@@ -166,5 +162,25 @@ describe("<Img />", () => {
     render(<Img src={SUCCESS_SRC} />);
 
     expect(ref.current).not.toBeNull();
+  });
+
+  it("should reset image with placeholder correctly", () => {
+    setStartLoad();
+    const { rerender, asFragment } = render(
+      <Img src={SUCCESS_SRC} {...props} />
+    );
+    rerender(<Img src="" {...props} />);
+
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it("should reset image with default src correctly", () => {
+    setStartLoad();
+    const { rerender, asFragment } = render(
+      <Img src={SUCCESS_SRC} {...props} />
+    );
+    rerender(<Img src="" {...props} placeholder="" />);
+
+    expect(asFragment()).toMatchSnapshot();
   });
 });
