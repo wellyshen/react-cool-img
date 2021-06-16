@@ -78,12 +78,12 @@ describe("Imager", () => {
   });
 
   it("should call onError without auto-retry", () =>
-    new Promise((done) => {
+    new Promise((resolve) => {
       const image = createImage(new Imager());
       const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
         // @ts-expect-error
-        done();
+        resolve();
       };
       const onLoad = jest.fn();
 
@@ -96,12 +96,12 @@ describe("Imager", () => {
     }));
 
   it("should call onError with auto-retry", () =>
-    new Promise((done) => {
+    new Promise((resolve) => {
       const image = createImage(new Imager());
       const onError = (event: Event) => {
         expect(event).toMatchObject(ERROR_EVT);
         // @ts-expect-error
-        done();
+        resolve();
       };
       const onLoad = jest.fn();
 
@@ -123,13 +123,13 @@ describe("Imager", () => {
     }));
 
   it("should call onLoad", () =>
-    new Promise((done) => {
+    new Promise((resolve) => {
       const image = createImage(new Imager());
       const onError = jest.fn();
       const onLoad = (event: Event) => {
         expect(event).toMatchObject(LOAD_EVT);
         // @ts-expect-error
-        done();
+        resolve();
       };
 
       image.load({ onError, onLoad });
