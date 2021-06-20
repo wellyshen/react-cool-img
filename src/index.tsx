@@ -89,34 +89,22 @@ const Img = forwardRef<HTMLImageElement, Props>(
 
       const { current: imager } = imagerRef;
 
-      const loadImg = () =>
+      if (!lazy || (cache && storage.get(src)) || startLoad)
         imager.load(
           src,
           decode,
           retry,
           (e) => {
+            setSource((prevSrc) => error || placeholder || prevSrc);
             if (onErrorRef.current) onErrorRef.current(e);
-
-            if (error) {
-              setSource(error);
-            } else if (placeholder) {
-              setSource(placeholder);
-            }
           },
           (e) => {
-            if (onLoadRef.current) onLoadRef.current(e);
-
             setSource(src);
             if (cache) storage.set(src);
+            if (onLoadRef.current) onLoadRef.current(e);
           },
           crossOrigin
         );
-
-      if (!lazy || (cache && storage.get(src))) {
-        loadImg();
-      } else if (startLoad) {
-        loadImg();
-      }
 
       return () => imager.unload();
       // eslint-disable-next-line react-hooks/exhaustive-deps

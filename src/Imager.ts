@@ -36,7 +36,7 @@ export default class Imager {
       }
 
       let time = acc === "*" ? delay ** this.retries : delay * this.retries;
-      if (acc === false) time = delay;
+      time = acc === false ? delay : time;
 
       this.timeout = setTimeout(() => {
         this.clearImgSrc();
@@ -45,9 +45,7 @@ export default class Imager {
 
       this.retries += 1;
     };
-    this.img.onload = (event: Event) => {
-      onLoad(event);
-    };
+    this.img.onload = (event: Event) => onLoad(event);
   }
 
   unload(): void {
