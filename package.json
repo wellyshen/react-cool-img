@@ -74,7 +74,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/react-hooks": "^7.0.0",
     "@types/jest": "^26.0.23",
-    "@types/react": "^17.0.11",
+    "@types/react": "^18.0.0",
     "@types/react-dom": "^17.0.8",
     "eslint": "^7.2.0",
     "eslint-config-welly": "^1.11.1",
