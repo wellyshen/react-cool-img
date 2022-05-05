@@ -7,10 +7,5 @@
   "plugins": [
     "@babel/proposal-class-properties",
     ["@babel/plugin-proposal-private-methods", { "loose": false }]
-  ],
-  "env": {
-    "development": {
-      "plugins": ["@emotion"]
-    }
-  }
+  ]
 }
