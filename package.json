@@ -41,7 +41,7 @@
     "test:update": "yarn test -u",
     "build:dev": "yarn clean:dist && rollup -c rollup.config.js",
     "build:prod": "yarn clean:dist && yarn clean:size && rollup -c rollup.config.js --environment BUILD:production",
-    "build:demo": "cd app && yarn build",
+    "build:demo": "cd app && yarn && yarn build",
     "preversion": "run-s lint test build:prod",
     "postversion": "git push --follow-tags --no-verify && npm publish && yarn clean:dist && yarn clean:size",
     "clean:dist": "rimraf dist",
