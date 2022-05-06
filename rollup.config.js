@@ -36,16 +36,15 @@ const plugins = [
     ),
   }),
   !isDev && sizeSnapshot(),
-  !isDev &&
-    copy({
-      targets: [
-        {
-          src: "src/react-cool-img.d.ts",
-          dest: pkg.types.split("/")[0],
-          rename: "index.d.ts",
-        },
-      ],
-    }),
+  copy({
+    targets: [
+      {
+        src: "src/react-cool-img.d.ts",
+        dest: pkg.types.split("/")[0],
+        rename: "index.d.ts",
+      },
+    ],
+  }),
 ].filter(Boolean);
 
 export default {
