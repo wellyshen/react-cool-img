@@ -1,5 +1,4 @@
 *.log
-app
 dist
 coverage
 .size-snapshot.json
