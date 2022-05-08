@@ -13,7 +13,7 @@ interface Args extends Options {
 }
 
 const renderHelper = ({
-  // @ts-expect-error
+  // @ts-ignore
   root = null,
   rootMargin = "50px",
   threshold = 0.01,
@@ -29,7 +29,7 @@ describe("useObserver › messages", () => {
   }));
 
   beforeAll(() => {
-    // @ts-expect-error
+    // @ts-ignore
     global.IntersectionObserver = mockIntersectionObserver;
     global.IntersectionObserverEntry = jest.fn();
   });
@@ -37,10 +37,10 @@ describe("useObserver › messages", () => {
   it("should throw threshold warn", () => {
     console.warn = jest.fn();
 
-    // @ts-expect-error
+    // @ts-ignore
     renderHelper({ threshold: [0.5, 1] });
     expect(console.warn).toHaveBeenCalledWith(thresholdWarn);
-    // @ts-expect-error
+    // @ts-ignore
     expect(IntersectionObserver.mock.results[0].value.threshold).toBe(0);
   });
 
@@ -58,7 +58,7 @@ describe("useObserver › messages", () => {
     expect(console.error).toHaveBeenCalledWith(observerErr);
     expect(cur[1]).toBeTruthy();
 
-    // @ts-expect-error
+    // @ts-ignore
     global.IntersectionObserver = mockIntersectionObserver;
     // @ts-ignore
     delete global.IntersectionObserverEntry;
@@ -92,9 +92,9 @@ describe("useObserver", () => {
   };
 
   beforeAll(() => {
-    // @ts-expect-error
+    // @ts-ignore
     global.IntersectionObserver = jest.fn(
-      // @ts-expect-error
+      // @ts-ignore
       (cb: Callback, { root, rootMargin, threshold }) => ({
         root,
         rootMargin,
@@ -111,7 +111,7 @@ describe("useObserver", () => {
   it("should set the options of intersection observer correctly", () => {
     renderHelper();
 
-    // @ts-expect-error
+    // @ts-ignore
     let mkObserver = IntersectionObserver.mock.results[0].value;
 
     expect(mkObserver.root).toBeNull();
@@ -122,7 +122,7 @@ describe("useObserver", () => {
 
     renderHelper(options);
 
-    // @ts-expect-error
+    // @ts-ignore
     mkObserver = IntersectionObserver.mock.results[1].value;
 
     expect(mkObserver.root).toBe(options.root);
@@ -229,7 +229,7 @@ describe("useObserver", () => {
       setRef(img);
     });
 
-    // @ts-expect-error
+    // @ts-ignore
     setIsIntersecting(undefined, 1);
 
     act(() => {

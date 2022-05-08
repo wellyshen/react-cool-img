@@ -46,10 +46,10 @@ describe("<Img />", () => {
     expect(render(img).asFragment()).toMatchSnapshot();
 
   const setStartLoad = (val = false) =>
-    // @ts-expect-error
+    // @ts-ignore
     useObserver.mockImplementation(() => [() => null, val, () => null]);
 
-  // @ts-expect-error
+  // @ts-ignore
   beforeEach(() => storage.get.mockReset());
 
   it("should setup useObserver's arguments correctly", () => {
@@ -82,7 +82,7 @@ describe("<Img />", () => {
   });
 
   it("should render placeholder image due to cache is disabled", () => {
-    // @ts-expect-error
+    // // @ts-ignore
     storage.get.mockImplementation(() => true);
 
     setStartLoad();
@@ -128,7 +128,7 @@ describe("<Img />", () => {
   });
 
   it("should render src image immediately due to image cached", () => {
-    // @ts-expect-error
+    // @ts-ignore
     storage.get.mockImplementation(() => true);
 
     setStartLoad();
