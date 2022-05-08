@@ -1,20 +1,18 @@
 /* eslint-disable react/prop-types, jsx-a11y/alt-text */
 
-import React, {
+import type {
   DetailedHTMLProps,
   ImgHTMLAttributes,
   SyntheticEvent,
   MutableRefObject,
-  useRef,
-  useState,
-  useEffect,
-  forwardRef,
-  memo,
 } from "react";
+import React, { useRef, useState, useEffect, forwardRef, memo } from "react";
 
-import useObserver, { Options } from "./useObserver";
+import type { Options } from "./useObserver";
+import useObserver from "./useObserver";
 import * as storage from "./storage";
-import Imager, { Retry } from "./Imager";
+import type { Retry } from "./Imager";
+import Imager from "./Imager";
 import useLatest from "./useLatest";
 
 interface Props

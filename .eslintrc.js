@@ -7,6 +7,7 @@ module.exports = {
         allow: ["warn", "error"],
       },
     ],
+    "react/require-default-props": "off",
     "testing-library/render-result-naming-convention": "off",
   },
 };

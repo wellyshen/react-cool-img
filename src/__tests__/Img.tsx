@@ -82,7 +82,7 @@ describe("<Img />", () => {
   });
 
   it("should render placeholder image due to cache is disabled", () => {
-    // // @ts-ignore
+    // @ts-ignore
     storage.get.mockImplementation(() => true);
 
     setStartLoad();

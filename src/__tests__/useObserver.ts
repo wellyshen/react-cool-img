@@ -2,11 +2,8 @@
 
 import { renderHook, act } from "@testing-library/react-hooks";
 
-import useObserver, {
-  observerErr,
-  thresholdWarn,
-  Options,
-} from "../useObserver";
+import type { Options } from "../useObserver";
+import useObserver, { observerErr, thresholdWarn } from "../useObserver";
 
 interface Args extends Options {
   debounce?: number;
