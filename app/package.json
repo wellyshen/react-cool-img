@@ -31,7 +31,7 @@
     "@types/react-dom": "^18.0.3",
     "normalize.css": "^8.0.1",
     "react": "^18.1.0",
-    "react-cool-img": "^1.2.12",
+    "react-cool-img": "latest",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
     "sass": "^1.51.0",
